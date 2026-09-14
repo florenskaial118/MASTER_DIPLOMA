@@ -1,5 +1,6 @@
 ---
 title: Аннотация сборок *Cardiobacteruin hominis* с помощью Prokka
+engine: knitr
 ---
 
 Проведем аннотацию новых (относительно летней практики) сборок *Cardiobacteruin hominis* с помощью Prokka
