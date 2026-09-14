@@ -16,6 +16,7 @@ book:
   repo-actions: [edit, source, issue]
 
 bibliography: references.bib  
+engine: knitr
 
 format:
   html:

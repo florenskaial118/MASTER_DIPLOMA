@@ -1,6 +1,5 @@
 ---
 title: Аннотация сборок *Cardiobacteruin hominis* с помощью Prokka
-jupyter: python3
 ---
 
 Проведем аннотацию новых (относительно летней практики) сборок *Cardiobacteruin hominis* с помощью Prokka
