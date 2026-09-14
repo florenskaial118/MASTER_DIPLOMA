@@ -1,0 +1,22 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Изучение древних микроорганизмов группы HACEK с точки зрения эволюционной биологии"
+  author: "Флоренская Лидия"
+  chapters:
+    - index.qmd
+    - chapters/download_assemblies.ipynb
+    - chapters/create_consensus_from_BAM.ipynb
+    - chapters/annotate_assemblies.ipynb
+    - chapters/make_core_alignment.ipynb
+    # ...
+  repo-url: https://github.com/твой-логин/репозиторий
+  repo-actions: [edit, source, issue]
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+    number-sections: true

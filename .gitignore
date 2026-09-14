@@ -1,0 +1,14 @@
+data/
+*.fastq
+*.fq
+*.fasta
+*.fa
+*.bam
+*.sam
+*.vcf
+*.gz
+*.log
+*.checkpoint
+_book/
+chapters/.DS_Store
+.DS_Store
