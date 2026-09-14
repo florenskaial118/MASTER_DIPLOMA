@@ -1,0 +1,15 @@
+{
+  "hash": "487f2ef2733f929473d5e4c43142b345",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: Консенсус исторических образцов\nengine: knitr\n---\n\nСделаем консенсус для наших исторических образцов из BAM файлов через angsd\n\n(bcftools, по дефолту, например, подставляет референс в местах, где не уверен в позиции. Это рушит работу prokka: у нас появляется ген, которого на самом деле в древнем нет. В следствии этого формируется неправильный коровый геном — у древнего там больше генов, чем есть на самом деле. И на итоговых деревьях получается, что наш древний близится к референсу. Возможно из-за этого возникают сложности с определением времени и т.д.)\n\n\nДля этого убедимся, что в BAM файлах выравнивания ридов образцов 1780, 3140, 4510, 7140 за референс выбран именно геном Cardiobacterium hominis и скачаем его\n\n\n::: {.cell}\n\n```{.bash .cell-code}\nfor bam in ../data/BTC_bam_C_H/*.bam; do\n    echo -n \"$bam: \"\n    samtools view -H \"$bam\" | grep '^@SQ' | cut -f2 | head -1\ndone\n```\n:::\n\n\nВидно, что во всех файлах используется NZ_LR134365.1 (GCF_900637305.1). Поищем данные по этому референсу и скачаем его последовательность \n\n\n::: {.cell}\n\n```{.bash .cell-code}\nsource ../scripts/download_assembly_metadata.sh\n\nget_assembly_metadata \"GCF_900637305.1\"\n```\n:::\n\n\n\n::: {.cell}\n\n```{.bash .cell-code}\nsource ../scripts/download_assembly.sh\n\ndownload_assembly \"GCF_900637305.1\" \"../data/reference_for_ancient_C_H.fa\"\nsamtools faidx \"../data/reference_for_ancient_C_H.fa\"\n```\n:::\n\n\nсоздаем консенсус\n\n\n::: {.cell}\n\n```{.bash .cell-code}\nsource ../scripts/create_angsd_consensus.sh\n\nfor bam in ../data/BTC_bam_C_H/*.bam; do\n    [ -e \"$bam\" ] || continue\n    s=$(basename \"$bam\" .bam | cut -d'_' -f1)\n\n    # Абсолютный путь к BAM\n    abs_bam=\"$(cd \"$(dirname \"$bam\")\" && pwd)/$(basename \"$bam\")\"\n    list_file=\"$(dirname \"$abs_bam\")/bam_list_${s}.txt\"\n    echo \"/bams/$(basename \"$abs_bam\")\" > \"$list_file\"\n\n    create_consensus_angsd \\\n        \"$list_file\" \\\n        \"../data/reference_for_ancient_C_H.fa\" \\\n        \"../data/BTC_consensus_C_H/${s}_consensus\"\ndone\n```\n:::\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

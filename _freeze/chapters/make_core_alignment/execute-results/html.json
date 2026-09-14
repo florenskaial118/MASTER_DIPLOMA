@@ -1,0 +1,15 @@
+{
+  "hash": "6883e43a7babd0cfc56721e315d921bb",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: Поиск коровых генов без аутгруппы\nengine: knitr\n---\n\nПоиск коровых генов без аутгруппы с помощью Roary (55 современных и 4 древних)\n\n\n::: {.cell}\n\n```{.bash .cell-code}\nmkdir -p ../data/all_gff_no_outgroup_C_H\ncp ../data/avaliable_gff_C_H/*.gff ../data/all_gff_no_outgroup_C_H/\ncp ../data/new_gff_C_H/*.gff ../data/all_gff_no_outgroup_C_H/\ncp ../data/BTC_consensus_gff_C_H/*.gff ../data/all_gff_no_outgroup_C_H/\n```\n:::\n\n\n\n::: {.cell}\n\n```{.bash .cell-code}\nmkdir -p ../data/all_core_alignment_no_outgroup_C_H\n\nsource ../scripts/make_core_alignment_roary.sh\nroary ../data/all_gff_no_outgroup_C_H ../data/all_core_alignment_no_outgroup_C_H\n```\n:::\n\n\n\n::: {.cell}\n\n```{.text .cell-code}\nCore genes\t(80% <= strains <= 100%)\t451\nSoft core genes\t(79% <= strains < 80%)\t85\nShell genes\t(15% <= strains < 79%)\t2782\nCloud genes\t(0% <= strains < 15%)\t9223\nTotal genes\t(0% <= strains <= 100%)\t12541\n```\n:::\n\n\nВыделим из них snp\n\n\n::: {.cell}\n\n```{.bash .cell-code}\nsnp-sites -cb -o ../data/all_core_alignment_no_outgroup_C_H/80_percent/core_snps_no_outgroup_C_H.fa \\\n          ../data/all_core_alignment_no_outgroup_C_H/80_percent/core_gene_alignment.aln\n\nsnp-sites -o ../data/all_core_alignment_no_outgroup_C_H/80_percent/core_snps_no_outgroup_C_H.fa \\\n../data/all_core_alignment_no_outgroup_C_H/80_percent/core_gene_alignment.aln\n```\n:::\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

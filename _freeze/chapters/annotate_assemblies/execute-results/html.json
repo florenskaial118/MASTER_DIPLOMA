@@ -1,0 +1,15 @@
+{
+  "hash": "21fbb5cd84421aebb026dbaaf9b25a80",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: Аннотация сборок *Cardiobacteruin hominis* с помощью Prokka\nengine: knitr\n---\n\nПроведем аннотацию новых (относительно летней практики) сборок *Cardiobacteruin hominis* с помощью Prokka\n\n\n::: {.cell}\n\n```{.bash .cell-code}\nchmod +x ../scripts/prokka_bacteria_docker.sh\n\n../scripts/prokka_bacteria_docker.sh \\\n    ../data/new_assemblies_C_H \\\n    ../data/new_annotations_C_H \\\n    ../data/new_gff_C_H\n```\n:::\n\n\nПроведем аннотацию наших древних сборок\n\n\n::: {.cell}\n\n```{.bash .cell-code}\n../scripts/prokka_bacteria_docker.sh \\\n    ../data/BTC_consensus_C_H \\\n    ../data/BTC_consensus_annotations_C_H \\\n    ../data/BTC_consensus_gff_C_H\n```\n:::\n\n\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}
