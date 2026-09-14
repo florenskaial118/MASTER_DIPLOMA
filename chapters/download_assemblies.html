@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-ed7344add5f1663e434276306a2aa159.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -154,7 +154,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Магистерский диплом 2027</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -166,19 +166,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/create_consensus_from_BAM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Сделаем консенсус для наших исторических образцов из BAM файлов через angsd</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Консенсус исторических образцов</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/annotate_assemblies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Проведем аннотацию новых сборок <em>Cardiobacteruin hominis</em> с помощью Prokka</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Аннотация сборок <em>Cardiobacteruin hominis</em> с помощью Prokka</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/make_core_alignment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Поиск коровых генов без аутгруппы с помощью Roary (55 современных и 4 древних)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Поиск коровых генов без аутгруппы</span></span></a>
   </div>
 </li>
     </ul>
@@ -193,7 +193,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#скачиваем-сборки-по-метаданным" id="toc-скачиваем-сборки-по-метаданным" class="nav-link active" data-scroll-target="#скачиваем-сборки-по-метаданным"><span class="header-section-number">3</span> Скачиваем сборки по метаданным</a></li>
   </ul>
-<div class="toc-actions"><ul><li><a href="https://github.dev/florenskaial118/MASTER_DIPLOMA.git/blob/main/chapters/download_assemblies.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/blob/main/chapters/download_assemblies.ipynb" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/edit/main/chapters/download_assemblies.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/blob/main/chapters/download_assemblies.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -218,14 +218,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><em>Cardiobacterium hominis</em>, <em>Eikenella corrodens</em>, <em>Aggregatibacter actinomycetemcomitans</em></p>
-<div id="fd80f7eb" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;shellscript&quot;}}">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>chmod <span class="op">+</span>x ..<span class="op">/</span>scripts<span class="op">/</span>download_assemblies_metadata.sh</span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x ../scripts/download_assemblies_metadata.sh</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>..<span class="op">/</span>scripts<span class="op">/</span>download_assemblies_metadata.sh <span class="st">"Cardiobacterium hominis"</span> ..<span class="op">/</span>data<span class="op">/</span>assembly_metadata<span class="op">/</span>Cardiobacterium_hominis.tsv</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>..<span class="op">/</span>scripts<span class="op">/</span>download_assemblies_metadata.sh <span class="st">"Eikenella corrodens"</span> ..<span class="op">/</span>data<span class="op">/</span>assembly_metadata<span class="op">/</span>Eikenella_corrodens.tsv</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>..<span class="op">/</span>scripts<span class="op">/</span>download_assemblies_metadata.sh <span class="st">"Aggregatibacter actinomycetemcomitans"</span> ..<span class="op">/</span>data<span class="op">/</span>assembly_metadata<span class="op">/</span>Aggregatibacter_actinomycetemcomitans.tsv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">../scripts/download_assemblies_metadata.sh</span> <span class="st">"Cardiobacterium hominis"</span> ../data/assembly_metadata/Cardiobacterium_hominis.tsv</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">../scripts/download_assemblies_metadata.sh</span> <span class="st">"Eikenella corrodens"</span> ../data/assembly_metadata/Eikenella_corrodens.tsv</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">../scripts/download_assemblies_metadata.sh</span> <span class="st">"Aggregatibacter actinomycetemcomitans"</span> ../data/assembly_metadata/Aggregatibacter_actinomycetemcomitans.tsv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="aa477904" class="cell">
+<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>Cardiobacterium_hominis <span class="op">=</span> pd.read_csv(<span class="st">'../data/assembly_metadata/Cardiobacterium_hominis.tsv'</span>, sep <span class="op">=</span> <span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span>
@@ -237,13 +237,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    Eikenella_corrodens.to_excel(writer, sheet_name<span class="op">=</span><span class="st">'Eikenella_corrodens'</span>, index<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    Aggregatibacter_actinomycetemcomitans.to_excel(writer, sheet_name<span class="op">=</span><span class="st">'Aggregatibacter'</span>, index<span class="op">=</span><span class="va">False</span>) <span class="co">#в названии листа нельзя использовать слишком длинные названия</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Итоговый xls лежит по адресу https://docs.google.com/spreadsheets/d/1ncw5GF4YLnUmx1mQxcyNWPArU9sB6RSFIRYcyxtNu1M/edit?gid=2041904701#gid=2041904701</p>
+<p>Итоговый xls лежит в <a href="https://docs.google.com/spreadsheets/d/1ncw5GF4YLnUmx1mQxcyNWPArU9sB6RSFIRYcyxtNu1M/edit?gid=2041904701#gid=2041904701">таблице</a></p>
 <p>Для части сборок уже есть готовая аннотация .gff от Саши, для части - нет. Важно, что нам нужно делать аннотациб вручную, потому что аннотации с сайта NCBI по формату не подходят для дальнейшнего анализа в roary.</p>
 <section id="скачиваем-сборки-по-метаданным" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Скачиваем сборки по метаданным</h1>
 <p>Начнем с <em>Cardiobacterium Hominis</em></p>
 <p>Сравним сборки из метаданных и доступные аннотации</p>
-<div id="e2fb0c51" class="cell" data-execution_count="2">
+<div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> os <span class="im">import</span> listdir</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -256,31 +256,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>diff_all <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(all_gff) <span class="op">-</span> <span class="bu">set</span>(avaliable_gff))</span>
 <span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>diff_av <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(avaliable_gff) <span class="op">-</span> <span class="bu">set</span>(all_gff))</span>
 <span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Всего сборок в NCBI: </span><span class="sc">{</span><span class="bu">len</span>(all_gff)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Всего доступных аннотаций: </span><span class="sc">{</span><span class="bu">len</span>(avaliable_gff)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Совпадает: </span><span class="sc">{</span><span class="bu">len</span>(intersection)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Уникальных в доступных: </span><span class="sc">{</span><span class="bu">len</span>(diff_av)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Уникальных во всех: </span><span class="sc">{</span><span class="bu">len</span>(diff_all)<span class="sc">}</span><span class="ss">'</span>)</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../data/new_assemblies_C_H/list.txt'</span>, <span class="st">'w'</span>) <span class="im">as</span> f:</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> gff <span class="kw">in</span> diff_all:</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        _ <span class="op">=</span> f.write(<span class="ss">f"</span><span class="sc">{</span>gff<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Всего сборок в NCBI: </span><span class="sc">{</span><span class="bu">len</span>(all_gff)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Всего сборок в NCBI: 55
-Всего доступных аннотаций: 48
-Совпадает: 48
-Уникальных в доступных: 0
-Уникальных во всех: 7</code></pre>
+<pre><code>Всего сборок в NCBI: 55</code></pre>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Всего доступных аннотаций: </span><span class="sc">{</span><span class="bu">len</span>(avaliable_gff)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Всего доступных аннотаций: 48</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Совпадает: </span><span class="sc">{</span><span class="bu">len</span>(intersection)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Совпадает: 48</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Уникальных в доступных: </span><span class="sc">{</span><span class="bu">len</span>(diff_av)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Уникальных в доступных: 0</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Уникальных во всех: </span><span class="sc">{</span><span class="bu">len</span>(diff_all)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Уникальных во всех: 7</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../data/new_assemblies_C_H/list.txt'</span>, <span class="st">'w'</span>) <span class="im">as</span> f:</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> gff <span class="kw">in</span> diff_all:</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        _ <span class="op">=</span> f.write(<span class="ss">f"</span><span class="sc">{</span>gff<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Убеждаемся, что все доступные есть в нашем списке, а для новые скачиваем.</p>
-<div id="09d6129d" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;powershell&quot;}}">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>source ..<span class="op">/</span>scripts<span class="op">/</span>download_assembly.sh</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>cat ..<span class="op">/</span>data<span class="op">/</span>new_assemblies_C_H<span class="op">/</span><span class="bu">list</span>.txt <span class="op">|</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> read AssemblyAccession<span class="op">;</span> do</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    download_assembly <span class="st">"$AssemblyAccession"</span> <span class="st">"../data/new_assemblies_C_H/$</span><span class="sc">{AssemblyAccession}</span><span class="st">.fa"</span> <span class="op">&lt;</span> <span class="op">/</span>dev<span class="op">/</span>null</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>done <span class="op">&lt;</span> <span class="st">'../data/new_assemblies/list.txt'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ../scripts/download_assembly.sh</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ../data/new_assemblies_C_H/list.txt <span class="kw">|</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">read</span> <span class="va">AssemblyAccession</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">download_assembly</span> <span class="st">"</span><span class="va">$AssemblyAccession</span><span class="st">"</span> <span class="st">"../data/new_assemblies_C_H/</span><span class="va">${AssemblyAccession}</span><span class="st">.fa"</span> <span class="op">&lt;</span> /dev/null</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&lt;</span> <span class="st">'../data/new_assemblies/list.txt'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
@@ -689,13 +697,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="index.html">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span>
+      <a href="../index.html" class="pagination-link" aria-label="Магистерский диплом 2027">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Магистерский диплом 2027</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/create_consensus_from_BAM.html" class="pagination-link" aria-label="Сделаем консенсус для наших исторических образцов из BAM файлов через angsd">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Сделаем консенсус для наших исторических образцов из BAM файлов через angsd</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/create_consensus_from_BAM.html" class="pagination-link" aria-label="Консенсус исторических образцов">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Консенсус исторических образцов</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -704,4 +712,4 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.dev/florenskaial118/MASTER_DIPLOMA.git/blob/main/chapters/download_assemblies.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/blob/main/chapters/download_assemblies.ipynb" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/edit/main/chapters/download_assemblies.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/blob/main/chapters/download_assemblies.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>

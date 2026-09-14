@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Сделаем консенсус для наших исторических образцов из BAM файлов через angsd – Изучение древних микроорганизмов группы HACEK с точки зрения эволюционной биологии</title>
+<title>3&nbsp; Консенсус исторических образцов – Изучение древних микроорганизмов группы HACEK с точки зрения эволюционной биологии</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -82,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-d3f7f8e73c8d287b30bcf59c2b563615.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-ed7344add5f1663e434276306a2aa159.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -123,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/create_consensus_from_BAM.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Сделаем консенсус для наших исторических образцов из BAM файлов через angsd</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/create_consensus_from_BAM.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Консенсус исторических образцов</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -154,7 +154,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">index.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Магистерский диплом 2027</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -166,19 +166,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/create_consensus_from_BAM.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Сделаем консенсус для наших исторических образцов из BAM файлов через angsd</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Консенсус исторических образцов</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/annotate_assemblies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Проведем аннотацию новых сборок <em>Cardiobacteruin hominis</em> с помощью Prokka</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Аннотация сборок <em>Cardiobacteruin hominis</em> с помощью Prokka</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/make_core_alignment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Поиск коровых генов без аутгруппы с помощью Roary (55 современных и 4 древних)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Поиск коровых генов без аутгруппы</span></span></a>
   </div>
 </li>
     </ul>
@@ -194,7 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Сделаем консенсус для наших исторических образцов из BAM файлов через angsd</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Консенсус исторических образцов</span></h1>
 </div>
 
 
@@ -211,44 +211,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p>Сделаем консенсус для наших исторических образцов из BAM файлов через angsd</p>
 <p>(bcftools, по дефолту, например, подставляет референс в местах, где не уверен в позиции. Это рушит работу prokka: у нас появляется ген, которого на самом деле в древнем нет. В следствии этого формируется неправильный коровый геном — у древнего там больше генов, чем есть на самом деле. И на итоговых деревьях получается, что наш древний близится к референсу. Возможно из-за этого возникают сложности с определением времени и т.д.)</p>
 <p>Для этого убедимся, что в BAM файлах выравнивания ридов образцов 1780, 3140, 4510, 7140 за референс выбран именно геном Cardiobacterium hominis и скачаем его</p>
-<div id="4d83b737" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;powershell&quot;}}">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bam <span class="kw">in</span> ..<span class="op">/</span>data<span class="op">/</span>BTC_bam_C_H<span class="op">/*</span>.bam<span class="op">;</span> do</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    echo <span class="op">-</span>n <span class="st">"$bam: "</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    samtools view <span class="op">-</span>H <span class="st">"$bam"</span> <span class="op">|</span> grep <span class="st">'^@SQ'</span> <span class="op">|</span> cut <span class="op">-</span>f2 <span class="op">|</span> head <span class="op">-</span><span class="dv">1</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>done</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bam <span class="kw">in</span> ../data/BTC_bam_C_H/<span class="pp">*</span>.bam<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="at">-n</span> <span class="st">"</span><span class="va">$bam</span><span class="st">: "</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">samtools</span> view <span class="at">-H</span> <span class="st">"</span><span class="va">$bam</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">grep</span> <span class="st">'^@SQ'</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-f2</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-1</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Видно, что во всех файлах используется NZ_LR134365.1 (GCF_900637305.1). Поищем данные по этому референсу и скачаем его последовательность</p>
-<div id="eee1969c" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;powershell&quot;}}">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>source ..<span class="op">/</span>scripts<span class="op">/</span>download_assembly_metadata.sh</span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ../scripts/download_assembly_metadata.sh</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>get_assembly_metadata <span class="st">"GCF_900637305.1"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">get_assembly_metadata</span> <span class="st">"GCF_900637305.1"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div id="bacf40ad" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;powershell&quot;}}">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>source ..<span class="op">/</span>scripts<span class="op">/</span>download_assembly.sh</span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ../scripts/download_assembly.sh</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>download_assembly <span class="st">"GCF_900637305.1"</span> <span class="st">"../data/reference_for_ancient_C_H.fa"</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>samtools faidx <span class="st">"../data/reference_for_ancient_C_H.fa"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">download_assembly</span> <span class="st">"GCF_900637305.1"</span> <span class="st">"../data/reference_for_ancient_C_H.fa"</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> faidx <span class="st">"../data/reference_for_ancient_C_H.fa"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>создаем консенсус</p>
-<div id="a226fe8a" class="cell" data-quarto-private-1="{&quot;key&quot;:&quot;vscode&quot;,&quot;value&quot;:{&quot;languageId&quot;:&quot;powershell&quot;}}">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>source ..<span class="op">/</span>scripts<span class="op">/</span>create_angsd_consensus.sh</span>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ../scripts/create_angsd_consensus.sh</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bam <span class="kw">in</span> ..<span class="op">/</span>data<span class="op">/</span>BTC_bam_C_H<span class="op">/*</span>.bam<span class="op">;</span> do</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    [ <span class="op">-</span>e <span class="st">"$bam"</span> ] <span class="op">||</span> <span class="cf">continue</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    s<span class="op">=</span>$(basename <span class="st">"$bam"</span> .bam <span class="op">|</span> cut <span class="op">-</span>d<span class="st">'_'</span> <span class="op">-</span>f1)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bam <span class="kw">in</span> ../data/BTC_bam_C_H/<span class="pp">*</span>.bam<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">[</span> <span class="ot">-e</span> <span class="st">"</span><span class="va">$bam</span><span class="st">"</span> <span class="bu">]</span> <span class="kw">||</span> <span class="cf">continue</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="va">s</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$bam</span><span class="st">"</span> .bam <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span><span class="st">'_'</span> <span class="at">-f1</span><span class="va">)</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Абсолютный путь к BAM</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    abs_bam<span class="op">=</span><span class="st">"$(cd "</span>$(dirname <span class="st">"$bam"</span>)<span class="st">" &amp;&amp; pwd)/$(basename "</span>$bam<span class="st">")"</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    list_file<span class="op">=</span><span class="st">"$(dirname "</span>$abs_bam<span class="st">")/bam_list_$</span><span class="sc">{s}</span><span class="st">.txt"</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    echo <span class="st">"/bams/$(basename "</span>$abs_bam<span class="st">")"</span> <span class="op">&gt;</span> <span class="st">"$list_file"</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="va">abs_bam</span><span class="op">=</span><span class="st">"</span><span class="va">$(</span><span class="bu">cd</span> <span class="st">"</span><span class="va">$(</span><span class="fu">dirname</span> <span class="st">"</span><span class="va">$bam</span><span class="st">"</span><span class="va">)</span><span class="st">"</span> <span class="kw">&amp;&amp;</span> <span class="bu">pwd</span><span class="va">)</span><span class="st">/</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$bam</span><span class="st">"</span><span class="va">)</span><span class="st">"</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">list_file</span><span class="op">=</span><span class="st">"</span><span class="va">$(</span><span class="fu">dirname</span> <span class="st">"</span><span class="va">$abs_bam</span><span class="st">"</span><span class="va">)</span><span class="st">/bam_list_</span><span class="va">${s}</span><span class="st">.txt"</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"/bams/</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$abs_bam</span><span class="st">"</span><span class="va">)</span><span class="st">"</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$list_file</span><span class="st">"</span></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    create_consensus_angsd <span class="op">\</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"$list_file"</span> <span class="op">\</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"../data/reference_for_ancient_C_H.fa"</span> <span class="op">\</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"../data/BTC_consensus_C_H/$</span><span class="sc">{s}</span><span class="st">_consensus"</span></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>done</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">create_consensus_angsd</span> <span class="dt">\</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$list_file</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"../data/reference_for_ancient_C_H.fa"</span> <span class="dt">\</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"../data/BTC_consensus_C_H/</span><span class="va">${s}</span><span class="st">_consensus"</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
@@ -661,8 +662,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/annotate_assemblies.html" class="pagination-link" aria-label="Проведем аннотацию новых сборок *Cardiobacteruin hominis* с помощью Prokka">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Проведем аннотацию новых сборок <em>Cardiobacteruin hominis</em> с помощью Prokka</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/annotate_assemblies.html" class="pagination-link" aria-label="Аннотация сборок *Cardiobacteruin hominis* с помощью Prokka">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Аннотация сборок <em>Cardiobacteruin hominis</em> с помощью Prokka</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
@@ -671,4 +672,4 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.dev/florenskaial118/MASTER_DIPLOMA.git/blob/main/chapters/create_consensus_from_BAM.ipynb" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/blob/main/chapters/create_consensus_from_BAM.ipynb" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/edit/main/chapters/create_consensus_from_BAM.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/blob/main/chapters/create_consensus_from_BAM.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
