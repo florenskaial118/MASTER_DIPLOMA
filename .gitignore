@@ -12,3 +12,5 @@ data/
 _book/
 chapters/.DS_Store
 .DS_Store
+/.quarto/
+**/*.quarto_ipynb

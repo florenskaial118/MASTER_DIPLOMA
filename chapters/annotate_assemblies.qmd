@@ -1,0 +1,27 @@
+---
+title: Аннотация сборок *Cardiobacteruin hominis* с помощью Prokka
+jupyter: python3
+---
+
+Проведем аннотацию новых (относительно летней практики) сборок *Cardiobacteruin hominis* с помощью Prokka
+
+```{bash}
+#| eval: false
+chmod +x ../scripts/prokka_bacteria_docker.sh
+
+../scripts/prokka_bacteria_docker.sh \
+    ../data/new_assemblies_C_H \
+    ../data/new_annotations_C_H \
+    ../data/new_gff_C_H
+```
+
+Проведем аннотацию наших древних сборок
+
+```{bash}
+#| eval: false
+../scripts/prokka_bacteria_docker.sh \
+    ../data/BTC_consensus_C_H \
+    ../data/BTC_consensus_annotations_C_H \
+    ../data/BTC_consensus_gff_C_H
+```
+

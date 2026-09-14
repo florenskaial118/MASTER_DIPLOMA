@@ -7,13 +7,15 @@ book:
   author: "Флоренская Лидия"
   chapters:
     - index.qmd
-    - chapters/download_assemblies.ipynb
-    - chapters/create_consensus_from_BAM.ipynb
-    - chapters/annotate_assemblies.ipynb
-    - chapters/make_core_alignment.ipynb
+    - chapters/download_assemblies.qmd
+    - chapters/create_consensus_from_BAM.qmd
+    - chapters/annotate_assemblies.qmd
+    - chapters/make_core_alignment.qmd
     # ...
-  repo-url: https://github.com/твой-логин/репозиторий
+  repo-url: https://github.com/florenskaial118/MASTER_DIPLOMA.git
   repo-actions: [edit, source, issue]
+
+bibliography: references.bib  
 
 format:
   html:

@@ -1,0 +1,59 @@
+---
+title: Консенсус исторических образцов
+engine: knitr
+---
+
+Сделаем консенсус для наших исторических образцов из BAM файлов через angsd
+
+(bcftools, по дефолту, например, подставляет референс в местах, где не уверен в позиции. Это рушит работу prokka: у нас появляется ген, которого на самом деле в древнем нет. В следствии этого формируется неправильный коровый геном — у древнего там больше генов, чем есть на самом деле. И на итоговых деревьях получается, что наш древний близится к референсу. Возможно из-за этого возникают сложности с определением времени и т.д.)
+
+
+Для этого убедимся, что в BAM файлах выравнивания ридов образцов 1780, 3140, 4510, 7140 за референс выбран именно геном Cardiobacterium hominis и скачаем его
+
+```{bash}
+#| eval: false
+for bam in ../data/BTC_bam_C_H/*.bam; do
+    echo -n "$bam: "
+    samtools view -H "$bam" | grep '^@SQ' | cut -f2 | head -1
+done
+```
+
+Видно, что во всех файлах используется NZ_LR134365.1 (GCF_900637305.1). Поищем данные по этому референсу и скачаем его последовательность 
+
+```{bash}
+#| eval: false
+source ../scripts/download_assembly_metadata.sh
+
+get_assembly_metadata "GCF_900637305.1"
+```
+
+```{bash}
+#| eval: false
+source ../scripts/download_assembly.sh
+
+download_assembly "GCF_900637305.1" "../data/reference_for_ancient_C_H.fa"
+samtools faidx "../data/reference_for_ancient_C_H.fa"
+```
+
+создаем консенсус
+
+```{bash}
+#| eval: false
+source ../scripts/create_angsd_consensus.sh
+
+for bam in ../data/BTC_bam_C_H/*.bam; do
+    [ -e "$bam" ] || continue
+    s=$(basename "$bam" .bam | cut -d'_' -f1)
+
+    # Абсолютный путь к BAM
+    abs_bam="$(cd "$(dirname "$bam")" && pwd)/$(basename "$bam")"
+    list_file="$(dirname "$abs_bam")/bam_list_${s}.txt"
+    echo "/bams/$(basename "$abs_bam")" > "$list_file"
+
+    create_consensus_angsd \
+        "$list_file" \
+        "../data/reference_for_ancient_C_H.fa" \
+        "../data/BTC_consensus_C_H/${s}_consensus"
+done
+```
+

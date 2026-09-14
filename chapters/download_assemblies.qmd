@@ -1,0 +1,78 @@
+---
+title: Скачиваем метаданные о сборках
+engine: knitr
+---
+
+
+*Cardiobacterium hominis*, *Eikenella corrodens*, *Aggregatibacter actinomycetemcomitans* 
+
+
+```{bash}
+#| eval: false
+chmod +x ../scripts/download_assemblies_metadata.sh
+
+../scripts/download_assemblies_metadata.sh "Cardiobacterium hominis" ../data/assembly_metadata/Cardiobacterium_hominis.tsv
+../scripts/download_assemblies_metadata.sh "Eikenella corrodens" ../data/assembly_metadata/Eikenella_corrodens.tsv
+../scripts/download_assemblies_metadata.sh "Aggregatibacter actinomycetemcomitans" ../data/assembly_metadata/Aggregatibacter_actinomycetemcomitans.tsv
+```
+
+```{python}
+#| eval: false
+import pandas as pd
+
+Cardiobacterium_hominis = pd.read_csv('../data/assembly_metadata/Cardiobacterium_hominis.tsv', sep = '\t')
+Eikenella_corrodens = pd.read_csv('../data/assembly_metadata/Eikenella_corrodens.tsv', sep = '\t')
+Aggregatibacter_actinomycetemcomitans = pd.read_csv('../data/assembly_metadata/Aggregatibacter_actinomycetemcomitans.tsv', sep = '\t')
+
+with pd.ExcelWriter('../data/assembly_metadata/combined_info.xlsx') as writer:
+    Cardiobacterium_hominis.to_excel(writer, sheet_name='Cardiobacterium_hominis', index=False)
+    Eikenella_corrodens.to_excel(writer, sheet_name='Eikenella_corrodens', index=False)
+    Aggregatibacter_actinomycetemcomitans.to_excel(writer, sheet_name='Aggregatibacter', index=False) #в названии листа нельзя использовать слишком длинные названия
+```
+
+Итоговый xls лежит в [таблице](https://docs.google.com/spreadsheets/d/1ncw5GF4YLnUmx1mQxcyNWPArU9sB6RSFIRYcyxtNu1M/edit?gid=2041904701#gid=2041904701)
+
+Для части сборок уже есть готовая аннотация .gff от Саши, для части - нет. Важно, что нам нужно делать аннотациб вручную, потому что аннотации с сайта NCBI по формату не подходят для дальнейшнего анализа в roary.
+
+# Скачиваем сборки по метаданным
+
+Начнем с *Cardiobacterium Hominis*
+
+Сравним сборки из метаданных и доступные аннотации
+
+```{python}
+import pandas as pd
+from os import listdir
+
+Cardiobacterium_hominis = pd.read_csv('../data/assembly_metadata/Cardiobacterium_hominis.tsv', sep = '\t')
+
+all_gff = [f'{f.split('.1')[0]}.1' for f in Cardiobacterium_hominis['AssemblyAccession']]
+avaliable_gff = [f'{f.split('.1')[0]}.1' for f in listdir('../data/avaliable_gff_C_H')]
+
+intersection = list(set(all_gff) & set(avaliable_gff))
+diff_all = list(set(all_gff) - set(avaliable_gff))
+diff_av = list(set(avaliable_gff) - set(all_gff))
+
+print(f'Всего сборок в NCBI: {len(all_gff)}')
+print(f'Всего доступных аннотаций: {len(avaliable_gff)}')
+print(f'Совпадает: {len(intersection)}')
+print(f'Уникальных в доступных: {len(diff_av)}')
+print(f'Уникальных во всех: {len(diff_all)}')
+
+with open('../data/new_assemblies_C_H/list.txt', 'w') as f:
+    for gff in diff_all:
+        _ = f.write(f"{gff}\n")
+```
+
+Убеждаемся, что все доступные есть в нашем списке, а для новые скачиваем.
+
+```{bash}
+#| eval: false
+source ../scripts/download_assembly.sh
+
+cat ../data/new_assemblies_C_H/list.txt |
+while read AssemblyAccession; do
+    download_assembly "$AssemblyAccession" "../data/new_assemblies_C_H/${AssemblyAccession}.fa" < /dev/null
+done < '../data/new_assemblies/list.txt'
+```
+

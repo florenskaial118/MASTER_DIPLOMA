@@ -1,0 +1,42 @@
+---
+title: Поиск коровых генов без аутгруппы
+engine: knitr
+---
+
+Поиск коровых генов без аутгруппы с помощью Roary (55 современных и 4 древних)
+
+```{bash}
+#| eval: false
+mkdir -p ../data/all_gff_no_outgroup_C_H
+cp ../data/avaliable_gff_C_H/*.gff ../data/all_gff_no_outgroup_C_H/
+cp ../data/new_gff_C_H/*.gff ../data/all_gff_no_outgroup_C_H/
+cp ../data/BTC_consensus_gff_C_H/*.gff ../data/all_gff_no_outgroup_C_H/
+```
+
+```{bash}
+#| eval: false
+mkdir -p ../data/all_core_alignment_no_outgroup_C_H
+
+source ../scripts/make_core_alignment_roary.sh
+roary ../data/all_gff_no_outgroup_C_H ../data/all_core_alignment_no_outgroup_C_H
+```
+
+```{text}
+Core genes	(80% <= strains <= 100%)	451
+Soft core genes	(79% <= strains < 80%)	85
+Shell genes	(15% <= strains < 79%)	2782
+Cloud genes	(0% <= strains < 15%)	9223
+Total genes	(0% <= strains <= 100%)	12541
+```
+
+Выделим из них snp
+
+```{bash}
+#| eval: false
+snp-sites -cb -o ../data/all_core_alignment_no_outgroup_C_H/80_percent/core_snps_no_outgroup_C_H.fa \
+          ../data/all_core_alignment_no_outgroup_C_H/80_percent/core_gene_alignment.aln
+
+snp-sites -o ../data/all_core_alignment_no_outgroup_C_H/80_percent/core_snps_no_outgroup_C_H.fa \
+../data/all_core_alignment_no_outgroup_C_H/80_percent/core_gene_alignment.aln
+```
+
