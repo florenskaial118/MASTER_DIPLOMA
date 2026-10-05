@@ -1,0 +1,32 @@
+---
+title: Поиск SNP
+engine: knitr
+---
+
+Флаг `-c` оставляет только колонки, где буква есть у всех образцов сразу. В этом выравнивании такой колонки нет: в каждой хотя бы у одного штамма стоит прочерк. Поэтому `snp-sites -bc` пишет, что SNP нет. Без `-c` он отдаёт колонки, в которых буквы различаются.
+
+```{bash}
+#| eval: false
+snp-sites \
+    -o ../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H/core_with_ancient/core_snps.fa \
+    ../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H/core_with_ancient/core_gene_alignment_with_ancient.aln
+```
+
+87 к снипов 
+
+Попробуем с помощью clipkit
+
+```{bash}
+clipkit ../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H/core_with_ancient/core_gene_alignment_with_ancient.aln \
+ -m kpi-smart-gap -o ../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H/core_with_ancient/clipkit_core_snps.fa
+```
+
+```{text}
+---------------------
+| Output Statistics |
+---------------------
+Original length: 470290
+Number of sites kept: 54312
+Number of sites trimmed: 415978
+Percentage of alignment trimmed: 88.451%
+```

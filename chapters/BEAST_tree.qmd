@@ -1,0 +1,143 @@
+---
+title: Датированное дерево
+engine: knitr
+---
+
+
+На основе 481 корового гена современных и древних *Cardiobacterium hominis* построим датированное дерево 
+
+Запишем метадату по странам в файл country_meta_itol.txt для дерева в itol по шаблону country_meta_itol_old.txt
+
+```{python}
+#| code-fold: true
+#| eval: false
+import csv
+import re
+from collections import Counter
+from pathlib import Path
+
+metadata_path = Path("../data/C_H/assembly_metadata/Cardiobacterium_hominis.tsv")
+alignment_path = Path(
+    "../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H/core_with_ancient/core_snps.fa"
+)
+output_path = Path("../data/C_H/iq_tree_no_outgroup/country_meta_itol.txt")
+
+# Цвета стран из country_meta_itol_old.txt.
+# Switzerland и Cameroon в старом файле не было.
+country_colors = {
+    "USA": "#ff0000",
+    "Germany": "#00ff00",
+    "Australia": "#800080",
+    "Denmark": "#0000ff",
+    "Not provided": "#ffffff",
+    "China": "#ffff00",
+    "Brazil": "#ff69b4",
+    "Spain": "#ffa500",
+    "Papua New Guinea": "#87ceeb",
+    "Hong Kong": "#d6d614",
+    "Ancient": "#808080",
+    "Switzerland": "#00ced1",
+    "Cameroon": "#8b4513",
+}
+
+missing_country = {"", "not provided", "not determined", "missing", "nan"}
+
+
+def normalize_country(raw):
+    country = (raw or "").strip()
+    if country.lower() in missing_country:
+        return "Not provided"
+    return country.split(":")[0].strip()
+
+
+accession_to_country = {}
+with metadata_path.open() as handle:
+    for row in csv.DictReader(handle, delimiter="\t"):
+        accession_to_country[row["AssemblyAccession"]] = normalize_country(row.get("Country"))
+
+accession_re = re.compile(r"^(GC[AF]_\d+\.\d+)")
+tip_names = []
+with alignment_path.open() as handle:
+    for line in handle:
+        if line.startswith(">"):
+            tip_names.append(line[1:].strip().split()[0])
+
+rows = []
+unknown = []
+for name in tip_names:
+    match = accession_re.match(name)
+    if match is None:
+        country = "Ancient"
+    else:
+        country = accession_to_country.get(match.group(1))
+        if country is None:
+            unknown.append(name)
+            country = "Not provided"
+    if country not in country_colors:
+        raise KeyError(f"Нет цвета для страны {country!r} ({name})")
+    rows.append((name, country_colors[country], country))
+
+ancient = [row for row in rows if row[2] == "Ancient"]
+modern = [row for row in rows if row[2] != "Ancient"]
+
+with output_path.open("w") as handle:
+    handle.write(
+        "DATASET_COLORSTRIP\n"
+        "SEPARATOR TAB\n"
+        "DATASET_LABEL\tCountry\n"
+        "COLOR\t#ff0000\n"
+        "STRIP_WIDTH\t25\n"
+        "MARGIN\t5\n"
+        "BORDER_WIDTH\t1\n"
+        "BORDER_COLOR\t#000000\n"
+        "\n"
+        "DATA\n"
+    )
+    for name, color, country in ancient + modern:
+        _ = handle.write(f"{name}\t{color}\t{country}\n")
+
+print(f"Записано {len(rows)} образцов в {output_path}")
+print(Counter(country for _, _, country in ancient + modern))
+if unknown:
+    print("Нет в метаданных:", unknown)
+```
+
+### BEAUti 
+
+Для наших древних образцов известно, что 
+
+8104510 - Pereslavl-Zalessky	XV - нач. XVI
+
+8107130	- 1240-1007 BC 125c курган Комсомолец 1. Ставропольский край, Новопавловский район
+
+8103140	- Прогресс 2, Курган 1, п.37	6012-+28 BP  
+
+8101780	 - 2170 -+ 23 18с, это Кен Су. Киргизия, Иссык-Кульская область
+
+Стандартный Beast
+
+- Все коровые гены в одной партиции (clipkit_core_snps.fa)
+-   Tips: Use tip dates. Dates specified as year before present: 
+    -   angsd_4510 : 1500-1600 , то есть 2026-1550 = 476 BP (в миллионах лет 0.000476)
+    -   angsd_7130 : 1240-1007 BC, то есть 2026+1123 = 3149 BP (0.003149)
+    -   angsd_3140 : 6012-+28 BP (0.006012)
+    -   angsd_1780 : 2170 BP (0.00217)
+
+-   Приоры:
+    -   Site Model: HKY + Gamma (0).
+    -   Species clock model : strict clock
+    -   Tree Prior: Coalescent Constant Population.
+    -   ClockRate lognormal
+    -   галочка, чтобы измерять параметры часов 
+- MCMC: длина цепи 50 млн итераций.
+
+Саша заметила, что если подвигать clock rate, то beast сходится к разным значениям, поэтому попробуем разные значения. 
+
+Скорость мутации в логнормальном распределении определяется двум парамтерами $\mu \in (e^{(M-1.96S)},e^{(M+1.96S)})$ 
+
+Для значений мутации в диапазоне $10^{-8}$ и $10^{-6}$  S = 1.25 обычно покрывает 95 процентный интервал вероятности
+
+Поэтому сделаем xml файлы с такими параметрами и посмотрим к чему сойдется бист:
+
+1) M = $1 \times 10^{-8}$ (in real space), S = 1.25 
+2) M = $1 \times 10^{-6}$ (in real space), S = 1.25  
