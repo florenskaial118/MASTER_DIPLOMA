@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Поиск коровых генов без аутгруппы – Изучение древних микроорганизмов группы HACEK с точки зрения эволюционной биологии</title>
+<title>4&nbsp; Поиск коровых генов без аутгруппы – Изучение древних микроорганизмов группы HACEK с точки зрения эволюционной биологии</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -71,6 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../chapters/ML_tree.html" rel="next">
 <link href="../chapters/annotate_assemblies.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -81,7 +82,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-ed7344add5f1663e434276306a2aa159.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-fd0503e23dce65854c81c5baaade3bdf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -122,7 +123,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/make_core_alignment.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Поиск коровых генов без аутгруппы</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/make_core_alignment.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Поиск коровых генов без аутгруппы</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -164,20 +165,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/create_consensus_from_BAM.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Консенсус исторических образцов</span></span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../chapters/annotate_assemblies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Аннотация сборок <em>Cardiobacteruin hominis</em> с помощью Prokka</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Аннотация сборок <em>Cardiobacteruin hominis</em> с помощью Prokka</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/make_core_alignment.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Поиск коровых генов без аутгруппы</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Поиск коровых генов без аутгруппы</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/ML_tree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Построение ML дерева по коровому выравниванию</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/BEAST_tree.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Датированное дерево</span></span></a>
   </div>
 </li>
     </ul>
@@ -185,15 +192,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#коровые-гены-современных-сборок-roary-55-геномов" id="toc-коровые-гены-современных-сборок-roary-55-геномов" class="nav-link active" data-scroll-target="#коровые-гены-современных-сборок-roary-55-геномов"><span class="header-section-number">4.1</span> Коровые гены современных сборок (Roary, 55 геномов)</a></li>
+  <li><a href="#анализ-выравнивания-древних-ридов-на-гены-современного-пангенома" id="toc-анализ-выравнивания-древних-ридов-на-гены-современного-пангенома" class="nav-link" data-scroll-target="#анализ-выравнивания-древних-ридов-на-гены-современного-пангенома"><span class="header-section-number">4.2</span> Анализ выравнивания древних ридов на гены современного пангенома</a></li>
+  <li><a href="#общее-коровое-выравнивание-современных-и-древних" id="toc-общее-коровое-выравнивание-современных-и-древних" class="nav-link" data-scroll-target="#общее-коровое-выравнивание-современных-и-древних"><span class="header-section-number">4.3</span> Общее коровое выравнивание современных и древних</a>
+  <ul class="collapse">
+  <li><a href="#какие-из-них-есть-в-коровом-выравнивании" id="toc-какие-из-них-есть-в-коровом-выравнивании" class="nav-link" data-scroll-target="#какие-из-них-есть-в-коровом-выравнивании"><span class="header-section-number">4.3.1</span> Какие из них есть в коровом выравнивании</a></li>
+  <li><a href="#консенсус-древних-по-этим-генам" id="toc-консенсус-древних-по-этим-генам" class="nav-link" data-scroll-target="#консенсус-древних-по-этим-генам"><span class="header-section-number">4.3.2</span> Консенсус древних по этим генам</a></li>
+  <li><a href="#вставка-консенсуса-в-выравнивание" id="toc-вставка-консенсуса-в-выравнивание" class="nav-link" data-scroll-target="#вставка-консенсуса-в-выравнивание"><span class="header-section-number">4.3.3</span> Вставка консенсуса в выравнивание</a></li>
+  <li><a href="#pca-не-выбиваются-ли-древние" id="toc-pca-не-выбиваются-ли-древние" class="nav-link" data-scroll-target="#pca-не-выбиваются-ли-древние"><span class="header-section-number">4.3.4</span> PCA: не выбиваются ли древние</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/edit/main/chapters/make_core_alignment.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/blob/main/chapters/make_core_alignment.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Поиск коровых генов без аутгруппы</span></h1>
+<h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Поиск коровых генов без аутгруппы</span></h1>
 </div>
 
 
@@ -210,36 +231,407 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Поиск коровых генов без аутгруппы с помощью Roary (55 современных и 4 древних)</p>
+<p>Проаннотированные современные сборки собираются в пангеном. Древние риды выравниваются на гены этого пангенома. В общее выравнивание попадают гены, покрытые на ширину больше 80 хотя бы у одного из древних образцов.</p>
+<section id="коровые-гены-современных-сборок-roary-55-геномов" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="коровые-гены-современных-сборок-roary-55-геномов"><span class="header-section-number">4.1</span> Коровые гены современных сборок (Roary, 55 геномов)</h2>
+<p>Собираем все аннотации в одну папку для корректной работы Roary и запускаем его</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ../data/all_gff_no_outgroup_C_H</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../data/avaliable_gff_C_H/<span class="pp">*</span>.gff ../data/all_gff_no_outgroup_C_H/</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../data/new_gff_C_H/<span class="pp">*</span>.gff ../data/all_gff_no_outgroup_C_H/</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../data/BTC_consensus_gff_C_H/<span class="pp">*</span>.gff ../data/all_gff_no_outgroup_C_H/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ../data/C_H/all_gff_no_outgroup_no_BTC_C_H</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../data/C_H/avaliable_gff_C_H/<span class="pp">*</span>.gff ../data/C_H/all_gff_no_outgroup_no_BTC_C_H/</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cp</span> ../data/C_H/new_gff_C_H/<span class="pp">*</span>.gff ../data/C_H/all_gff_no_outgroup_no_BTC_C_H/</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ../data/all_core_alignment_no_outgroup_C_H</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ../scripts/make_core_alignment_roary.sh</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">roary</span> ../data/all_gff_no_outgroup_C_H ../data/all_core_alignment_no_outgroup_C_H</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">roary</span> ../data/C_H/all_gff_no_outgroup_no_BTC_C_H ../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<pre class="text cell-code"><code>Core genes  (80% &lt;= strains &lt;= 100%)    451
-Soft core genes (79% &lt;= strains &lt; 80%)  85
-Shell genes (15% &lt;= strains &lt; 79%)  2782
-Cloud genes (0% &lt;= strains &lt; 15%)   9223
-Total genes (0% &lt;= strains &lt;= 100%) 12541</code></pre>
+<pre class="text cell-code"><code>Core genes  (80% &lt;= strains &lt;= 100%)    789
+Soft core genes (79% &lt;= strains &lt; 80%)  0
+Shell genes (15% &lt;= strains &lt; 79%)  2009
+Cloud genes (0% &lt;= strains &lt; 15%)   6365
+Total genes (0% &lt;= strains &lt;= 100%) 9163</code></pre>
 </div>
-<p>Выделим из них snp</p>
+<p>в core_accessory.header.embl FT feature - 527 штук, FT misc_feature - 261</p>
+</section>
+<section id="анализ-выравнивания-древних-ридов-на-гены-современного-пангенома" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="анализ-выравнивания-древних-ридов-на-гены-современного-пангенома"><span class="header-section-number">4.2</span> Анализ выравнивания древних ридов на гены современного пангенома</h2>
+<p>Саша выравняла сырые риды древних образцов на гены из <code>pan_genome_reference.fa</code>. Это гены современного генома <code>GCA_042638435.1</code>, записанные сплошной строкой, без прочерков.</p>
+<p>Мы посмотрим какие гены выровнены на ширину больше 80</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">snp-sites</span> <span class="at">-cb</span> <span class="at">-o</span> ../data/all_core_alignment_no_outgroup_C_H/80_percent/core_snps_no_outgroup_C_H.fa <span class="dt">\</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>          ../data/all_core_alignment_no_outgroup_C_H/80_percent/core_gene_alignment.aln</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">snp-sites</span> <span class="at">-o</span> ../data/all_core_alignment_no_outgroup_C_H/80_percent/core_snps_no_outgroup_C_H.fa <span class="dt">\</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>../data/all_core_alignment_no_outgroup_C_H/80_percent/core_gene_alignment.aln</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> ../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H/BTC_reads_coverage</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bam <span class="kw">in</span> ../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H/BTC_reads_alignment/<span class="pp">*</span>.bam<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="va">sample</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$bam</span><span class="st">"</span> .pangenome_dedup.bam<span class="va">)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">samtools</span> index <span class="st">"</span><span class="va">$bam</span><span class="st">"</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">samtools</span> coverage <span class="st">"</span><span class="va">$bam</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'NR == 1 || $6 &gt;= 80'</span> <span class="dt">\</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        <span class="op">&gt;</span> <span class="st">"../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H/BTC_reads_coverage/</span><span class="va">${sample}</span><span class="st">_coverage80.tsv"</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Теперь мы берём их объединение: локус остаётся, если он хорошо покрыт хотя бы у одного древнего. У того древнего, где покрытия нет, в этом гене будут <code>N</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>coverage_dir <span class="op">=</span> Path(<span class="st">"../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H/BTC_reads_coverage"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> Path(<span class="st">"../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H/core_with_ancient"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>out.mkdir(exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>covered <span class="op">=</span> <span class="bu">set</span>()</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> path <span class="kw">in</span> <span class="bu">sorted</span>(coverage_dir.glob(<span class="st">"*_coverage80.tsv"</span>)):</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    genes <span class="op">=</span> {line.split(<span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)[<span class="dv">0</span>] <span class="cf">for</span> i, line <span class="kw">in</span> <span class="bu">enumerate</span>(path.read_text().splitlines()) <span class="cf">if</span> i}</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    covered <span class="op">|=</span> genes</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f'у </span><span class="sc">{</span>path<span class="sc">.</span>name<span class="sc">}</span><span class="ss"> - </span><span class="sc">{</span><span class="bu">len</span>(genes)<span class="sc">}</span><span class="ss"> хорошо покрытых генов'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>у 000008101780_coverage80.tsv - 4031 хорошо покрытых генов
+у 000008103140_coverage80.tsv - 4011 хорошо покрытых генов
+у 000008104510_coverage80.tsv - 5007 хорошо покрытых генов
+у 000008107130_coverage80.tsv - 5446 хорошо покрытых генов</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"хотя бы у одного:"</span>, <span class="bu">len</span>(covered))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>хотя бы у одного: 6111</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> (out <span class="op">/</span> <span class="st">"covered_loci.txt"</span>).write_text(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join(<span class="bu">sorted</span>(covered)) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="общее-коровое-выравнивание-современных-и-древних" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="общее-коровое-выравнивание-современных-и-древних"><span class="header-section-number">4.3</span> Общее коровое выравнивание современных и древних</h2>
+<section id="какие-из-них-есть-в-коровом-выравнивании" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="какие-из-них-есть-в-коровом-выравнивании"><span class="header-section-number">4.3.1</span> Какие из них есть в коровом выравнивании</h3>
+<p>В <code>core_alignment_header.embl</code> записано, где каждый ген лежит в склеенном выравнивании. Берём те, что есть в <code>gene_presence_absence.csv</code> и чей локус хорошо покрыт хотя бы у одного древнего.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> Path(<span class="st">"../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H"</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>roary <span class="op">=</span> base <span class="op">/</span> <span class="st">"80_percent"</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> base <span class="op">/</span> <span class="st">"core_with_ancient"</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>reference_name <span class="op">=</span> <span class="st">"GCA_042638435.1"</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_fasta(path):</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    sequences, name, chunks <span class="op">=</span> {}, <span class="va">None</span>, []</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> Path(path).read_text().splitlines():</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> line.startswith(<span class="st">"&gt;"</span>):</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> name:</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>                sequences[name] <span class="op">=</span> <span class="st">""</span>.join(chunks)</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>            name, chunks <span class="op">=</span> line[<span class="dv">1</span>:].split()[<span class="dv">0</span>], []</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>            chunks.append(line.strip())</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> name:</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        sequences[name] <span class="op">=</span> <span class="st">""</span>.join(chunks)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sequences</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>genes <span class="op">=</span> []</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>current <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> line <span class="kw">in</span> (roary <span class="op">/</span> <span class="st">"core_alignment_header.embl"</span>).read_text().splitlines():</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> line.startswith(<span class="st">"FT   feature"</span>):</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>        start, end <span class="op">=</span> line.split()[<span class="op">-</span><span class="dv">1</span>].split(<span class="st">".."</span>)</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>        current <span class="op">=</span> {<span class="st">"gene"</span>: <span class="va">None</span>, <span class="st">"start"</span>: <span class="bu">int</span>(start), <span class="st">"end"</span>: <span class="bu">int</span>(end)}</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>        genes.append(current)</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> current <span class="kw">and</span> <span class="st">"/locus_tag="</span> <span class="kw">in</span> line:</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>        current[<span class="st">"gene"</span>] <span class="op">=</span> line.split(<span class="st">"="</span>, <span class="dv">1</span>)[<span class="dv">1</span>].strip().strip(<span class="st">'"'</span>)</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>locus_of <span class="op">=</span> {}</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> (roary <span class="op">/</span> <span class="st">"gene_presence_absence.csv"</span>).<span class="bu">open</span>() <span class="im">as</span> handle:</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>    reader <span class="op">=</span> csv.reader(handle)</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>    header <span class="op">=</span> <span class="bu">next</span>(reader)</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>    gene_col <span class="op">=</span> header.index(<span class="st">"Gene"</span>)</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>    ref_col <span class="op">=</span> header.index(reference_name)</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> row <span class="kw">in</span> reader:</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>        locus_of.setdefault(row[gene_col], row[ref_col].strip())</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a>pan_genome <span class="op">=</span> read_fasta(roary <span class="op">/</span> <span class="st">"pan_genome_reference.fa"</span>)</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>covered <span class="op">=</span> <span class="bu">set</span>((out <span class="op">/</span> <span class="st">"covered_loci.txt"</span>).read_text().split())</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>kept <span class="op">=</span> []</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> gene <span class="kw">in</span> genes:</span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>    locus <span class="op">=</span> locus_of.get(gene[<span class="st">"gene"</span>], <span class="st">""</span>)</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> locus <span class="kw">not</span> <span class="kw">in</span> covered <span class="kw">or</span> locus <span class="kw">not</span> <span class="kw">in</span> pan_genome:</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>    kept.append((gene[<span class="st">"gene"</span>], locus, gene[<span class="st">"start"</span>], gene[<span class="st">"end"</span>], <span class="bu">len</span>(pan_genome[locus])))</span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"генов в выравнивании:"</span>, <span class="bu">len</span>(genes))</span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"берём:"</span>, <span class="bu">len</span>(kept))</span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>lines <span class="op">=</span> [<span class="st">"gene</span><span class="ch">\t</span><span class="st">locus</span><span class="ch">\t</span><span class="st">alignment_start</span><span class="ch">\t</span><span class="st">alignment_end</span><span class="ch">\t</span><span class="st">contig_length"</span>]</span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>bed <span class="op">=</span> []</span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> gene, locus, start, end, length <span class="kw">in</span> kept:</span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>    lines.append(<span class="ss">f"</span><span class="sc">{</span>gene<span class="sc">}</span><span class="ch">\t</span><span class="sc">{</span>locus<span class="sc">}</span><span class="ch">\t</span><span class="sc">{</span>start<span class="sc">}</span><span class="ch">\t</span><span class="sc">{</span>end<span class="sc">}</span><span class="ch">\t</span><span class="sc">{</span>length<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>    bed.append(<span class="ss">f"</span><span class="sc">{</span>locus<span class="sc">}</span><span class="ch">\t</span><span class="ss">0</span><span class="ch">\t</span><span class="sc">{</span>length<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> (out <span class="op">/</span> <span class="st">"genes_kept.tsv"</span>).write_text(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join(lines) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> (out <span class="op">/</span> <span class="st">"genes_kept.bed"</span>).write_text(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join(bed) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<p>генов в выравнивании: 527 берём: 481</p>
+</section>
+<section id="консенсус-древних-по-этим-генам" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="консенсус-древних-по-этим-генам"><span class="header-section-number">4.3.2</span> Консенсус древних по этим генам</h3>
+<p>Консенсус считает ANGSD. На отобранных генах глубина 10–30×, поэтому <code>-doFasta 2</code>: в позиции берётся самая частая буква среди ридов.</p>
+<p>Случайная буква (<code>-doFasta 1</code>) нужна, когда на позицию приходится один рид, здесь так почти нет.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="va">BED</span><span class="op">=</span>../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H/core_with_ancient/genes_kept.bed</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="va">DIR</span><span class="op">=</span>../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H/BTC_reads_alignment</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bam <span class="kw">in</span> <span class="st">"</span><span class="va">$DIR</span><span class="st">"</span>/<span class="pp">*</span>.bam<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="va">sample</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$bam</span><span class="st">"</span> .pangenome_dedup.bam<span class="va">)</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">samtools</span> depth <span class="at">-a</span> <span class="at">-b</span> <span class="st">"</span><span class="va">$BED</span><span class="st">"</span> <span class="st">"</span><span class="va">$bam</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">awk</span> <span class="at">-v</span> s=<span class="st">"</span><span class="va">$sample</span><span class="st">"</span> <span class="st">'</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="st">    { n++; sum += $3; if ($3 &gt;= 10) d10++ }</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="st">    END { printf "%s  позиций %d  средняя глубина %.1f  доля &gt;=10x %.1f%%\n", s, n, sum/n, 100*d10/n }</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="st">  '</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>000008101780  позиций 405339  средняя глубина 15.9  доля &gt;=10x 71.9%
+000008103140  позиций 402822  средняя глубина 14.2  доля &gt;=10x 51.1%
+000008104510  позиций 405339  средняя глубина 26.0  доля &gt;=10x 84.9%
+000008107130  позиций 405339  средняя глубина 35.7  доля &gt;=10x 89.8%</code></pre>
+</div>
+</div>
+<p><code>-minMapQ 20</code> и <code>-minQ 20</code> отбрасывают слабые риды и слабые буквы. Файл <code>pan_genome_reference.fa</code> задаёт имена и длины генов.</p>
+<p>Список регионов для ANGSD — те же гены, что в <code>genes_kept.bed</code>, но координаты с 1 и конец включительно. Сам вызов — <code>scripts/create_angsd_consensus.sh</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="va">base</span><span class="op">=</span><span class="va">$(</span><span class="bu">cd</span> ../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H <span class="kw">&amp;&amp;</span> <span class="bu">pwd</span><span class="va">)</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="va">out</span><span class="op">=</span><span class="st">"</span><span class="va">$base</span><span class="st">/core_with_ancient"</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="st">"</span><span class="va">$out</span><span class="st">/consensus"</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">awk</span> <span class="at">-F</span> <span class="st">'\t'</span> <span class="st">'{print $1 "\t1\t" $3}'</span> <span class="st">"</span><span class="va">$out</span><span class="st">/genes_kept.bed"</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$out</span><span class="st">/angsd_regions.txt"</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ../scripts/create_angsd_consensus.sh</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> bam <span class="kw">in</span> <span class="st">"</span><span class="va">$base</span><span class="st">/BTC_reads_alignment"</span>/<span class="pp">*</span>.bam<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="va">sample</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$bam</span><span class="st">"</span> .pangenome_dedup.bam<span class="va">)</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"</span><span class="va">$bam</span><span class="st">"</span> <span class="op">&gt;</span> <span class="st">"</span><span class="va">$out</span><span class="st">/consensus/</span><span class="va">${sample}</span><span class="st">.bamlist"</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="ex">create_consensus_angsd</span> <span class="dt">\</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$out</span><span class="st">/consensus/</span><span class="va">${sample}</span><span class="st">.bamlist"</span> <span class="dt">\</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$base</span><span class="st">/80_percent/pan_genome_reference.fa"</span> <span class="dt">\</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$out</span><span class="st">/consensus/</span><span class="va">${sample}</span><span class="st">"</span> <span class="dt">\</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="va">$out</span><span class="st">/angsd_regions.txt"</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"</span><span class="va">$sample</span><span class="st"> </span><span class="va">$(</span><span class="fu">grep</span> <span class="at">-c</span> <span class="st">'^&gt;'</span> <span class="st">"</span><span class="va">$out</span><span class="st">/consensus/</span><span class="va">${sample}</span><span class="st">.fa"</span><span class="va">)</span><span class="st"> генов"</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="вставка-консенсуса-в-выравнивание" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="вставка-консенсуса-в-выравнивание"><span class="header-section-number">4.3.3</span> Вставка консенсуса в выравнивание</h3>
+<p>У современных штаммов из выравнивания вырезаются те же гены. У древнего идём по строке <code>GCA_042638435.1</code>: на букве берём следующую букву консенсуса ANGSD, на прочерке ставим прочерк. Консенсус уже той же длины, что ген без прочерков. Если букв не хватило, остаток позиции заполняется <code>n</code>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>base <span class="op">=</span> Path(<span class="st">"../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>roary <span class="op">=</span> base <span class="op">/</span> <span class="st">"80_percent"</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> base <span class="op">/</span> <span class="st">"core_with_ancient"</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>reference_name <span class="op">=</span> <span class="st">"GCA_042638435.1"</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> read_fasta(path):</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    sequences, name, chunks <span class="op">=</span> {}, <span class="va">None</span>, []</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> Path(path).read_text().splitlines():</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> line.startswith(<span class="st">"&gt;"</span>):</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> name:</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>                sequences[name] <span class="op">=</span> <span class="st">""</span>.join(chunks)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>            name, chunks <span class="op">=</span> line[<span class="dv">1</span>:].split()[<span class="dv">0</span>], []</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>            chunks.append(line.strip())</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> name:</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>        sequences[name] <span class="op">=</span> <span class="st">""</span>.join(chunks)</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> sequences</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>alignment <span class="op">=</span> read_fasta(roary <span class="op">/</span> <span class="st">"core_gene_alignment.aln"</span>)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>reference <span class="op">=</span> alignment[reference_name]</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>kept <span class="op">=</span> [</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    line.split(<span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> line <span class="kw">in</span> (out <span class="op">/</span> <span class="st">"genes_kept.tsv"</span>).read_text().splitlines()[<span class="dv">1</span>:]</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>ancient <span class="op">=</span> {</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>    path.stem: read_fasta(path)</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> path <span class="kw">in</span> <span class="bu">sorted</span>((out <span class="op">/</span> <span class="st">"consensus"</span>).glob(<span class="st">"*.fa"</span>))</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>pieces <span class="op">=</span> {name: [] <span class="cf">for</span> name <span class="kw">in</span> <span class="bu">list</span>(alignment) <span class="op">+</span> <span class="bu">list</span>(ancient)}</span>
+<span id="cb14-33"><a href="#cb14-33" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> gene, locus, start, end, length <span class="kw">in</span> kept:</span>
+<span id="cb14-34"><a href="#cb14-34" aria-hidden="true" tabindex="-1"></a>    start, end <span class="op">=</span> <span class="bu">int</span>(start) <span class="op">-</span> <span class="dv">1</span>, <span class="bu">int</span>(end)</span>
+<span id="cb14-35"><a href="#cb14-35" aria-hidden="true" tabindex="-1"></a>    ref_row <span class="op">=</span> reference[start:end]</span>
+<span id="cb14-36"><a href="#cb14-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name, sequence <span class="kw">in</span> alignment.items():</span>
+<span id="cb14-37"><a href="#cb14-37" aria-hidden="true" tabindex="-1"></a>        pieces[name].append(sequence[start:end])</span>
+<span id="cb14-38"><a href="#cb14-38" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> sample, contigs <span class="kw">in</span> ancient.items():</span>
+<span id="cb14-39"><a href="#cb14-39" aria-hidden="true" tabindex="-1"></a>        consensus <span class="op">=</span> contigs.get(locus)</span>
+<span id="cb14-40"><a href="#cb14-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> consensus <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb14-41"><a href="#cb14-41" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">SystemExit</span>(<span class="ss">f"в консенсусе </span><span class="sc">{</span>sample<span class="sc">}</span><span class="ss"> нет гена </span><span class="sc">{</span>locus<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-42"><a href="#cb14-42" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">len</span>(consensus) <span class="op">!=</span> <span class="bu">int</span>(length):</span>
+<span id="cb14-43"><a href="#cb14-43" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(sample, locus, <span class="st">"длина консенсуса"</span>, <span class="bu">len</span>(consensus), <span class="st">"длина гена"</span>, length)</span>
+<span id="cb14-44"><a href="#cb14-44" aria-hidden="true" tabindex="-1"></a>        placed <span class="op">=</span> []</span>
+<span id="cb14-45"><a href="#cb14-45" aria-hidden="true" tabindex="-1"></a>        i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb14-46"><a href="#cb14-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> base <span class="kw">in</span> ref_row:</span>
+<span id="cb14-47"><a href="#cb14-47" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> base <span class="op">==</span> <span class="st">"-"</span>:</span>
+<span id="cb14-48"><a href="#cb14-48" aria-hidden="true" tabindex="-1"></a>                placed.append(<span class="st">"-"</span>)</span>
+<span id="cb14-49"><a href="#cb14-49" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span></span>
+<span id="cb14-50"><a href="#cb14-50" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">&gt;=</span> <span class="bu">len</span>(consensus):</span>
+<span id="cb14-51"><a href="#cb14-51" aria-hidden="true" tabindex="-1"></a>                placed.append(<span class="st">"n"</span>)</span>
+<span id="cb14-52"><a href="#cb14-52" aria-hidden="true" tabindex="-1"></a>                <span class="cf">continue</span></span>
+<span id="cb14-53"><a href="#cb14-53" aria-hidden="true" tabindex="-1"></a>            letter <span class="op">=</span> consensus[i].lower()</span>
+<span id="cb14-54"><a href="#cb14-54" aria-hidden="true" tabindex="-1"></a>            i <span class="op">+=</span> <span class="dv">1</span></span>
+<span id="cb14-55"><a href="#cb14-55" aria-hidden="true" tabindex="-1"></a>            placed.append(<span class="st">"-"</span> <span class="cf">if</span> letter <span class="op">==</span> <span class="st">"*"</span> <span class="cf">else</span> letter)</span>
+<span id="cb14-56"><a href="#cb14-56" aria-hidden="true" tabindex="-1"></a>        pieces[sample].append(<span class="st">""</span>.join(placed))</span>
+<span id="cb14-57"><a href="#cb14-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-58"><a href="#cb14-58" aria-hidden="true" tabindex="-1"></a>order <span class="op">=</span> <span class="bu">list</span>(alignment) <span class="op">+</span> <span class="bu">list</span>(ancient)</span>
+<span id="cb14-59"><a href="#cb14-59" aria-hidden="true" tabindex="-1"></a>lines <span class="op">=</span> []</span>
+<span id="cb14-60"><a href="#cb14-60" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name <span class="kw">in</span> order:</span>
+<span id="cb14-61"><a href="#cb14-61" aria-hidden="true" tabindex="-1"></a>    sequence <span class="op">=</span> <span class="st">""</span>.join(pieces[name])</span>
+<span id="cb14-62"><a href="#cb14-62" aria-hidden="true" tabindex="-1"></a>    lines.append(<span class="ss">f"&gt;</span><span class="sc">{</span>name<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-63"><a href="#cb14-63" aria-hidden="true" tabindex="-1"></a>    lines.extend(sequence[i:i <span class="op">+</span> <span class="dv">60</span>] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">0</span>, <span class="bu">len</span>(sequence), <span class="dv">60</span>))</span>
+<span id="cb14-64"><a href="#cb14-64" aria-hidden="true" tabindex="-1"></a>_ <span class="op">=</span> (out <span class="op">/</span> <span class="st">"core_gene_alignment_with_ancient.aln"</span>).write_text(<span class="st">"</span><span class="ch">\n</span><span class="st">"</span>.join(lines) <span class="op">+</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb14-65"><a href="#cb14-65" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(order), <span class="st">"последовательностей,"</span>, <span class="bu">len</span>(<span class="st">""</span>.join(pieces[order[<span class="dv">0</span>]])), <span class="st">"позиций"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>59 последовательностей, 470290 позиций</code></pre>
+</div>
+</div>
+</section>
+<section id="pca-не-выбиваются-ли-древние" class="level3" data-number="4.3.4">
+<h3 data-number="4.3.4" class="anchored" data-anchor-id="pca-не-выбиваются-ли-древние"><span class="header-section-number">4.3.4</span> PCA: не выбиваются ли древние</h3>
+<p>Для каждой пары образцов берём только позиции, где у обоих стоит A, C, G или T. Расстояние — доля позиций, в которых буквы различаются. Прочерк и <code>N</code> в долю не входят. Координаты считаем так, чтобы близкие на графике образцы были близки по этой доле.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>aln_path <span class="op">=</span> Path(<span class="st">"../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H/core_with_ancient/core_gene_alignment_with_ancient.aln"</span>)</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>sequences <span class="op">=</span> {}</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>name <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>chunks <span class="op">=</span> []</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> line <span class="kw">in</span> aln_path.read_text().splitlines():</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> line.startswith(<span class="st">"&gt;"</span>):</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> name:</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>            sequences[name] <span class="op">=</span> <span class="st">""</span>.join(chunks)</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>        name <span class="op">=</span> line[<span class="dv">1</span>:].split()[<span class="dv">0</span>]</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>        chunks <span class="op">=</span> []</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>        chunks.append(line.strip())</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>sequences[name] <span class="op">=</span> <span class="st">""</span>.join(chunks)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>names <span class="op">=</span> <span class="bu">list</span>(sequences)</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>alignment <span class="op">=</span> np.array([<span class="bu">list</span>(sequences[sample].upper()) <span class="cf">for</span> sample <span class="kw">in</span> names])</span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>is_base <span class="op">=</span> np.isin(alignment, <span class="bu">list</span>(<span class="st">"ACGT"</span>))</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>n_samples <span class="op">=</span> <span class="bu">len</span>(names)</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>distance <span class="op">=</span> np.zeros((n_samples, n_samples))</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_samples):</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> j <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">+</span> <span class="dv">1</span>, n_samples):</span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>        both <span class="op">=</span> is_base[i] <span class="op">&amp;</span> is_base[j]</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>        n_diff <span class="op">=</span> np.count_nonzero(both <span class="op">&amp;</span> (alignment[i] <span class="op">!=</span> alignment[j]))</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>        distance[i, j] <span class="op">=</span> distance[j, i] <span class="op">=</span> n_diff <span class="op">/</span> both.<span class="bu">sum</span>()</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>centering <span class="op">=</span> np.eye(n_samples) <span class="op">-</span> np.ones((n_samples, n_samples)) <span class="op">/</span> n_samples</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>gram <span class="op">=</span> <span class="op">-</span><span class="fl">0.5</span> <span class="op">*</span> centering <span class="op">@</span> (distance <span class="op">**</span> <span class="dv">2</span>) <span class="op">@</span> centering</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>eigenvalues, eigenvectors <span class="op">=</span> np.linalg.eigh(gram)</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>order <span class="op">=</span> np.argsort(eigenvalues)[::<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>eigenvalues <span class="op">=</span> eigenvalues[order]</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>eigenvectors <span class="op">=</span> eigenvectors[:, order]</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> eigenvectors[:, :<span class="dv">2</span>] <span class="op">*</span> np.sqrt(np.clip(eigenvalues[:<span class="dv">2</span>], <span class="dv">0</span>, <span class="va">None</span>))</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>explained <span class="op">=</span> eigenvalues[:<span class="dv">2</span>] <span class="op">/</span> eigenvalues[eigenvalues <span class="op">&gt;</span> <span class="dv">0</span>].<span class="bu">sum</span>() <span class="op">*</span> <span class="dv">100</span></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>ancient <span class="op">=</span> [i <span class="cf">for</span> i, sample <span class="kw">in</span> <span class="bu">enumerate</span>(names) <span class="cf">if</span> sample.startswith(<span class="st">"00000"</span>)]</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>modern <span class="op">=</span> [i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_samples) <span class="cf">if</span> i <span class="kw">not</span> <span class="kw">in</span> ancient]</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;Figure size 1200x800 with 0 Axes&gt;</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(scores[modern, <span class="dv">0</span>], scores[modern, <span class="dv">1</span>], s<span class="op">=</span><span class="dv">60</span>, alpha<span class="op">=</span><span class="fl">0.8</span>, edgecolor<span class="op">=</span><span class="st">"k"</span>, label<span class="op">=</span><span class="st">"современные"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;matplotlib.collections.PathCollection object at 0x119a5d2b0&gt;</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>plt.scatter(scores[ancient, <span class="dv">0</span>], scores[ancient, <span class="dv">1</span>], s<span class="op">=</span><span class="dv">90</span>, edgecolor<span class="op">=</span><span class="st">"k"</span>, label<span class="op">=</span><span class="st">"древние"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;matplotlib.collections.PathCollection object at 0x110919450&gt;</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> ancient:</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    plt.annotate(names[i][<span class="op">-</span><span class="dv">4</span>:], (scores[i, <span class="dv">0</span>], scores[i, <span class="dv">1</span>]), fontsize<span class="op">=</span><span class="dv">9</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Text(-0.0067921463842458485, 0.0016779239549169216, '1780')
+Text(-0.008046727994156221, 0.002933745151376979, '3140')
+Text(-0.005992435884124464, 0.0015556893362351234, '4510')
+Text(-0.006693269440565547, 0.001504520727336218, '7130')</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="ss">f"PC1 (</span><span class="sc">{</span>explained[<span class="dv">0</span>]<span class="sc">:.1f}</span><span class="ss">%)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Text(0.5, 0, 'PC1 (18.5%)')</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="ss">f"PC2 (</span><span class="sc">{</span>explained[<span class="dv">1</span>]<span class="sc">:.1f}</span><span class="ss">%)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Text(0, 0.5, 'PC2 (7.5%)')</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"PCA по попарным расстояниям корового выравнивания"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Text(0.5, 1.0, 'PCA по попарным расстояниям корового выравнивания')</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>plt.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;matplotlib.lines.Line2D object at 0x119a5da90&gt;</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>plt.axvline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"grey"</span>, lw<span class="op">=</span><span class="fl">0.5</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;matplotlib.lines.Line2D object at 0x119a5dd30&gt;</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>plt.legend()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;matplotlib.legend.Legend object at 0x119a5de80&gt;</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>out <span class="op">=</span> Path(<span class="st">"../results/figures/PCA_core_with_ancient.png"</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>out.parent.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>plt.savefig(out, dpi<span class="op">=</span><span class="dv">150</span>)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="make_core_alignment_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="1152"></p>
+</figure>
+</div>
+</div>
 </div>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -645,10 +1037,13 @@ Total genes (0% &lt;= strains &lt;= 100%) 12541</code></pre>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../chapters/annotate_assemblies.html" class="pagination-link" aria-label="Аннотация сборок *Cardiobacteruin hominis* с помощью Prokka">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Аннотация сборок <em>Cardiobacteruin hominis</em> с помощью Prokka</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Аннотация сборок <em>Cardiobacteruin hominis</em> с помощью Prokka</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../chapters/ML_tree.html" class="pagination-link" aria-label="Построение ML дерева по коровому выравниванию">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Построение ML дерева по коровому выравниванию</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
@@ -656,4 +1051,4 @@ Total genes (0% &lt;= strains &lt;= 100%) 12541</code></pre>
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/edit/main/chapters/make_core_alignment.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/blob/main/chapters/make_core_alignment.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/edit/main/chapters/make_core_alignment.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/blob/main/chapters/make_core_alignment.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
