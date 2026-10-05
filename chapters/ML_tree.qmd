@@ -14,4 +14,4 @@ iqtree -s ../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H/core_with_ancien
 -pre  ../data/C_H/iq_tree_no_outgroup/C_H_ML_tree -redo
 ```
 
-![ML дерево](../data/C_H/iq_tree_no_outgroup/Screenshot%202026-09-28%20at%206.12.43%E2%80%AFPM.png)
+![ML дерево](../results/figures/ML_tree_CH.png)

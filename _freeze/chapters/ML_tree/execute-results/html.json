@@ -1,9 +1,11 @@
 {
-  "hash": "e8e9d3698582e04818f6fd65f7202520",
+  "hash": "e3c7acdf7cefe3575a3828a18958d2a4",
   "result": {
     "engine": "knitr",
-    "markdown": "---\ntitle: Построение ML дерева по коровому выравниванию\nengine: knitr\n---\n\n\n\n::: {.cell}\n\n```{.bash .cell-code}\nmkdir -p ../data/C_H/iq_tree_no_outgroup\n\niqtree -s ../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H/core_with_ancient/clipkit_core_snps.fa  -m GTR+F+ASC+G4 \\\n  -bb 1000 -alrt 1000 \\\n  -nt 3 \\\n-pre  ../data/C_H/iq_tree_no_outgroup/C_H_ML_tree -redo\n```\n:::\n\n\n![ML дерево](../data/C_H/iq_tree_no_outgroup/Screenshot%202026-09-28%20at%206.12.43%E2%80%AFPM.png)",
-    "supporting": [],
+    "markdown": "---\ntitle: Построение ML дерева по коровому выравниванию\nengine: knitr\n---\n\n\n\n::: {.cell}\n\n```{.bash .cell-code}\nmkdir -p ../data/C_H/iq_tree_no_outgroup\n\niqtree -s ../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H/core_with_ancient/clipkit_core_snps.fa  -m GTR+F+ASC+G4 \\\n  -bb 1000 -alrt 1000 \\\n  -nt 3 \\\n-pre  ../data/C_H/iq_tree_no_outgroup/C_H_ML_tree -redo\n```\n:::\n\n\n![ML дерево](../results/figures/ML_tree_CH.png)",
+    "supporting": [
+      "ML_tree_files"
+    ],
     "filters": [
       "rmarkdown/pagebreak.lua"
     ],
