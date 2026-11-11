@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -27,7 +27,26 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -40,14 +59,15 @@ ul.task-list li input[type="checkbox"] {
 <link href="./chapters/download_assemblies.html" rel="next">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-fd0503e23dce65854c81c5baaade3bdf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-4f67ab1e4efc86feb5e21e0983fc9301.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -79,17 +99,17 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Магистерский диплом 2027</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Магистерский диплом 2027</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -100,7 +120,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Изучение древних микроорганизмов группы HACEK с точки зрения эволюционной биологии</a> 
@@ -125,31 +145,49 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapters/download_assemblies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Скачиваем метаданные о сборках</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Метаданные и сборки</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/create_consensus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Консенсусы древних образцов</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapters/annotate_assemblies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Аннотация сборок <em>Cardiobacteruin hominis</em> с помощью Prokka</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Аннотация сборок</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapters/make_core_alignment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Поиск коровых генов без аутгруппы</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Пан-геномный анализ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/find_snp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Отбор сайтов для дерева</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapters/ML_tree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Построение ML дерева по коровому выравниванию</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ML-дерево по коровому выравниванию</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/BEAST_tree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Датированное дерево</span></span></a>
+  <a href="./chapters/check_time_signal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Сигнал времени</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/analyse_genes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Гены вирулентности и устойчивости</span></span></a>
   </div>
 </li>
     </ul>
@@ -158,16 +196,34 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#магистерский-диплом-2027" id="toc-магистерский-диплом-2027" class="nav-link active" data-scroll-target="#магистерский-диплом-2027"><span class="header-section-number">1</span> Магистерский диплом 2027</a></li>
+  <li><a href="#магистерский-диплом-2027" id="toc-магистерский-диплом-2027" class="nav-link active" data-scroll-target="#магистерский-диплом-2027"><span class="header-section-number">1</span> Магистерский диплом 2027</a>
+  <ul class="collapse">
+  <li><a href="#введение" id="toc-введение" class="nav-link" data-scroll-target="#введение"><span class="header-section-number">1.1</span> Введение</a>
+  <ul class="collapse">
+  <li><a href="#клинические-особенности-и-диагностика" id="toc-клинические-особенности-и-диагностика" class="nav-link" data-scroll-target="#клинические-особенности-и-диагностика"><span class="header-section-number">1.1.1</span> Клинические особенности и диагностика</a></li>
+  <li><a href="#эволюция-подходов-к-антибактериальной-терапии-и-профили-резистентности" id="toc-эволюция-подходов-к-антибактериальной-терапии-и-профили-резистентности" class="nav-link" data-scroll-target="#эволюция-подходов-к-антибактериальной-терапии-и-профили-резистентности"><span class="header-section-number">1.1.2</span> Эволюция подходов к антибактериальной терапии и профили резистентности</a></li>
+  </ul></li>
+  <li><a href="#данные" id="toc-данные" class="nav-link" data-scroll-target="#данные"><span class="header-section-number">1.2</span> Данные</a></li>
+  <li><a href="#как-устроен-анализ" id="toc-как-устроен-анализ" class="nav-link" data-scroll-target="#как-устроен-анализ"><span class="header-section-number">1.3</span> Как устроен анализ</a></li>
+  <li><a href="#результаты" id="toc-результаты" class="nav-link" data-scroll-target="#результаты"><span class="header-section-number">1.4</span> Результаты</a>
+  <ul class="collapse">
+  <li><a href="#пан-геном" id="toc-пан-геном" class="nav-link" data-scroll-target="#пан-геном"><span class="header-section-number">1.4.1</span> Пан-геном</a></li>
+  <li><a href="#ml-дерево" id="toc-ml-дерево" class="nav-link" data-scroll-target="#ml-дерево"><span class="header-section-number">1.4.2</span> ML-дерево</a></li>
+  <li><a href="#сигнал-времени" id="toc-сигнал-времени" class="nav-link" data-scroll-target="#сигнал-времени"><span class="header-section-number">1.4.3</span> Сигнал времени</a></li>
+  <li><a href="#гены-вирулентности" id="toc-гены-вирулентности" class="nav-link" data-scroll-target="#гены-вирулентности"><span class="header-section-number">1.4.4</span> Гены вирулентности</a></li>
+  <li><a href="#гены-устойчивости" id="toc-гены-устойчивости" class="nav-link" data-scroll-target="#гены-устойчивости"><span class="header-section-number">1.4.5</span> Гены устойчивости</a></li>
+  <li><a href="#сводка" id="toc-сводка" class="nav-link" data-scroll-target="#сводка"><span class="header-section-number">1.4.6</span> Сводка</a></li>
+  </ul></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/blob/main/index.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -196,17 +252,283 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="магистерский-диплом-2027" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Магистерский диплом 2027</h1>
-<p>Тема — древние микроорганизмы группы HACEK: скорость эволюции, время корня, число замен и рекомбинация.</p>
-<p>Этапы:</p>
-<ol type="1">
-<li>Построение датированных деревьев</li>
-<li>Изучение де-ново сборок</li>
-<li>изучение рекомбинации организмов внутри группы</li>
-<li>посмотреть на позитивную эволюцию (какие гены подтвергаются позитивному отбору и на каких ветвях?)</li>
-</ol>
-<p>conda окружение - MASTER_DIPLOMA</p>
+<p>Сравнительный геномный анализ древних и современных штаммов <em>C. hominis</em>. Метаданные <em>Eikenella corrodens</em> и <em>Aggregatibacter actinomycetemcomitans</em> скачиваются в той же главе, но до дерева и генов эти два вида здесь не доведены. Рекомбинация и положительный отбор в текущие главы не входят.</p>
+<p>По <em>C. hominis</em> в книге сделано следующее:</p>
+<ul>
+<li>собраны метаданные и сборки, для древних образцов построены консенсусы;</li>
+<li>по 59 геномам посчитан пан-геном и ML-дерево;</li>
+<li>проверен сигнал времени;</li>
+<li>отмечены гены вирулентности (VFDB) и устойчивости (CARD/RGI).</li>
+</ul>
+<section id="введение" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="введение"><span class="header-section-number">1.1</span> Введение</h2>
+<p>Инфекционный эндокардит (ИЭ) остается тяжелым заболеванием с высокой летальностью, несмотря на значительный прогресс в его диагностике и терапии <span class="citation" data-cites="tharsiga2026">(<a href="#ref-tharsiga2026" role="doc-biblioref">Tharsiga et al. 2026</a>)</span>. Среди редких возбудителей ИЭ особое место занимают грамотрицательные бактерии группы HACEK (<em>Haemophilus</em>, <em>Aggregatibacter actinomycetemcomitans</em>, <em>Cardiobacterium hominis</em>, <em>Eikenella corrodens</em> и <em>Kingella kingae</em>), входящие в состав нормальной микрофлоры полости рта и верхних дыхательных путей человека <span class="citation" data-cites="khaledi2022 chambers2013">(<a href="#ref-khaledi2022" role="doc-biblioref">Khaledi et al. 2022</a>; <a href="#ref-chambers2013" role="doc-biblioref">Chambers et al. 2013</a>)</span>.</p>
+<p><em>Cardiobacterium hominis</em> известен как возбудитель инфекционного эндокардита с 1962 года <span class="citation" data-cites="lequellec1994">(<a href="#ref-lequellec1994" role="doc-biblioref">Le Quellec et al. 1994a</a>)</span>. Согласно классическим данным Ellner et al., этот микроорганизм обладает «крайне низкой вирулентностью» <span class="citation" data-cites="ellner1979">(<a href="#ref-ellner1979" role="doc-biblioref">ELLNER et al. 1979</a>)</span>.</p>
+<p>Несмотря на это, он способен вызывать тяжелое поражение эндокарда при наличии фоновой патологии. Как показал недавний обзор 44 клинических случаев, основными предрасполагающими факторами развития инфекции выступают перенесенное протезирование клапанов (57%), стоматологические вмешательства или кариес (20%), а также врожденные аномалии клапанного аппарата (5%) <span class="citation" data-cites="ono2023">(<a href="#ref-ono2023" role="doc-biblioref">Ono et al. 2023</a>)</span>.</p>
+<p>Исторически заболевание ассоциировалось с неблагоприятным прогнозом: в когорте Ellner et al.&nbsp;(до широкого применения эффективной антибактериальной терапии и хирургии клапанов) летальность достигала 26% <span class="citation" data-cites="ellner1979">(<a href="#ref-ellner1979" role="doc-biblioref">ELLNER et al. 1979</a>)</span>. Однако внедрение эффективных протоколов лечения кардинально изменило ситуацию: по данным Malani et al.&nbsp;(61 случай), частота выздоровления при поражении ествественных клапанов составила 93%, а при протезном эндокардите — 94%. При этом потребность в замене клапана достигала 45% (27 из 61 случаев) <span class="citation" data-cites="malani2006">(<a href="#ref-malani2006" role="doc-biblioref">Malani et al. 2006</a>)</span>.</p>
+<p>При этом за последние десятилетия существенно изменился возрастной портрет пациента: пик заболеваемости сместился с 45 лет в 1950-х годах до 70 лет в настоящее время, а пожилые люди имеют пятикратно повышенный риск развития ИЭ по сравнению с общей взрослой популяцией <span class="citation" data-cites="ursi2018">(<a href="#ref-ursi2018" role="doc-biblioref">Ursi et al. 2018</a>)</span>.</p>
+<section id="клинические-особенности-и-диагностика" class="level3" data-number="1.1.1">
+<h3 data-number="1.1.1" class="anchored" data-anchor-id="клинические-особенности-и-диагностика"><span class="header-section-number">1.1.1</span> Клинические особенности и диагностика</h3>
+<p>Для эндокардита, вызванного <em>C. hominis</em>, характерно подострое, медленное и малосимптомное развитие. Длительность симптомов до диагноза: в среднем 138 ± 128 дней <span class="citation" data-cites="malani2006">(<a href="#ref-malani2006" role="doc-biblioref">Malani et al. 2006</a>)</span>.</p>
+<p>Диагностика базируется на сочетании трех ключевых критериев: эхокардиографического исследования, верификации клинических признаков (лихорадка, появление сердечных шумов) и микробиологического выделения возбудителя, часто на фоне заболеваний пародонта или бактериемии <span class="citation" data-cites="khaledi2022">(<a href="#ref-khaledi2022" role="doc-biblioref">Khaledi et al. 2022</a>)</span>.</p>
+<div id="fig-HACEK" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-HACEK-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="results/figures/HACEK.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-HACEK-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1.1: Диагностика ИЭ <span class="citation" data-cites="khaledi2022">(<a href="#ref-khaledi2022" role="doc-biblioref">Khaledi et al. 2022</a>)</span>
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="эволюция-подходов-к-антибактериальной-терапии-и-профили-резистентности" class="level3" data-number="1.1.2">
+<h3 data-number="1.1.2" class="anchored" data-anchor-id="эволюция-подходов-к-антибактериальной-терапии-и-профили-резистентности"><span class="header-section-number">1.1.2</span> Эволюция подходов к антибактериальной терапии и профили резистентности</h3>
+<p>При выборе тактики лечения клиницисты опираются на актуальные национальные и международные стандарты <span class="citation" data-cites="kotova2024">(<a href="#ref-kotova2024" role="doc-biblioref">Kotova and Kobalava 2024</a>)</span>.</p>
+<ul>
+<li><p><strong>Российские клинические рекомендации</strong>: «Инфекционный эндокардит и инфекция внутрисердечных устройств» (2021 г.).</p></li>
+<li><p><strong>Европейские рекомендации</strong>: «ESC Guidelines for the management of endocarditis» (2023 г.)</p></li>
+</ul>
+<p>Исторически «золотым стандартом» терапии эндокардита, вызванного бактериями группы HACEK, считалась комбинация ампициллина и гентамицина <span class="citation" data-cites="calza2004">(<a href="#ref-calza2004" role="doc-biblioref">Calza et al. 2004</a>)</span>. Однако появление штаммов <em>C. hominis</em>, продуцирующих β-лактамазы (в частности, типа TEM), потребовало пересмотра этих схем <span class="citation" data-cites="lequellec1994a lu2000a">(<a href="#ref-lequellec1994a" role="doc-biblioref">Le Quellec et al. 1994b</a>; <a href="#ref-lu2000a" role="doc-biblioref">Lu et al. 2000</a>)</span>. С середины 2000-х годов препаратами выбора стали цефалоспорины III поколения (преимущественно цефтриаксон): рекомендуемая длительность курса составляет 4 недели при эндокардите естественного клапана и 6 недель — при поражении протеза <span class="citation" data-cites="walkty2005b">(<a href="#ref-walkty2005b" role="doc-biblioref">Walkty 2005</a>)</span>. Актуальность этого подхода подтверждается и современными клиническими наблюдениями: например, в описанном в 2026 году случае эндокардита у 40-летнего пациента без сопутствующей патологии шестинедельный курс цефалоспорина III поколения привел к полному выздоровлению <span class="citation" data-cites="tharsiga2026">(<a href="#ref-tharsiga2026" role="doc-biblioref">Tharsiga et al. 2026</a>)</span>.</p>
+<p>Помимо β-лактамов, в контексте эволюции и эпидемиологии резистентности <em>C. hominis</em> представляют интерес и другие классы антибиотиков, даже если они не входят в первую линию терапии:</p>
+<ul>
+<li>Гликопептиды (ванкомицин): преимущественно применяются против грамположительных кокков и часто назначаются эмпирически до подтверждения возбудителя. Однако еще в 1979 году был описан клинический изолят <em>C. hominis</em>, устойчивый к ванкомицину (МПК 25 мкг/мл) и эритромицину <span class="citation" data-cites="ellner1979">(<a href="#ref-ellner1979" role="doc-biblioref">ELLNER et al. 1979</a>)</span>.</li>
+<li>Тетрациклины и сульфаниламиды: не используются в качестве стандартной терапии ИЭ, вызванного HACEK, однако их гены устойчивости широко распространены в микробных сообществах полости рта и служат важными маркерами горизонтального переноса генов.</li>
+</ul>
+<p>Учитывая редкость выделения <em>C. hominis</em> в рутинной практике, его геномная структура, эволюционная динамика и скрытый потенциал генов устойчивости остаются недостаточно изученными. Целью данного исследования стал сравнительный геномный анализ современных и древних штаммов <em>C. hominis</em> для оценки структуры их пан-генома, филогеографических связей, а также набора факторов вирулентности и механизмов антибиотикорезистентности.</p>
+</section>
+</section>
+<section id="данные" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="данные"><span class="header-section-number">1.2</span> Данные</h2>
+<p>В NCBI 55 современных сборок <em>C. hominis</em> из 11 стран. У 17 страна не указана. Списки accession лежат в <a href="./chapters/download_assemblies.html">главе про метаданные</a>.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Страна</th>
+<th>Сборок</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Страна не указана</td>
+<td>17</td>
+</tr>
+<tr class="even">
+<td>Австралия</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>Китай</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td>США</td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<td>Испания</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>Бразилия</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>Камерун</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>Дания</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>Германия</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Гонконг</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>Папуа — Новая Гвинея</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>Швейцария</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>Древних образцов четыре. На карте Комсомолец и Прогресс 2 стоят на одной точке, поэтому древних мест три, а образцов четыре.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Образец</th>
+<th>Возраст</th>
+<th>Место</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>4510</td>
+<td>476 л.н. (1500–1600 н.э.)</td>
+<td>Переславль-Залесский, Россия</td>
+</tr>
+<tr class="even">
+<td>7130</td>
+<td>3149 л.н. (1240–1007 до н.э.)</td>
+<td>Курган Комсомолец 1, Ставропольский край</td>
+</tr>
+<tr class="odd">
+<td>3140</td>
+<td>6012 ± 28 л.н.</td>
+<td>Прогресс 2, курган 1, Кавказ</td>
+</tr>
+<tr class="even">
+<td>1780</td>
+<td>2170 ± 23 л.н.</td>
+<td>Кен-Су, Киргизия</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="results/figures/C_H_map.png" class="img-fluid figure-img"></p>
+<figcaption>Четыре древних образца (зелёные) и современные сборы с известными координатами. Комсомолец и Прогресс 2 совмещены. 17 сборок без страны на карту не попали.</figcaption>
+</figure>
+</div>
+</section>
+<section id="как-устроен-анализ" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="как-устроен-анализ"><span class="header-section-number">1.3</span> Как устроен анализ</h2>
+<p>Древние консенсусы построены по BAM, уже выровненным на референс <em>C. hominis</em> NCTC10426 (<code>GCF_900637305.1</code>). ANGSD (<code>-doFasta 1</code>) пишет в позицию случайную букву среди оснований с качеством картирования и качеством основания не ниже 20. Порог глубины не задан. Где ридов нет, стоит N. Подробности в <a href="./chapters/create_consensus.html">главе про консенсусы</a>.</p>
+<p>Современные сборки без готового GFF и четыре консенсуса аннотированы Prokka (<code>--kingdom Bacteria</code>). В Roary идут только эти GFF: файлы NCBI ему не подходят. См. <a href="./chapters/annotate_assemblies.html">аннотацию</a>.</p>
+<p>Roary кластеризует белки при идентичности 80% (<code>-i 80</code>) и считает коровым ген, который есть минимум у 80% штаммов (<code>-cd 80</code>). Получилось 451 коровых генов из 12 541. См. <a href="./chapters/make_core_alignment.html">пан-геном</a>.</p>
+<p>В коровом выравнивании 343 520 сайта и ни одной колонки без пропуска, поэтому <code>snp-sites -c</code> пуст. В дерево взят файл ClipKIT <code>kpi-smart-gap</code>: 39 954 информативных сайта. См. <a href="./chapters/find_snp.html">отбор сайтов</a>.</p>
+<p>IQ-TREE: <code>GTR+F+ASC+G4</code>, 1000 ультрабыстрых бутстрепов и 1000 SH-aLRT, без аутгруппы. Поправка <code>+ASC</code> стоит потому, что константных сайтов в выравнивании нет. См. <a href="./chapters/ML_tree.html">ML-дерево</a>.</p>
+<p>Сигнал времени проверяет TreeTime (<code>--reroot least-squares</code>). Дата известна у 35 из 59 листьев. См. <a href="./chapters/check_time_signal.html">сигнал времени</a>.</p>
+<p>Гены вирулентности ищет ABRicate по VFDB, гены устойчивости — RGI по CARD, только попадания Perfect и Strict. См. <a href="./chapters/analyse_genes.html">главу про гены</a>.</p>
+</section>
+<section id="результаты" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="результаты"><span class="header-section-number">1.4</span> Результаты</h2>
+<section id="пан-геном" class="level3" data-number="1.4.1">
+<h3 data-number="1.4.1" class="anchored" data-anchor-id="пан-геном"><span class="header-section-number">1.4.1</span> Пан-геном</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="results/figures/pangenome_cumulative_CH.png" class="img-fluid figure-img"></p>
+<figcaption>Кривая насыщения пан-генома <em>C. hominis</em> не выходит на плато: на 59-м геноме она всё ещё растёт.</figcaption>
+</figure>
+</div>
+<p>Коровых генов 451 из 12 541. Пан-геном открытый.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="results/figures/PCA.png" class="img-fluid figure-img"></p>
+<figcaption>PCA по доле различий в коровом выравнивании. Древние образцы смещены влево от основного облака современных, но самые удаленные точки — современные.</figcaption>
+</figure>
+</div>
+</section>
+<section id="ml-дерево" class="level3" data-number="1.4.2">
+<h3 data-number="1.4.2" class="anchored" data-anchor-id="ml-дерево"><span class="header-section-number">1.4.2</span> ML-дерево</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="results/figures/ML_tree_CH_country.svg" class="img-fluid figure-img"></p>
+<figcaption>ML-дерево 59 штаммов по 451 коровому гену, 39 954 сайта. Древние в отдельной кладе.</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="results/figures/ML_tree_map_up.png" class="img-fluid figure-img"></p>
+<figcaption>Проекция того же дерева на карту, 42 образца с координатами. еографической структуры у современных штаммов нет.</figcaption>
+</figure>
+</div>
+</section>
+<section id="сигнал-времени" class="level3" data-number="1.4.3">
+<h3 data-number="1.4.3" class="anchored" data-anchor-id="сигнал-времени"><span class="header-section-number">1.4.3</span> Сигнал времени</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="results/figures/root_to_tip_regression.png" class="img-fluid figure-img"></p>
+<figcaption>Регрессия расстояния от корня на год образца. r² = 0,08.</figcaption>
+</figure>
+</div>
+<p>r² = 0,08. Датированное дерево по этой выборке не строится. Дальше штаммы сравниваются по присутствию и отсутствию генов патогенности и антибиотикорезистентности.</p>
+</section>
+<section id="гены-вирулентности" class="level3" data-number="1.4.4">
+<h3 data-number="1.4.4" class="anchored" data-anchor-id="гены-вирулентности"><span class="header-section-number">1.4.4</span> Гены вирулентности</h3>
+<p>При обычном пороге ABRicate VFDB не находит ничего. При 70% идентичности и 70% покрытия находятся шесть гомологов: <em>tapT</em> (34 образца), <em>tufA</em> (16), <em>msrA/B</em> (3), <em>hmbR</em>, <em>kdtA/waaA</em> и <em>pilU</em> (по одному). Это гены адгезии, стресса и оболочки, не токсины. У древних консенсусов нет ни одного из них. Так результат стыкуется с описанием «крайне низкой вирулентности» вида <span class="citation" data-cites="ellner1979">(<a href="#ref-ellner1979" role="doc-biblioref">ELLNER et al. 1979</a>)</span>.</p>
+</section>
+<section id="гены-устойчивости" class="level3" data-number="1.4.5">
+<h3 data-number="1.4.5" class="anchored" data-anchor-id="гены-устойчивости"><span class="header-section-number">1.4.5</span> Гены устойчивости</h3>
+<p>RGI (CARD, Perfect и Strict) находит восемь генов разных классов:</p>
+<ul>
+<li>сульфаниламиды: <em>folP</em> с заменами у 45 образцов, в том числе у всех четырёх древних; и <em>sul2</em> у двух современных образцов;</li>
+<li>гликопептиды: <em>vanT</em> кластера vanG у 10 образцов и <em>vanW</em> кластера vanI у одного;</li>
+<li>β-лактамы: <em>TEM-1</em> у двух;</li>
+<li>аминогликозиды: <em>APH(3’’)-Ib</em> и <em>APH(6)-Id</em> у одного;</li>
+<li>тетрациклины: <em>tet(A)</em> у одного.</li>
+</ul>
+<p>У <code>GCA_963509695.1</code> сразу четыре класса: аминогликозиды, <em>TEM-1</em>, сульфаниламиды и <em>vanT</em>. У <code>GCA_963554755.1</code> есть <em>tet(A)</em>.</p>
+<p><em>vanT</em> кодирует серин-рацемазу и сам по себе не означает устойчивость к ванкомицину: для кластера нужны и остальные компоненты, включая VanG и VanXY.</p>
+<p>Ванкомицин и тетрациклин не входят в первую линию терапии <em>C. hominis</em>, так что эти находки не меняют клинические рекомендации. Они описывают, какие гены устойчивости у вида уже есть.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="results/figures/ML_tree_CH_with_metadata.svg" class="img-fluid figure-img"></p>
+<figcaption>ML-дерево и присутствие генов. Синие метки — гомологи VFDB при пороге 70%, зелёные — гены CARD. У древних образцов факторов вирулентности нет, из устойчивости есть только <em>folP</em>.</figcaption>
+</figure>
+</div>
+</section>
+<section id="сводка" class="level3" data-number="1.4.6">
+<h3 data-number="1.4.6" class="anchored" data-anchor-id="сводка"><span class="header-section-number">1.4.6</span> Сводка</h3>
+<p>Пан-геном <em>C. hominis</em> открытый: 451 коровый ген из 12 541. Древние образцы смещены относительно современных и на PCA, и на ML-дереве. Временного сигнала нет, r² = 0,08.</p>
+<p>При стандартном пороге факторов вирулентности нет. При пороге 70% шесть гомологов находятся только у современных сборок. Картина устойчивости мозаичная. Общий для древних образцов сигнал — <em>folP</em>. Отдельно выделяются <code>GCA_963509695.1</code> и <code>GCA_963554755.1</code>.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-calza2004" class="csl-entry" role="listitem">
+Calza, Leonardo, Roberto Manfredi, and Francesco Chiodo. 2004. <span>“Infective Endocarditis: A Review of the Best Treatment Options.”</span> <em>Expert Opinion on Pharmacotherapy</em> 5 (9): 1899–916. <a href="https://doi.org/10.1517/14656566.5.9.1899">https://doi.org/10.1517/14656566.5.9.1899</a>.
+</div>
+<div id="ref-chambers2013" class="csl-entry" role="listitem">
+Chambers, Stephen T., David Murdoch, Arthur Morris, et al. 2013. <span>“HACEK Infective Endocarditis: Characteristics and Outcomes from a Large, Multi-National Cohort.”</span> <em>PLoS ONE</em> 8 (5): e63181. <a href="https://doi.org/10.1371/journal.pone.0063181">https://doi.org/10.1371/journal.pone.0063181</a>.
+</div>
+<div id="ref-ellner1979" class="csl-entry" role="listitem">
+ELLNER, JERROLD J., MELVIN S. ROSENTHAL, PHILLIP I. LERNER, and MARTIN C. McHENRY. 1979. <span>“Infective Endocarditis Caused by Slow-Growing, Fastidious, Gram-Negative Bacteria.”</span> <em>Medicine</em> 58 (2): 145–58. <a href="https://doi.org/10.1097/00005792-197903000-00003">https://doi.org/10.1097/00005792-197903000-00003</a>.
+</div>
+<div id="ref-khaledi2022" class="csl-entry" role="listitem">
+Khaledi, Mansoor, Fatemeh Sameni, Hamed Afkhami, et al. 2022. <span>“Infective Endocarditis by HACEK: A Review.”</span> <em>Journal of Cardiothoracic Surgery</em> 17 (1). <a href="https://doi.org/10.1186/s13019-022-01932-5">https://doi.org/10.1186/s13019-022-01932-5</a>.
+</div>
+<div id="ref-kotova2024" class="csl-entry" role="listitem">
+Kotova, E. O., and Zh. D. Kobalava. 2024. <span>“Practical Approaches to Antimicrobial Therapy for Infective Endocarditis in the Context of National and European Clinical Guidelines.”</span> <em>Rational Pharmacotherapy in Cardiology</em> 20 (1): 85–102. <a href="https://doi.org/10.20996/1819-6446-2024-3006">https://doi.org/10.20996/1819-6446-2024-3006</a>.
+</div>
+<div id="ref-lequellec1994" class="csl-entry" role="listitem">
+Le Quellec, A., D. Bessis, C. Perez, and A. J. Ciurana. 1994a. <span>“Endocarditis Due to &nbsp;-Lactamase-Producing Cardiobacterium Hominis.”</span> <em>Clinical Infectious Diseases</em> 19 (5): 994–95. <a href="https://doi.org/10.1093/clinids/19.5.994">https://doi.org/10.1093/clinids/19.5.994</a>.
+</div>
+<div id="ref-lequellec1994a" class="csl-entry" role="listitem">
+Le Quellec, A., D. Bessis, C. Perez, and A. J. Ciurana. 1994b. <span>“Endocarditis Due to &nbsp;-Lactamase-Producing Cardiobacterium Hominis.”</span> <em>Clinical Infectious Diseases</em> 19 (5): 994–95. <a href="https://doi.org/10.1093/clinids/19.5.994">https://doi.org/10.1093/clinids/19.5.994</a>.
+</div>
+<div id="ref-lu2000a" class="csl-entry" role="listitem">
+Lu, Po-Liang, Po-Ren Hsueh, Chien-Ching Hung, Lee-Jene Teng, Tsrang-Neng Jang, and Kwen-Tay Luh. 2000. <span>“Infective Endocarditis Complicated with Progressive Heart Failure Due to β-Lactamase-Producing <span><em>Cardiobacterium Hominis</em></span>.”</span> <em>Journal of Clinical Microbiology</em> 38 (5): 2015–17. <a href="https://doi.org/10.1128/jcm.38.5.2015-2017.2000">https://doi.org/10.1128/jcm.38.5.2015-2017.2000</a>.
+</div>
+<div id="ref-malani2006" class="csl-entry" role="listitem">
+Malani, A. N., D. M. Aronoff, S. F. Bradley, and C. A. Kauffman. 2006. <span>“Cardiobacterium Hominis Endocarditis: Two Cases and a Review of the Literature.”</span> <em>European Journal of Clinical Microbiology &amp; Infectious Diseases</em> 25 (9): 587–95. <a href="https://doi.org/10.1007/s10096-006-0189-9">https://doi.org/10.1007/s10096-006-0189-9</a>.
+</div>
+<div id="ref-ono2023" class="csl-entry" role="listitem">
+Ono, Ryohei, Izumi Kitagawa, and Yoshio Kobayashi. 2023. <span>“Cardiobacterium Hominis Infective Endocarditis: A Literature Review.”</span> <em>American Heart Journal Plus: Cardiology Research and Practice</em> 26 (February): 100248. <a href="https://doi.org/10.1016/j.ahjo.2022.100248">https://doi.org/10.1016/j.ahjo.2022.100248</a>.
+</div>
+<div id="ref-tharsiga2026" class="csl-entry" role="listitem">
+Tharsiga, T., A. J. S. Sabrina, and M. Umakanth. 2026. <span>“Subacute Infective Endocarditis in a Healthy Man with Native Heart Valves by Cardiobacterium Hominis: A Rare Presentation from the HACEK Group.”</span> <em>Asian Journal of Internal Medicine</em> 5 (1): 74–78. <a href="https://doi.org/10.4038/ajim.v5i1.341">https://doi.org/10.4038/ajim.v5i1.341</a>.
+</div>
+<div id="ref-ursi2018" class="csl-entry" role="listitem">
+Ursi, M. P., E. Durante Mangoni, R. Rajani, J. Hancock, J. B. Chambers, and B. Prendergast. 2018. <span>“Infective Endocarditis in the Elderly: Diagnostic and Treatment Options.”</span> <em>Drugs &amp; Aging</em> 36 (2): 115–24. <a href="https://doi.org/10.1007/s40266-018-0614-7">https://doi.org/10.1007/s40266-018-0614-7</a>.
+</div>
+<div id="ref-walkty2005b" class="csl-entry" role="listitem">
+Walkty, Andrew. 2005. <span>“<span><em>Cardiobacterium Hominis</em></span> Endocarditis: A Case Report and Review of the Literature.”</span> <em>Canadian Journal of Infectious Diseases and Medical Microbiology</em> 16 (5): 293–97. <a href="https://doi.org/10.1155/2005/716873">https://doi.org/10.1155/2005/716873</a>.
+</div>
+</div>
+</section>
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -288,7 +610,8 @@ ul.task-list li input[type="checkbox"] {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -297,8 +620,69 @@ ul.task-list li input[type="checkbox"] {
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -312,6 +696,7 @@ ul.task-list li input[type="checkbox"] {
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -474,44 +859,54 @@ ul.task-list li input[type="checkbox"] {
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -610,12 +1005,15 @@ ul.task-list li input[type="checkbox"] {
     }
   });
   </script>
-<nav class="page-navigation">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./chapters/download_assemblies.html" class="pagination-link" aria-label="Скачиваем метаданные о сборках">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Скачиваем метаданные о сборках</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./chapters/download_assemblies.html" class="pagination-link" aria-label="Метаданные и сборки">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Метаданные и сборки</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

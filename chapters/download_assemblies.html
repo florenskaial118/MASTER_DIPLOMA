@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Скачиваем метаданные о сборках – Изучение древних микроорганизмов группы HACEK с точки зрения эволюционной биологии</title>
+<title>2&nbsp; Метаданные и сборки – Изучение древних микроорганизмов группы HACEK с точки зрения эволюционной биологии</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -71,18 +71,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../chapters/annotate_assemblies.html" rel="next">
+<link href="../chapters/create_consensus.html" rel="next">
 <link href="../index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-fd0503e23dce65854c81c5baaade3bdf.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-4f67ab1e4efc86feb5e21e0983fc9301.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -110,21 +111,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<link href="../site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
+<script src="../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+<script src="../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<link href="../site_libs/leaflet-1.3.1/leaflet.css" rel="stylesheet">
+<script src="../site_libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="../site_libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
+<script src="../site_libs/proj4-2.6.2/proj4.min.js"></script>
+<script src="../site_libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="../site_libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
+<script src="../site_libs/leaflet-binding-2.2.3/leaflet.js"></script>
+<script src="../site_libs/leaflet-providers-3.0.0/leaflet-providers.js"></script>
+<script src="../site_libs/leaflet-providers-plugin-2.2.3/leaflet-providers-plugin.js"></script>
 
 
 </head>
 
-<body class="nav-sidebar floating quarto-light">
+<body class="nav-sidebar floating quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-  <nav class="quarto-secondary-nav">
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
     <div class="container-fluid d-flex">
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/download_assemblies.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Скачиваем метаданные о сборках</span></a></li></ol></nav>
-        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/download_assemblies.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Метаданные и сборки</span></a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
@@ -135,7 +148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Site">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="../">Изучение древних микроорганизмов группы HACEK с точки зрения эволюционной биологии</a> 
@@ -160,31 +173,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/download_assemblies.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Скачиваем метаданные о сборках</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Метаданные и сборки</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/create_consensus.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Консенсусы древних образцов</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/annotate_assemblies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Аннотация сборок <em>Cardiobacteruin hominis</em> с помощью Prokka</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Аннотация сборок</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/make_core_alignment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Поиск коровых генов без аутгруппы</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Пан-геномный анализ</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/find_snp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Отбор сайтов для дерева</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../chapters/ML_tree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Построение ML дерева по коровому выравниванию</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">ML-дерево по коровому выравниванию</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../chapters/BEAST_tree.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Датированное дерево</span></span></a>
+  <a href="../chapters/check_time_signal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Сигнал времени</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/analyse_genes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Гены вирулентности и устойчивости</span></span></a>
   </div>
 </li>
     </ul>
@@ -193,20 +224,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#скачиваем-сборки-по-метаданным" id="toc-скачиваем-сборки-по-метаданным" class="nav-link active" data-scroll-target="#скачиваем-сборки-по-метаданным"><span class="header-section-number">3</span> Скачиваем сборки по метаданным</a></li>
+  <li><a href="#страны-сбора" id="toc-страны-сбора" class="nav-link active" data-scroll-target="#страны-сбора"><span class="header-section-number">2.1</span> Страны сбора</a></li>
+  <li><a href="#датасет-стран-для-itol" id="toc-датасет-стран-для-itol" class="nav-link" data-scroll-target="#датасет-стран-для-itol"><span class="header-section-number">2.2</span> Датасет стран для iTOL</a></li>
+  <li><a href="#карта-образцов" id="toc-карта-образцов" class="nav-link" data-scroll-target="#карта-образцов"><span class="header-section-number">2.3</span> Карта образцов</a></li>
+  <li><a href="#сборки-c.-hominis" id="toc-сборки-c.-hominis" class="nav-link" data-scroll-target="#сборки-c.-hominis"><span class="header-section-number">2.4</span> Сборки <em>C. hominis</em></a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/edit/main/chapters/download_assemblies.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/blob/main/chapters/download_assemblies.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Скачиваем метаданные о сборках</span></h1>
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Метаданные и сборки</span></h1>
 </div>
 
 
@@ -223,13 +257,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><em>Cardiobacterium hominis</em>, <em>Eikenella corrodens</em>, <em>Aggregatibacter actinomycetemcomitans</em></p>
+<p>Метаданные трёх видов скачиваются с NCBI: сборка, биообразец, страна и дата сбора. Дальше в книге разобран <em>Cardiobacterium hominis</em>; <em>Eikenella corrodens</em> и <em>Aggregatibacter actinomycetemcomitans</em> остаются в тех же таблицах для следующего блока.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x ../scripts/download_assemblies_metadata.sh</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> +x ../scripts/download_taxon_assemblies_metadata.sh</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">../scripts/download_assemblies_metadata.sh</span> <span class="st">"Cardiobacterium hominis"</span> ../data/C_H/assembly_metadata/Cardiobacterium_hominis.tsv</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">../scripts/download_assemblies_metadata.sh</span> <span class="st">"Eikenella corrodens"</span> ../data/C_H/assembly_metadata/Eikenella_corrodens.tsv</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">../scripts/download_assemblies_metadata.sh</span> <span class="st">"Aggregatibacter actinomycetemcomitans"</span> ../data/C_H/assembly_metadata/Aggregatibacter_actinomycetemcomitans.tsv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">../scripts/download_taxon_assemblies_metadata.sh</span> <span class="st">"Cardiobacterium hominis"</span> ../data/C_H/assembly_metadata/Cardiobacterium_hominis.tsv</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">../scripts/download_taxon_assemblies_metadata.sh</span> <span class="st">"Eikenella corrodens"</span> ../data/C_H/assembly_metadata/Eikenella_corrodens.tsv</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">../scripts/download_taxon_assemblies_metadata.sh</span> <span class="st">"Aggregatibacter actinomycetemcomitans"</span> ../data/C_H/assembly_metadata/Aggregatibacter_actinomycetemcomitans.tsv</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -243,66 +277,252 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    Eikenella_corrodens.to_excel(writer, sheet_name<span class="op">=</span><span class="st">'Eikenella_corrodens'</span>, index<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    Aggregatibacter_actinomycetemcomitans.to_excel(writer, sheet_name<span class="op">=</span><span class="st">'Aggregatibacter'</span>, index<span class="op">=</span><span class="va">False</span>) <span class="co">#в названии листа нельзя использовать слишком длинные названия</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Итоговый xls лежит в <a href="https://docs.google.com/spreadsheets/d/1ncw5GF4YLnUmx1mQxcyNWPArU9sB6RSFIRYcyxtNu1M/edit?gid=2041904701#gid=2041904701">таблице</a></p>
-<p>Для части сборок уже есть готовая аннотация .gff от Саши, для части - нет. Важно, что нам нужно делать аннотациб вручную, потому что аннотации с сайта NCBI по формату не подходят для дальнейшнего анализа в roary.</p>
-<section id="скачиваем-сборки-по-метаданным" class="level1" data-number="3">
-<h1 data-number="3"><span class="header-section-number">3</span> Скачиваем сборки по метаданным</h1>
-<p>Начнем с <em>Cardiobacterium Hominis</em></p>
-<p>На летней практике я работала с этим видом, поэтому для опубликованных на тот момент современных сборок есть анотация. Сравним текущий список сборок с тем, для которого есть аннотаци с лета (убеждаемся, что все уже проаннотированные сборки есть в нашем списке)</p>
+<p>Сводная таблица лежит в <a href="https://docs.google.com/spreadsheets/d/1ncw5GF4YLnUmx1mQxcyNWPArU9sB6RSFIRYcyxtNu1M/edit?gid=2041904701#gid=2041904701">Google Sheets</a>. Готовые GFF есть не для всех сборок. Аннотации NCBI по формату не подходят для Roary, поэтому недостающие файлы аннотируются Prokka в следующих главах.</p>
+<section id="страны-сбора" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="страны-сбора"><span class="header-section-number">2.1</span> Страны сбора</h2>
+<p>Для <em>Cardiobacterium hominis</em> страна берётся из метаданных. Если в поле несколько значений через двоеточие, остаётся первое. Пустые и неопределённые помечаются как <code>Not provided</code>.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> os <span class="im">import</span> listdir</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>Cardiobacterium_hominis <span class="op">=</span> pd.read_csv(<span class="st">'../data/C_H/assembly_metadata/Cardiobacterium_hominis.tsv'</span>, sep <span class="op">=</span> <span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>all_assembly <span class="op">=</span> [<span class="ss">f'</span><span class="sc">{</span>f<span class="sc">.</span>split(<span class="st">'.1'</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">.1'</span> <span class="cf">for</span> f <span class="kw">in</span> Cardiobacterium_hominis[<span class="st">'AssemblyAccession'</span>]]</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>annotated_assembly <span class="op">=</span> [<span class="ss">f'</span><span class="sc">{</span>f<span class="sc">.</span>split(<span class="st">'.1'</span>)[<span class="dv">0</span>]<span class="sc">}</span><span class="ss">.1'</span> <span class="cf">for</span> f <span class="kw">in</span> listdir(<span class="st">'../data/C_H/avaliable_gff_C_H'</span>)]</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>intersection <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(all_assembly) <span class="op">&amp;</span> <span class="bu">set</span>(annotated_assembly))</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>diff_all <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(all_assembly) <span class="op">-</span> <span class="bu">set</span>(annotated_assembly))</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>diff_av <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(annotated_assembly) <span class="op">-</span> <span class="bu">set</span>(all_assembly))</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Текущее количество сборок в NCBI: </span><span class="sc">{</span><span class="bu">len</span>(all_assembly)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>missing_country <span class="op">=</span> {<span class="st">""</span>, <span class="st">"not provided"</span>, <span class="st">"not determined"</span>, <span class="st">"missing"</span>, <span class="st">"nan"</span>}</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> normalize_country(raw):</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    country <span class="op">=</span> (raw <span class="kw">or</span> <span class="st">""</span>).strip()</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> country.lower() <span class="kw">in</span> missing_country:</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Not provided"</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> country.split(<span class="st">":"</span>)[<span class="dv">0</span>].strip()</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"../data/C_H/assembly_metadata/Cardiobacterium_hominis.tsv"</span>, sep<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"Country"</span>] <span class="op">=</span> df[<span class="st">"Country"</span>].fillna(<span class="st">"Not provided"</span>).<span class="bu">map</span>(normalize_country)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>result <span class="op">=</span> (</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    df.groupby(<span class="st">"Country"</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>      .size()</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>      .reset_index(name<span class="op">=</span><span class="st">"Count"</span>)</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>      .sort_values(<span class="st">"Count"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>result.to_csv(<span class="st">"../results/tables/CH_countries.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>result</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Country  Count
+7       Not provided     17
+0          Australia     10
+3              China      7
+11               USA      7
+9              Spain      4
+1             Brazil      2
+2           Cameroon      2
+4            Denmark      2
+5            Germany      1
+6          Hong Kong      1
+8   Papua New Guinea      1
+10       Switzerland      1</code></pre>
+</div>
+</div>
+<p>55 современных сборок <em>C. hominis</em>: 11 стран и 17 сборок без страны.</p>
+</section>
+<section id="датасет-стран-для-itol" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="датасет-стран-для-itol"><span class="header-section-number">2.2</span> Датасет стран для iTOL</h2>
+<p>Для iTOL каждому листу дерева задаётся цвет страны. Четыре древних консенсуса идут одной серой полосой <code>Ancient</code>, современные — по стране из таблицы выше. Файл: <code>data/C_H/old_iq_tree_no_outgroup/country_meta_itol.txt</code>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> csv</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> collections <span class="im">import</span> Counter</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>metadata_path <span class="op">=</span> Path(<span class="st">"../data/C_H/assembly_metadata/Cardiobacterium_hominis.tsv"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>output_path <span class="op">=</span> Path(<span class="st">"../data/C_H/old_iq_tree_no_outgroup/country_meta_itol.txt"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Цвета стран</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>country_colors <span class="op">=</span> {</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"USA"</span>: <span class="st">"#ff0000"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Germany"</span>: <span class="st">"#00ff00"</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Australia"</span>: <span class="st">"#800080"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Denmark"</span>: <span class="st">"#0000ff"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Not provided"</span>: <span class="st">"#ffffff"</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"China"</span>: <span class="st">"#ffff00"</span>,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Brazil"</span>: <span class="st">"#ff69b4"</span>,</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Spain"</span>: <span class="st">"#ffa500"</span>,</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Papua New Guinea"</span>: <span class="st">"#87ceeb"</span>,</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Hong Kong"</span>: <span class="st">"#d6d614"</span>,</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Ancient"</span>: <span class="st">"#808080"</span>,</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Switzerland"</span>: <span class="st">"#00ced1"</span>,</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Cameroon"</span>: <span class="st">"#8b4513"</span>,</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>missing_country <span class="op">=</span> {<span class="st">""</span>, <span class="st">"not provided"</span>, <span class="st">"not determined"</span>, <span class="st">"missing"</span>, <span class="st">"nan"</span>}</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> normalize_country(raw):</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    country <span class="op">=</span> (raw <span class="kw">or</span> <span class="st">""</span>).strip()</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> country.lower() <span class="kw">in</span> missing_country:</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">"Not provided"</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> country.split(<span class="st">":"</span>)[<span class="dv">0</span>].strip()</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="co"># 000008104510_consensus &gt; BTC_Pereyaslavl-Zalessky_Russia_476_BP</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="co"># 000008107130_consensus &gt; BTC_Komsomolets_Kurgan1_Stavropol_3149_BP</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="co"># 000008103140_consensus &gt; BTC_Progress2_Caucasus_Kurgan1_6012_BP</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="co"># 000008101780_consensus &gt; BTC_Ken_Su_Kyrgyzstan_2170_BP</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>ancient_samples <span class="op">=</span> [</span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BTC_Pereyaslavl-Zalessky_Russia_476_BP*"</span>,</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BTC_Komsomolets_Kurgan1_Stavropol_3149_BP*"</span>,</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BTC_Progress2_Caucasus_Kurgan1_6012_BP*"</span>,</span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">"BTC_Ken_Su_Kyrgyzstan_2170_BP*"</span>,</span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>ancient_color <span class="op">=</span> country_colors[<span class="st">"Ancient"</span>]</span>
+<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> metadata_path.<span class="bu">open</span>() <span class="im">as</span> handle:</span>
+<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> row <span class="kw">in</span> csv.DictReader(handle, delimiter<span class="op">=</span><span class="st">"</span><span class="ch">\t</span><span class="st">"</span>):</span>
+<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>        acc <span class="op">=</span> row[<span class="st">"AssemblyAccession"</span>].strip()</span>
+<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>        country <span class="op">=</span> normalize_country(row.get(<span class="st">"Country"</span>))</span>
+<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> country <span class="kw">not</span> <span class="kw">in</span> country_colors:</span>
+<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">KeyError</span>(<span class="ss">f"Нет цвета для страны </span><span class="sc">{</span>country<span class="sc">!r}</span><span class="ss"> (</span><span class="sc">{</span>acc<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>        rows.append((acc, country_colors[country], country))</span>
+<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name <span class="kw">in</span> ancient_samples:</span>
+<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>    rows.append((name, ancient_color, <span class="st">"Ancient"</span>))</span>
+<span id="cb5-59"><a href="#cb5-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-60"><a href="#cb5-60" aria-hidden="true" tabindex="-1"></a>ancient <span class="op">=</span> [r <span class="cf">for</span> r <span class="kw">in</span> rows <span class="cf">if</span> r[<span class="dv">2</span>] <span class="op">==</span> <span class="st">"Ancient"</span>]</span>
+<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a>modern <span class="op">=</span> [r <span class="cf">for</span> r <span class="kw">in</span> rows <span class="cf">if</span> r[<span class="dv">2</span>] <span class="op">!=</span> <span class="st">"Ancient"</span>]</span>
+<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a>rows_sorted <span class="op">=</span> ancient <span class="op">+</span> modern</span>
+<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> output_path.<span class="bu">open</span>(<span class="st">"w"</span>) <span class="im">as</span> handle:</span>
+<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a>    handle.write(</span>
+<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a>        <span class="st">"DATASET_COLORSTRIP</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a>        <span class="st">"SEPARATOR TAB</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a>        <span class="st">"DATASET_LABEL</span><span class="ch">\t</span><span class="st">Country</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a>        <span class="st">"COLOR</span><span class="ch">\t</span><span class="st">#ff0000</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>        <span class="st">"STRIP_WIDTH</span><span class="ch">\t</span><span class="st">25</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a>        <span class="st">"MARGIN</span><span class="ch">\t</span><span class="st">5</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>        <span class="st">"BORDER_WIDTH</span><span class="ch">\t</span><span class="st">1</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>        <span class="st">"BORDER_COLOR</span><span class="ch">\t</span><span class="st">#000000</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>        <span class="st">"</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a>        <span class="st">"DATA</span><span class="ch">\n</span><span class="st">"</span></span>
+<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name, color, country <span class="kw">in</span> rows_sorted:</span>
+<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>        handle.write(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">}</span><span class="ch">\t</span><span class="sc">{</span>color<span class="sc">}</span><span class="ch">\t</span><span class="sc">{</span>country<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Записано </span><span class="sc">{</span><span class="bu">len</span>(rows_sorted)<span class="sc">}</span><span class="ss"> образцов в </span><span class="sc">{</span>output_path<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"  из них древних: </span><span class="sc">{</span><span class="bu">len</span>(ancient)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Counter(country <span class="cf">for</span> _, _, country <span class="kw">in</span> rows_sorted))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="карта-образцов" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="карта-образцов"><span class="header-section-number">2.3</span> Карта образцов</h2>
+<p>На карту попадают образцы с известными координатами. Комсомолец (<code>7130</code>, Ставрополье) и Прогресс 2 (<code>3140</code>, Кавказ) стоят на одной точке. Зелёная подпись — число образцов и возраст в л.н., серая — современные сборы без даты. Тот же рисунок сохранён в <code>results/figures/C_H_map.png</code>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.2.1     ✔ readr     2.2.0
+✔ forcats   1.0.1     ✔ stringr   1.6.0
+✔ ggplot2   4.0.3     ✔ tibble    3.3.1
+✔ lubridate 1.9.5     ✔ tidyr     1.3.2
+✔ purrr     1.2.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(leaflet)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(htmlwidgets)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>coords_raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/C_H/old_iq_tree_no_outgroup/coords_all_52.csv"</span>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>coords <span class="ot">&lt;-</span> coords_raw <span class="sc">%&gt;%</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Geo <span class="sc">!=</span> <span class="st">""</span> <span class="sc">&amp;</span> Geo <span class="sc">!=</span> <span class="st">"Not provided"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Geo, lat, lon, Data) <span class="sc">%&gt;%</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat =</span> <span class="fu">as.numeric</span>(lat),</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">lon =</span> <span class="fu">as.numeric</span>(lon))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"../scripts/create_map_no_legend_years_no_borders_count.r"</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">create_the_best_map</span>(coords)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: mapview</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Карта создана. Отображаются локации: Australia; Brazil; Cameroon; Caucasus; China; Denmark; Germany; Hong Kong; Kyrgyzstan; Papua New Guinea; Russia; Spain; Switzerland; USA 
+Количество локаций: 14 </code></pre>
+</div>
+<div class="cell-output-display">
+<div class="leaflet html-widget html-fill-item" id="htmlwidget-47522b7fd59de90ec734" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-47522b7fd59de90ec734">{"x":{"options":{"minZoom":1,"maxZoom":10,"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addProviderTiles","args":["Esri.WorldPhysical",null,null,{"errorTileUrl":"","noWrap":false,"detectRetina":false}]},{"method":"addMarkers","args":[[-25.2744,-14.235,7.3697,44.95,35.8617,56.2639,51.1657,22.3193,42.7601,-6.315,57.4936,40.4637,46.8182,37.0902],[133.7751,-51.9253,12.3547,41.9667,104.1954,9.501799999999999,10.4515,114.1694,78.7282,143.9555,37.6352,-3.7492,8.227499999999999,-95.7129],null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},["<b> Australia <\/b><br> <b>Всего образцов:<\/b>  10 <br> <b>Годы:<\/b>   <br>","<b> Brazil <\/b><br> <b>Всего образцов:<\/b>  2 <br> <b>Годы:<\/b>   <br>","<b> Cameroon <\/b><br> <b>Всего образцов:<\/b>  2 <br> <b>Годы:<\/b>   <br>","<b> Caucasus <\/b><br> <b>Всего образцов:<\/b>  2 <br> <b>Годы:<\/b>  3149, 6012 <br>","<b> China <\/b><br> <b>Всего образцов:<\/b>  7 <br> <b>Годы:<\/b>   <br>","<b> Denmark <\/b><br> <b>Всего образцов:<\/b>  2 <br> <b>Годы:<\/b>   <br>","<b> Germany <\/b><br> <b>Всего образцов:<\/b>  1 <br> <b>Годы:<\/b>   <br>","<b> Hong Kong <\/b><br> <b>Всего образцов:<\/b>  1 <br> <b>Годы:<\/b>   <br>","<b> Kyrgyzstan <\/b><br> <b>Всего образцов:<\/b>  1 <br> <b>Годы:<\/b>  2170 <br>","<b> Papua New Guinea <\/b><br> <b>Всего образцов:<\/b>  1 <br> <b>Годы:<\/b>   <br>","<b> Russia <\/b><br> <b>Всего образцов:<\/b>  1 <br> <b>Годы:<\/b>  476 <br>","<b> Spain <\/b><br> <b>Всего образцов:<\/b>  4 <br> <b>Годы:<\/b>   <br>","<b> Switzerland <\/b><br> <b>Всего образцов:<\/b>  1 <br> <b>Годы:<\/b>   <br>","<b> USA <\/b><br> <b>Всего образцов:<\/b>  7 <br> <b>Годы:<\/b>   <br>"],null,null,null,["<span style=\"color: #6f6a66; font-weight: bold;\">10<\/span>","<span style=\"color: #6f6a66; font-weight: bold;\">2<\/span>","<span style=\"color: #6f6a66; font-weight: bold;\">2<\/span>","<span style=\"color: #07cc00; font-weight: bold;\">2 (3149, 6012 BP)<\/span>","<span style=\"color: #6f6a66; font-weight: bold;\">7<\/span>","<span style=\"color: #6f6a66; font-weight: bold;\">2<\/span>","<span style=\"color: #6f6a66; font-weight: bold;\">1<\/span>","<span style=\"color: #6f6a66; font-weight: bold;\">1<\/span>","<span style=\"color: #07cc00; font-weight: bold;\">1 (2170 BP)<\/span>","<span style=\"color: #6f6a66; font-weight: bold;\">1<\/span>","<span style=\"color: #07cc00; font-weight: bold;\">1 (476 BP)<\/span>","<span style=\"color: #6f6a66; font-weight: bold;\">4<\/span>","<span style=\"color: #6f6a66; font-weight: bold;\">1<\/span>","<span style=\"color: #6f6a66; font-weight: bold;\">7<\/span>"],{"interactive":false,"permanent":true,"direction":"top","opacity":1,"offset":[0,-25],"textsize":"10px","textOnly":false,"style":{"font-weight":"bold","font-size":"13px","text-shadow":"1px 1px 2px white","white-space":"nowrap","background-color":"rgba(255, 255, 255, 0.85)","padding":"1px 6px","border-radius":"4px","border":"1px solid #ccc"},"className":"","sticky":true},null]}],"setView":[[28.33797857142858,38.82668571428572],4,[]],"limits":{"lat":[-25.2744,57.4936],"lng":[-95.7129,143.9555]}},"evals":[],"jsHooks":[]}</script>
+<p>Места сбора C. hominis. Зелёным отмечены древние образцы, серым — современные. Комсомолец и Прогресс 2 совмещены.</p>
+</div>
+</div>
+</section>
+<section id="сборки-c.-hominis" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="сборки-c.-hominis"><span class="header-section-number">2.4</span> Сборки <em>C. hominis</em></h2>
+<p>Часть современных GFF уже собрана раньше. Сверяем их со свежим списком NCBI: заново аннотировать нужно только новые сборки, а в полный набор входят все текущие.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> os <span class="im">import</span> listdir</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>Cardiobacterium_hominis <span class="op">=</span> pd.read_csv(<span class="st">'../data/C_H/assembly_metadata/Cardiobacterium_hominis.tsv'</span>, sep <span class="op">=</span> <span class="st">'</span><span class="ch">\t</span><span class="st">'</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>all_assembly <span class="op">=</span> [name.split(<span class="st">".1"</span>)[<span class="dv">0</span>] <span class="op">+</span> <span class="st">".1"</span> <span class="cf">for</span> name <span class="kw">in</span> Cardiobacterium_hominis[<span class="st">"AssemblyAccession"</span>]]</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>annotated_assembly <span class="op">=</span> [name.split(<span class="st">".1"</span>)[<span class="dv">0</span>] <span class="op">+</span> <span class="st">".1"</span> <span class="cf">for</span> name <span class="kw">in</span> listdir(<span class="st">"../data/C_H/avaliable_gff_C_H"</span>)]</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>intersection <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(all_assembly) <span class="op">&amp;</span> <span class="bu">set</span>(annotated_assembly))</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>diff_all <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(all_assembly) <span class="op">-</span> <span class="bu">set</span>(annotated_assembly))</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>diff_av <span class="op">=</span> <span class="bu">list</span>(<span class="bu">set</span>(annotated_assembly) <span class="op">-</span> <span class="bu">set</span>(all_assembly))</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Текущее количество сборок в NCBI: </span><span class="sc">{</span><span class="bu">len</span>(all_assembly)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Текущее количество сборок в NCBI: 55</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Проаннотированных с лета: </span><span class="sc">{</span><span class="bu">len</span>(annotated_assembly)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Проаннотированных с лета: </span><span class="sc">{</span><span class="bu">len</span>(annotated_assembly)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Проаннотированных с лета: 48</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Совпадает: </span><span class="sc">{</span><span class="bu">len</span>(intersection)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Совпадает: </span><span class="sc">{</span><span class="bu">len</span>(intersection)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Совпадает: 48</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Тех из летних, что нет в текущем наборе: </span><span class="sc">{</span><span class="bu">len</span>(diff_av)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Тех из летних, что нет в текущем наборе: </span><span class="sc">{</span><span class="bu">len</span>(diff_av)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Тех из летних, что нет в текущем наборе: 0</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Тех из текущих, что нет в летних: </span><span class="sc">{</span><span class="bu">len</span>(diff_all)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f'Тех из текущих, что нет в летних: </span><span class="sc">{</span><span class="bu">len</span>(diff_all)<span class="sc">}</span><span class="ss">'</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Тех из текущих, что нет в летних: 7</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../data/C_H/new_assemblies_C_H/list.txt'</span>, <span class="st">'w'</span>) <span class="im">as</span> f:</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> gff <span class="kw">in</span> diff_all:</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>        _ <span class="op">=</span> f.write(<span class="ss">f"</span><span class="sc">{</span>gff<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../data/C_H/assemblies_C_H/list.txt'</span>, <span class="st">'w'</span>) <span class="im">as</span> f:</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> gff <span class="kw">in</span> all_assembly:</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>        _ <span class="op">=</span> f.write(<span class="ss">f"</span><span class="sc">{</span>gff<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../data/C_H/new_assemblies_C_H/list.txt'</span>, <span class="st">'w'</span>) <span class="im">as</span> f:</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> gff <span class="kw">in</span> diff_all:</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        _ <span class="op">=</span> f.write(<span class="ss">f"</span><span class="sc">{</span>gff<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">'../data/C_H/assemblies_C_H/list.txt'</span>, <span class="st">'w'</span>) <span class="im">as</span> f:</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> gff <span class="kw">in</span> all_assembly:</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        _ <span class="op">=</span> f.write(<span class="ss">f"</span><span class="sc">{</span>gff<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Новые скачиваем в отдельную папку дл аннотации, а все сборки вместе - в другую папку</p>
+<p>Новые номера записаны в <code>data/C_H/new_assemblies_C_H/list.txt</code>, полный список — в <code>data/C_H/assemblies_C_H/list.txt</code>.</p>
+<p>Новые сборки сохраняются отдельно, их ещё нужно аннотировать. Полный набор лежит в <code>assemblies_C_H</code> и дальше идёт в поиск генов.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ../scripts/download_assembly.sh</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">read</span> <span class="va">AssemblyAccession</span><span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">download_assembly</span> <span class="st">"</span><span class="va">$AssemblyAccession</span><span class="st">"</span> <span class="st">"../data/C_H/new_assemblies_C_H/</span><span class="va">${AssemblyAccession}</span><span class="st">.fa"</span> <span class="op">&lt;</span> /dev/null</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&lt;</span> <span class="st">'../data/C_H/new_assemblies_C_H/list.txt'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ../scripts/download_assembly.sh</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">read</span> <span class="va">AssemblyAccession</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">download_assembly</span> <span class="st">"</span><span class="va">$AssemblyAccession</span><span class="st">"</span> <span class="st">"../data/C_H/new_assemblies_C_H/</span><span class="va">${AssemblyAccession}</span><span class="st">.fa"</span> <span class="op">&lt;</span> /dev/null</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&lt;</span> <span class="st">'../data/C_H/new_assemblies_C_H/list.txt'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">read</span> <span class="va">AssemblyAccession</span><span class="kw">;</span> <span class="cf">do</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">download_assembly</span> <span class="st">"</span><span class="va">$AssemblyAccession</span><span class="st">"</span> <span class="st">"../data/C_H/assemblies_C_H/</span><span class="va">${AssemblyAccession}</span><span class="st">.fa"</span> <span class="op">&lt;</span> /dev/null</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&lt;</span> <span class="st">'../data/C_H/assemblies_C_H/list.txt'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ../scripts/download_assembly.sh</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> <span class="bu">read</span> <span class="va">AssemblyAccession</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">download_assembly</span> <span class="st">"</span><span class="va">$AssemblyAccession</span><span class="st">"</span> <span class="st">"../data/C_H/assemblies_C_H/</span><span class="va">${AssemblyAccession}</span><span class="st">.fa"</span> <span class="op">&lt;</span> /dev/null</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span> <span class="op">&lt;</span> <span class="st">"../data/C_H/assemblies_C_H/list.txt"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
@@ -387,7 +607,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -396,8 +617,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -411,6 +693,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -573,44 +856,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -709,15 +1002,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
   });
   </script>
-<nav class="page-navigation">
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+<nav class="page-navigation" aria-label="Page">
   <div class="nav-page nav-page-previous">
       <a href="../index.html" class="pagination-link" aria-label="Магистерский диплом 2027">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Магистерский диплом 2027</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../chapters/annotate_assemblies.html" class="pagination-link" aria-label="Аннотация сборок *Cardiobacteruin hominis* с помощью Prokka">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Аннотация сборок <em>Cardiobacteruin hominis</em> с помощью Prokka</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../chapters/create_consensus.html" class="pagination-link" aria-label="Консенсусы древних образцов">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Консенсусы древних образцов</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
