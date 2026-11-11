@@ -74,6 +74,7 @@ print(tree_short[:500])
 
 ```{r}
 #| code-fold: true
+#| eval: false
 #| fig-cap: "ML-дерево на карте, 42 образца с координатами. Соседние ветви расходятся по разным странам."
 library(phytools)
 library(mapdata)
@@ -110,16 +111,18 @@ coords_ML <- matrix(c(lat_ML, lon_ML), ncol = 2)
 colnames(coords_ML) <- c("lat", "lon")
 rownames(coords_ML) <- ML_tree$tip.label
 
-obj_ML <- phylo.to.map(ML_tree, coords_ML, from = "top")
+obj_ML <- phylo.to.map(ML_tree, coords_ML, from = "top", plot = FALSE)
 
-plot(obj_ML, ftype = "i", cex.points = c(0.5, 1.2),
-     xlim = c(-120, 160), ylim = c(-80, 90), fsize = 1, split = c(0.5, 0.5))
+#plot(obj_ML, ftype = "i", cex.points = c(0.5, 1.2), xlim = c(-120, 160), ylim = c(-80, 90), fsize = 1, split = c(0.5, 0.5))
+
 dev.off()
 png("../results/figures/ML_tree_map_up.png", height = 7000, width = 7400, res = 800)
 plot(obj_ML, ftype = "i", cex.points = c(0.5, 1.2),
      xlim = c(-120, 160), ylim = c(-80, 90), fsize = 1, split = c(0.5, 0.5))
 dev.off()
 ```
+
+![Проекция ML дерева на карту](../results/figures/ML_tree_map_up.png)
 
 По этой проекции географической структуры у современных штаммов нет.
 
