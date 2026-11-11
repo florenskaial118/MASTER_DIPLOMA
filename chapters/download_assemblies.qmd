@@ -1,19 +1,18 @@
 ---
-title: Скачиваем метаданные о сборках
+title: Метаданные и сборки
 engine: knitr
 ---
 
-
-*Cardiobacterium hominis*, *Eikenella corrodens*, *Aggregatibacter actinomycetemcomitans* 
-
+Метаданные трёх видов скачиваются с NCBI: 
+сборка, биообразец, страна и дата сбора. Дальше в книге разобран *Cardiobacterium hominis*; *Eikenella corrodens* и *Aggregatibacter actinomycetemcomitans* остаются в тех же таблицах для следующего блока.
 
 ```{bash}
 #| eval: false
-chmod +x ../scripts/download_assemblies_metadata.sh
+chmod +x ../scripts/download_taxon_assemblies_metadata.sh
 
-../scripts/download_assemblies_metadata.sh "Cardiobacterium hominis" ../data/C_H/assembly_metadata/Cardiobacterium_hominis.tsv
-../scripts/download_assemblies_metadata.sh "Eikenella corrodens" ../data/C_H/assembly_metadata/Eikenella_corrodens.tsv
-../scripts/download_assemblies_metadata.sh "Aggregatibacter actinomycetemcomitans" ../data/C_H/assembly_metadata/Aggregatibacter_actinomycetemcomitans.tsv
+../scripts/download_taxon_assemblies_metadata.sh "Cardiobacterium hominis" ../data/C_H/assembly_metadata/Cardiobacterium_hominis.tsv
+../scripts/download_taxon_assemblies_metadata.sh "Eikenella corrodens" ../data/C_H/assembly_metadata/Eikenella_corrodens.tsv
+../scripts/download_taxon_assemblies_metadata.sh "Aggregatibacter actinomycetemcomitans" ../data/C_H/assembly_metadata/Aggregatibacter_actinomycetemcomitans.tsv
 ```
 
 ```{python}
@@ -30,15 +29,158 @@ with pd.ExcelWriter('../data/C_H/assembly_metadata/combined_info.xlsx') as write
     Aggregatibacter_actinomycetemcomitans.to_excel(writer, sheet_name='Aggregatibacter', index=False) #в названии листа нельзя использовать слишком длинные названия
 ```
 
-Итоговый xls лежит в [таблице](https://docs.google.com/spreadsheets/d/1ncw5GF4YLnUmx1mQxcyNWPArU9sB6RSFIRYcyxtNu1M/edit?gid=2041904701#gid=2041904701)
+Сводная таблица лежит в [Google Sheets](https://docs.google.com/spreadsheets/d/1ncw5GF4YLnUmx1mQxcyNWPArU9sB6RSFIRYcyxtNu1M/edit?gid=2041904701#gid=2041904701). Готовые GFF есть не для всех сборок. Аннотации NCBI по формату не подходят для Roary, поэтому недостающие файлы аннотируются Prokka в следующих главах.
 
-Для части сборок уже есть готовая аннотация .gff от Саши, для части - нет. Важно, что нам нужно делать аннотациб вручную, потому что аннотации с сайта NCBI по формату не подходят для дальнейшнего анализа в roary.
+## Страны сбора
 
-# Скачиваем сборки по метаданным
+Для *Cardiobacterium hominis* страна берётся из метаданных. Если в поле несколько значений через двоеточие, остаётся первое. Пустые и неопределённые помечаются как `Not provided`.
 
-Начнем с *Cardiobacterium Hominis*
+```{python}
+import pandas as pd
 
-На летней практике я работала с этим видом, поэтому для опубликованных на тот момент современных сборок есть анотация. Сравним текущий список сборок с тем, для которого есть аннотаци с лета (убеждаемся, что все уже проаннотированные сборки есть в нашем списке)
+missing_country = {"", "not provided", "not determined", "missing", "nan"}
+
+def normalize_country(raw):
+    country = (raw or "").strip()
+    if country.lower() in missing_country:
+        return "Not provided"
+    return country.split(":")[0].strip()
+
+df = pd.read_csv("../data/C_H/assembly_metadata/Cardiobacterium_hominis.tsv", sep="\t")
+df["Country"] = df["Country"].fillna("Not provided").map(normalize_country)
+
+result = (
+    df.groupby("Country")
+      .size()
+      .reset_index(name="Count")
+      .sort_values("Count", ascending=False)
+)
+
+result.to_csv("../results/tables/CH_countries.csv", index=False)
+result
+```
+
+55 современных сборок *C. hominis*: 11 стран и 17 сборок без страны. 
+
+## Датасет стран для iTOL
+
+Для iTOL каждому листу дерева задаётся цвет страны. Четыре древних консенсуса идут одной серой полосой `Ancient`, современные — по стране из таблицы выше. Файл: `data/C_H/old_iq_tree_no_outgroup/country_meta_itol.txt`.
+
+```{python}
+#| code-fold: true
+#| eval: false
+
+import csv
+from collections import Counter
+from pathlib import Path
+
+metadata_path = Path("../data/C_H/assembly_metadata/Cardiobacterium_hominis.tsv")
+output_path = Path("../data/C_H/old_iq_tree_no_outgroup/country_meta_itol.txt")
+
+# Цвета стран
+country_colors = {
+    "USA": "#ff0000",
+    "Germany": "#00ff00",
+    "Australia": "#800080",
+    "Denmark": "#0000ff",
+    "Not provided": "#ffffff",
+    "China": "#ffff00",
+    "Brazil": "#ff69b4",
+    "Spain": "#ffa500",
+    "Papua New Guinea": "#87ceeb",
+    "Hong Kong": "#d6d614",
+    "Ancient": "#808080",
+    "Switzerland": "#00ced1",
+    "Cameroon": "#8b4513",
+}
+
+missing_country = {"", "not provided", "not determined", "missing", "nan"}
+
+
+def normalize_country(raw):
+    country = (raw or "").strip()
+    if country.lower() in missing_country:
+        return "Not provided"
+    return country.split(":")[0].strip()
+
+# 000008104510_consensus > BTC_Pereyaslavl-Zalessky_Russia_476_BP
+# 000008107130_consensus > BTC_Komsomolets_Kurgan1_Stavropol_3149_BP
+# 000008103140_consensus > BTC_Progress2_Caucasus_Kurgan1_6012_BP
+# 000008101780_consensus > BTC_Ken_Su_Kyrgyzstan_2170_BP
+
+ancient_samples = [
+    "BTC_Pereyaslavl-Zalessky_Russia_476_BP*",
+    "BTC_Komsomolets_Kurgan1_Stavropol_3149_BP*",
+    "BTC_Progress2_Caucasus_Kurgan1_6012_BP*",
+    "BTC_Ken_Su_Kyrgyzstan_2170_BP*",
+]
+
+ancient_color = country_colors["Ancient"]
+
+rows = []
+with metadata_path.open() as handle:
+    for row in csv.DictReader(handle, delimiter="\t"):
+        acc = row["AssemblyAccession"].strip()
+        country = normalize_country(row.get("Country"))
+        if country not in country_colors:
+            raise KeyError(f"Нет цвета для страны {country!r} ({acc})")
+        rows.append((acc, country_colors[country], country))
+
+for name in ancient_samples:
+    rows.append((name, ancient_color, "Ancient"))
+
+ancient = [r for r in rows if r[2] == "Ancient"]
+modern = [r for r in rows if r[2] != "Ancient"]
+rows_sorted = ancient + modern
+
+with output_path.open("w") as handle:
+    handle.write(
+        "DATASET_COLORSTRIP\n"
+        "SEPARATOR TAB\n"
+        "DATASET_LABEL\tCountry\n"
+        "COLOR\t#ff0000\n"
+        "STRIP_WIDTH\t25\n"
+        "MARGIN\t5\n"
+        "BORDER_WIDTH\t1\n"
+        "BORDER_COLOR\t#000000\n"
+        "\n"
+        "DATA\n"
+    )
+    for name, color, country in rows_sorted:
+        handle.write(f"{name}\t{color}\t{country}\n")
+
+print(f"Записано {len(rows_sorted)} образцов в {output_path}")
+print(f"  из них древних: {len(ancient)}")
+print(Counter(country for _, _, country in rows_sorted))
+```
+
+## Карта образцов
+
+На карту попадают образцы с известными координатами. Комсомолец (`7130`, Ставрополье) и Прогресс 2 (`3140`, Кавказ) стоят на одной точке. 
+Зелёная подпись — число образцов и возраст в л.н., серая — современные сборы без даты. Тот же рисунок сохранён в `results/figures/C_H_map.png`.
+
+```{r}
+#| code-fold: true
+#| fig-cap: "Места сбора C. hominis. Зелёным отмечены древние образцы, серым — современные. Комсомолец и Прогресс 2 совмещены."
+library(tidyverse)
+library(leaflet)
+library(htmlwidgets)
+
+coords_raw <- read.csv("../data/C_H/old_iq_tree_no_outgroup/coords_all_52.csv")
+coords <- coords_raw %>%
+  filter(Geo != "" & Geo != "Not provided") %>%
+  select(Geo, lat, lon, Data) %>%
+  mutate(
+    lat = as.numeric(lat),
+    lon = as.numeric(lon))
+
+source("../scripts/create_map_no_legend_years_no_borders_count.r")
+create_the_best_map(coords)
+```
+
+## Сборки *C. hominis*
+
+Часть современных GFF уже собрана раньше. Сверяем их со свежим списком NCBI: заново аннотировать нужно только новые сборки, а в полный набор входят все текущие.
 
 ```{python}
 import pandas as pd
@@ -46,8 +188,8 @@ from os import listdir
 
 Cardiobacterium_hominis = pd.read_csv('../data/C_H/assembly_metadata/Cardiobacterium_hominis.tsv', sep = '\t')
 
-all_assembly = [f'{f.split('.1')[0]}.1' for f in Cardiobacterium_hominis['AssemblyAccession']]
-annotated_assembly = [f'{f.split('.1')[0]}.1' for f in listdir('../data/C_H/avaliable_gff_C_H')]
+all_assembly = [name.split(".1")[0] + ".1" for name in Cardiobacterium_hominis["AssemblyAccession"]]
+annotated_assembly = [name.split(".1")[0] + ".1" for name in listdir("../data/C_H/avaliable_gff_C_H")]
 
 intersection = list(set(all_assembly) & set(annotated_assembly))
 diff_all = list(set(all_assembly) - set(annotated_assembly))
@@ -68,8 +210,9 @@ with open('../data/C_H/assemblies_C_H/list.txt', 'w') as f:
         _ = f.write(f"{gff}\n")
 ```
 
+Новые номера записаны в `data/C_H/new_assemblies_C_H/list.txt`, полный список — в `data/C_H/assemblies_C_H/list.txt`.
 
-Новые скачиваем в отдельную папку дл аннотации, а все сборки вместе - в другую папку
+Новые сборки сохраняются отдельно, их ещё нужно аннотировать. Полный набор лежит в `assemblies_C_H` и дальше идёт в поиск генов.
 
 ```{bash}
 #| eval: false
@@ -82,8 +225,9 @@ done < '../data/C_H/new_assemblies_C_H/list.txt'
 
 ```{bash}
 #| eval: false
+source ../scripts/download_assembly.sh
+
 while read AssemblyAccession; do
     download_assembly "$AssemblyAccession" "../data/C_H/assemblies_C_H/${AssemblyAccession}.fa" < /dev/null
-done < '../data/C_H/assemblies_C_H/list.txt'
+done < "../data/C_H/assemblies_C_H/list.txt"
 ```
-
