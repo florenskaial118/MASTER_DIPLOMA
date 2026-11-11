@@ -333,183 +333,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phytools)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(phytools)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapdata)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>ML_tree <span class="ot">&lt;-</span> <span class="fu">read.newick</span>(<span class="st">"../data/C_H/old_iq_tree_no_outgroup/C_H_ML_tree_short.treefile"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>coords_raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/C_H/old_iq_tree_no_outgroup/coords_all_52.csv"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>coords_df <span class="ot">&lt;-</span> coords_raw <span class="sc">%&gt;%</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">tip =</span> <span class="fu">sub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">*$"</span>, <span class="st">""</span>, <span class="fu">trimws</span>(tip)),</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat =</span> <span class="fu">as.numeric</span>(lat),</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">lon =</span> <span class="fu">as.numeric</span>(lon)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">complete.cases</span>(lat, lon)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tip <span class="sc">%in%</span> ML_tree<span class="sc">$</span>tip.label)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>missing <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(ML_tree<span class="sc">$</span>tip.label, coords_df<span class="sc">$</span>tip)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(missing) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"В дереве, но нет координат:"</span>, <span class="fu">paste</span>(<span class="fu">head</span>(missing, <span class="dv">3</span>), <span class="at">collapse =</span> <span class="st">", "</span>), <span class="st">"...</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  ML_tree <span class="ot">&lt;-</span> <span class="fu">drop.tip</span>(ML_tree, missing)</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Политoмии разрешатся нулевыми ветвями</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>ML_tree <span class="ot">&lt;-</span> <span class="fu">multi2di</span>(ML_tree)</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>idx_ML <span class="ot">&lt;-</span> <span class="fu">match</span>(ML_tree<span class="sc">$</span>tip.label, coords_df<span class="sc">$</span>tip)</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>lat_ML <span class="ot">&lt;-</span> coords_df<span class="sc">$</span>lat[idx_ML]</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>lon_ML <span class="ot">&lt;-</span> coords_df<span class="sc">$</span>lon[idx_ML]</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lat_ML) <span class="ot">&lt;-</span> <span class="fu">names</span>(lon_ML) <span class="ot">&lt;-</span> ML_tree<span class="sc">$</span>tip.label</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>coords_ML <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(lat_ML, lon_ML), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(coords_ML) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"lat"</span>, <span class="st">"lon"</span>)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(coords_ML) <span class="ot">&lt;-</span> ML_tree<span class="sc">$</span>tip.label</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>obj_ML <span class="ot">&lt;-</span> <span class="fu">phylo.to.map</span>(ML_tree, coords_ML, <span class="at">from =</span> <span class="st">"top"</span>, <span class="at">plot =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="co">#plot(obj_ML, ftype = "i", cex.points = c(0.5, 1.2), xlim = c(-120, 160), ylim = c(-80, 90), fsize = 1, split = c(0.5, 0.5))</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"../results/figures/ML_tree_map_up.png"</span>, <span class="at">height =</span> <span class="dv">7000</span>, <span class="at">width =</span> <span class="dv">7400</span>, <span class="at">res =</span> <span class="dv">800</span>)</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(obj_ML, <span class="at">ftype =</span> <span class="st">"i"</span>, <span class="at">cex.points =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.2</span>),</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">120</span>, <span class="dv">160</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">80</span>, <span class="dv">90</span>), <span class="at">fsize =</span> <span class="dv">1</span>, <span class="at">split =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>))</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: ape</code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: maps</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mapdata)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ape)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>
-Attaching package: 'dplyr'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following object is masked from 'package:ape':
-
-    where</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:stats':
-
-    filter, lag</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>The following objects are masked from 'package:base':
-
-    intersect, setdiff, setequal, union</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>ML_tree <span class="ot">&lt;-</span> <span class="fu">read.newick</span>(<span class="st">"../data/C_H/old_iq_tree_no_outgroup/C_H_ML_tree_short.treefile"</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>coords_raw <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"../data/C_H/old_iq_tree_no_outgroup/coords_all_52.csv"</span>)</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>coords_df <span class="ot">&lt;-</span> coords_raw <span class="sc">%&gt;%</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">tip =</span> <span class="fu">sub</span>(<span class="st">"</span><span class="sc">\\</span><span class="st">*$"</span>, <span class="st">""</span>, <span class="fu">trimws</span>(tip)),</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">lat =</span> <span class="fu">as.numeric</span>(lat),</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">lon =</span> <span class="fu">as.numeric</span>(lon)</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">complete.cases</span>(lat, lon)) <span class="sc">%&gt;%</span></span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(tip <span class="sc">%in%</span> ML_tree<span class="sc">$</span>tip.label)</span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>missing <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(ML_tree<span class="sc">$</span>tip.label, coords_df<span class="sc">$</span>tip)</span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">length</span>(missing) <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">"В дереве, но нет координат:"</span>, <span class="fu">paste</span>(<span class="fu">head</span>(missing, <span class="dv">3</span>), <span class="at">collapse =</span> <span class="st">", "</span>), <span class="st">"...</span><span class="sc">\n</span><span class="st">"</span>)</span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  ML_tree <span class="ot">&lt;-</span> <span class="fu">drop.tip</span>(ML_tree, missing)</span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>В дереве, но нет координат: GCF_000160655.1, GCF_900637305.1, GCF_937919565.1 ...</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Политoмии разрешатся нулевыми ветвями</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>ML_tree <span class="ot">&lt;-</span> <span class="fu">multi2di</span>(ML_tree)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>idx_ML <span class="ot">&lt;-</span> <span class="fu">match</span>(ML_tree<span class="sc">$</span>tip.label, coords_df<span class="sc">$</span>tip)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>lat_ML <span class="ot">&lt;-</span> coords_df<span class="sc">$</span>lat[idx_ML]</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>lon_ML <span class="ot">&lt;-</span> coords_df<span class="sc">$</span>lon[idx_ML]</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(lat_ML) <span class="ot">&lt;-</span> <span class="fu">names</span>(lon_ML) <span class="ot">&lt;-</span> ML_tree<span class="sc">$</span>tip.label</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>coords_ML <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">c</span>(lat_ML, lon_ML), <span class="at">ncol =</span> <span class="dv">2</span>)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(coords_ML) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"lat"</span>, <span class="st">"lon"</span>)</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(coords_ML) <span class="ot">&lt;-</span> ML_tree<span class="sc">$</span>tip.label</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>obj_ML <span class="ot">&lt;-</span> <span class="fu">phylo.to.map</span>(ML_tree, coords_ML, <span class="at">from =</span> <span class="st">"top"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>objective: 432</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>objective: 424
-objective: 424
-objective: 424
-objective: 424
-objective: 424
-objective: 424
-objective: 424
-objective: 424</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>objective: 404
-objective: 404
-objective: 404
-objective: 404
-objective: 404
-objective: 404
-objective: 404
-objective: 404
-objective: 404
-objective: 404
-objective: 404
-objective: 404</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>objective: 398</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>objective: 396</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>objective: 394
-objective: 394
-objective: 394
-objective: 394
-objective: 394
-objective: 394</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>objective: 392
-objective: 392</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>objective: 368
-objective: 368
-objective: 368</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>objective: 364
-objective: 364
-objective: 364
-objective: 364
-objective: 364
-objective: 364
-objective: 364</code></pre>
-</div>
-<div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="ML_tree_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>ML-дерево на карте, 42 образца с координатами. Соседние ветви расходятся по разным странам.</figcaption>
+<p><img src="../results/figures/ML_tree_map_up.png" class="img-fluid figure-img"></p>
+<figcaption>Проекция ML дерева на карту</figcaption>
 </figure>
-</div>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(obj_ML, <span class="at">ftype =</span> <span class="st">"i"</span>, <span class="at">cex.points =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.2</span>),</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">120</span>, <span class="dv">160</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">80</span>, <span class="dv">90</span>), <span class="at">fsize =</span> <span class="dv">1</span>, <span class="at">split =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="ML_tree_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>ML-дерево на карте, 42 образца с координатами. Соседние ветви расходятся по разным странам.</figcaption>
-</figure>
-</div>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>null device 
-          1 </code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">"../results/figures/ML_tree_map_up.png"</span>, <span class="at">height =</span> <span class="dv">7000</span>, <span class="at">width =</span> <span class="dv">7400</span>, <span class="at">res =</span> <span class="dv">800</span>)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(obj_ML, <span class="at">ftype =</span> <span class="st">"i"</span>, <span class="at">cex.points =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.2</span>),</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">120</span>, <span class="dv">160</span>), <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">80</span>, <span class="dv">90</span>), <span class="at">fsize =</span> <span class="dv">1</span>, <span class="at">split =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>))</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>pdf 
-  2 </code></pre>
-</div>
 </div>
 <p>По этой проекции географической структуры у современных штаммов нет.</p>
 <p>Рисунки из iTOL сохранены как SVG. Для вставки в текст их переводим в PNG.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rsvg-convert</span> results/figures/ML_tree_CH_country.svg <span class="at">-o</span> results/figures/ML_tree_CH_country.png</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="ex">rsvg-convert</span> results/figures/ML_tree_CH_with_metadata.svg <span class="at">-o</span> results/figures/ML_tree_CH_with_metadata.png</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">rsvg-convert</span> results/figures/ML_tree_CH_country.svg <span class="at">-o</span> results/figures/ML_tree_CH_country.png</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">rsvg-convert</span> results/figures/ML_tree_CH_with_metadata.svg <span class="at">-o</span> results/figures/ML_tree_CH_with_metadata.png</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 
