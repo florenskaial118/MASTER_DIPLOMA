@@ -8,10 +8,14 @@ book:
   chapters:
     - index.qmd
     - chapters/download_assemblies.qmd
+    - chapters/create_consensus.qmd
     - chapters/annotate_assemblies.qmd
     - chapters/make_core_alignment.qmd
+    - chapters/find_snp.qmd
     - chapters/ML_tree.qmd
-    - chapters/BEAST_tree.qmd
+    - chapters/check_time_signal.qmd
+    - chapters/analyse_genes.qmd
+
   repo-url: https://github.com/florenskaial118/MASTER_DIPLOMA.git
   repo-actions: [edit, source, issue]
 

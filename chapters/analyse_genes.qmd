@@ -1,0 +1,236 @@
+---
+title: Гены вирулентности и устойчивости
+engine: knitr
+---
+
+Гены ищутся по 55 современным сборкам и 4 древним консенсусам. 
+ABRicate сверяет последовательности с VFDB, RGI — с локальной базой CARD. Этот блок считается в окружении `rgi_env`.
+
+```{bash}
+#| eval: false
+rgi database --version --local
+```
+
+## Гены вирулентности
+
+При обычных порогах ABRicate VFDB не находит ничего: в `virulence_results.tab` одна строка заголовка. Порог снижен до 70% идентичности и 70% покрытия.
+
+```{bash}
+#| eval: false
+abricate --db vfdb --minid 70 --mincov 70 \
+  ../data/C_H/assemblies_C_H/*fa \
+  ../data/C_H/BTC_consensus_C_H/*fa \
+  > ../data/C_H/vfdb_results/virulence_results_relaxed.tab
+```
+
+```{python}
+import pandas as pd
+
+df = pd.read_csv('../data/C_H/vfdb_results/virulence_results_relaxed.tab', sep='\t')
+df['Sample'] = df['#FILE'].apply(lambda x: x.split('/')[-1].replace('.fa', ''))
+
+matrix = df.pivot_table(
+    index='Sample',
+    columns='GENE',
+    values='%COVERAGE',
+    aggfunc='max'
+)
+matrix = matrix.notna().astype(int)
+matrix = matrix[matrix.sum().sort_values(ascending=False).index]
+matrix.to_csv('../data/C_H/vfdb_results/virulence_matrix_relaxed.tab', sep='\t')
+
+print("Матрица:", matrix.shape)
+print(matrix.sum().sort_values(ascending=False))
+```
+
+Шесть гомологов. Число — сколько образцов несут ген. Имя `msrA/B(pilB` так и записано в выводе ABRicate, без закрывающей скобки.
+
+| Ген | Образцов | Что это |
+|---|---|---|
+| tapT | 34 | АТФаза пилей IV типа, адгезия |
+| tufA | 16 | Фактор элонгации Tu |
+| msrA/B | 3 | Репарация метионина, ответ на стресс |
+| hmbR | 1 | Рецептор гемоглобина |
+| kdtA/waaA | 1 | Сборка липоолигосахарида |
+| pilU | 1 | Подвижность пилей IV типа |
+
+У четырёх древних консенсусов нет ни одного из этих генов. 
+Находки относятся к адгезии, стрессу и оболочке клетки, не к токсинам. Это согласуется с низкой вирулентностью вида.
+
+## Гены устойчивости
+
+RGI смотрит те же fasta. 
+В матрицу попадают только попадания Perfect и Strict.
+
+```{bash}
+#| eval: false
+mkdir -p ../data/C_H/resistance_results
+
+for file in ../data/C_H/assemblies_C_H/*fa ../data/C_H/BTC_consensus_C_H/*fa; do
+    filename=$(basename "$file" .fa)
+    rgi main --input_sequence "$file" \
+             --output_file "../data/C_H/resistance_results/${filename}" \
+             --local --clean --input_type contig
+done
+```
+
+```{python}
+import pandas as pd
+import glob
+import os
+
+rgi_files = glob.glob('../data/C_H/resistance_results/*.txt')
+
+dfs = []
+for f in rgi_files:
+    sample = os.path.basename(f).replace('.txt', '')
+    try:
+        df = pd.read_csv(f, sep='\t')
+    except pd.errors.EmptyDataError:
+        continue
+    if df.empty:
+        continue
+    df['Sample'] = sample
+    dfs.append(df)
+
+rgi_all = pd.concat(dfs, ignore_index=True)
+rgi_all = rgi_all[rgi_all['Cut_Off'].isin(['Perfect', 'Strict'])]
+
+matrix = rgi_all.pivot_table(
+    index='Sample',
+    columns='Best_Hit_ARO',
+    values='Best_Identities',
+    aggfunc='max'
+)
+matrix = matrix.notna().astype(int)
+matrix.to_csv('../data/C_H/resistance_results/resistance_matrix.tab', sep='\t')
+
+print("Матрица:", matrix.shape)
+print(matrix.sum().sort_values(ascending=False))
+```
+
+| Ген | Класс | Образцов |
+|---|---|---|
+| folP с заменами | сульфаниламиды | 45 |
+| vanT, кластер vanG | гликопептиды | 10 |
+| TEM-1 | β-лактамы | 2 |
+| sul2 | сульфаниламиды | 2 |
+| APH(3'')-Ib | аминогликозиды | 1 |
+| APH(6)-Id | аминогликозиды | 1 |
+| tet(A) | тетрациклины | 1 |
+| vanW, кластер vanI | гликопептиды | 1 |
+
+Все четыре древних образца несут только `folP`. 
+У `GCA_963509695.1` сразу четыре класса: аминогликозиды, β-лактам (`TEM-1`), сульфаниламиды (`sul2` и `folP`) и `vanT`. 
+У `GCA_963554755.1` есть `tet(A)`.
+
+`vanT` сам по себе не означает устойчивость к ванкомицину: для кластера нужны и остальные гены, в том числе VanG и VanXY. 
+
+## Матрица для дерева
+
+Образцы без находок дописываются нулями, чтобы на дереве была вся выборка из 59 листов. 
+Синие метки — гены VFDB, зелёные — CARD. Подписи колонок собираются из самой матрицы, в том же порядке, что и значения.
+
+На коротком дереве древние листья называются иначе, чем fasta. В файле для iTOL стоят те же имена, что в главе про ML-дерево.
+
+| FASTA | Имя на дереве |
+|---|---|
+| `000008104510_consensus` | `BTC_Pereyaslavl-Zalessky_Russia_476_BP` |
+| `000008107130_consensus` | `BTC_Komsomolets_Kurgan1_Stavropol_3149_BP` |
+| `000008103140_consensus` | `BTC_Progress2_Caucasus_Kurgan1_6012_BP` |
+| `000008101780_consensus` | `BTC_Ken_Su_Kyrgyzstan_2170_BP` |
+
+```{python}
+import pandas as pd
+import glob
+import os
+
+all_samples = []
+for f in glob.glob('../data/C_H/assemblies_C_H/*fa') + \
+         glob.glob('../data/C_H/BTC_consensus_C_H/*fa'):
+    all_samples.append(os.path.basename(f).replace('.fa', ''))
+
+all_samples = sorted(set(all_samples))
+
+vf = pd.read_csv('../data/C_H/vfdb_results/virulence_matrix_relaxed.tab', sep='\t', index_col=0)
+res = pd.read_csv('../data/C_H/resistance_results/resistance_matrix.tab', sep='\t', index_col=0)
+
+combined = pd.concat([vf, res], axis=1, join='outer')
+combined = combined.fillna(0).astype(int)
+
+missing = [s for s in all_samples if s not in combined.index]
+if missing:
+    missing_df = pd.DataFrame(0, index=missing, columns=combined.columns)
+    combined = pd.concat([combined, missing_df])
+
+combined.to_csv('../data/C_H/combined_matrix.tab', sep='\t')
+print(f"Образцов: {len(combined)}, генов VFDB: {vf.shape[1]}, генов RGI: {res.shape[1]}")
+```
+
+```{python}
+#| code-fold: true
+import pandas as pd
+
+combined = pd.read_csv('../data/C_H/combined_matrix.tab', sep='\t', index_col=0)
+
+# Имя msrA в таблице ABRicate обрывается на скобке.
+vf_genes = ['tapT', 'tufA', 'pilU', 'msrA/B(pilB', 'hmbR', 'kdtA/waaA']
+vf_cols = [g for g in vf_genes if g in combined.columns]
+rgi_cols = [g for g in combined.columns if g not in vf_cols]
+combined = combined[vf_cols + rgi_cols]
+
+short_names = {
+    'msrA/B(pilB': 'msrA/B',
+    'kdtA/waaA': 'kdtA',
+    "APH(3'')-Ib": "aph3''-Ib",
+    'APH(6)-Id': 'aph6-Id',
+    'Neisseria gonorrhoeae folP with mutation conferring resistance to sulfonamides': 'folP*',
+    'vanT gene in vanG cluster': 'vanTG',
+    'vanW gene in vanI cluster': 'vanWI',
+}
+field_labels = ','.join(short_names.get(g, g) for g in combined.columns)
+
+n_vf = len(vf_cols)
+n_rgi = len(rgi_cols)
+vf_color = '#0000ff'
+rgi_color = '#008000'
+
+rename = {
+    '000008104510_consensus': 'BTC_Pereyaslavl-Zalessky_Russia_476_BP',
+    '000008107130_consensus': 'BTC_Komsomolets_Kurgan1_Stavropol_3149_BP',
+    '000008103140_consensus': 'BTC_Progress2_Caucasus_Kurgan1_6012_BP',
+    '000008101780_consensus': 'BTC_Ken_Su_Kyrgyzstan_2170_BP',
+}
+
+lines = [
+    'DATASET_BINARY',
+    'SEPARATOR COMMA',
+    'DATASET_LABEL,Virulence_and_Resistance',
+    'COLOR,#ff0000',
+    '',
+    'FIELD_SHAPES,' + ','.join(['1'] * len(combined.columns)),
+    'FIELD_LABELS,' + field_labels,
+    'FIELD_COLORS,' + ','.join([vf_color] * n_vf + [rgi_color] * n_rgi),
+    '',
+    'LEGEND_TITLE,Virulence and Resistance Genes',
+    'LEGEND_SHAPES,1,1',
+    f'LEGEND_COLORS,{vf_color},{rgi_color}',
+    'LEGEND_LABELS,Virulence (VFDB),Resistance (RGI/CARD)',
+    '',
+    'DATA',
+]
+for sample, row in combined.iterrows():
+    values = ','.join(str(int(v)) for v in row.values)
+    lines.append(f'{rename.get(sample, sample)},{values}')
+
+output_path = '../data/C_H/old_iq_tree_no_outgroup/itol_annotation_binary.txt'
+with open(output_path, 'w') as f:
+    _ = f.write('\n'.join(lines))
+
+print(f'Сохранено: {output_path}')
+```
+
+![ML-дерево и присутствие генов. 
+Синие метки — гомологи VFDB при пороге 70%, зелёные — гены CARD. 
+У древних образцов факторов вирулентности нет, 
+из устойчивости есть только folP.](../results/figures/ML_tree_CH_with_metadata.svg)

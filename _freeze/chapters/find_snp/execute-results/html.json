@@ -1,0 +1,15 @@
+{
+  "hash": "c70692e1e9e1e7f1c0a8bfdb02938280",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: Отбор сайтов для дерева\nengine: knitr\n---\n\nКоровое выравнивание — 59 последовательностей по 343 520 сайта. \n\nФлаг `-c` у `snp-sites` оставляет только колонки, где буква есть у всех образцов сразу. Здесь такой колонки нет: \nв каждой хотя бы у одного штамма стоит прочерк. Поэтому `snp-sites -bc` не находит ни одного сайта. \nБез `-c` программа отдаёт колонки, в которых буквы различаются, даже если у части штаммов пропуск.\n\n\n::: {.cell}\n\n```{.bash .cell-code}\nsnp-sites -o ../data/C_H/all_core_alignment_no_outgroup_C_H/80_percent/snp-sites_core_snps.fa \\\n    ../data/C_H/all_core_alignment_no_outgroup_C_H/80_percent/core_gene_alignment.aln\n```\n:::\n\n\nТак получается 71 125 колонок. Для дерева это всё ещё много пропусков.\n\nClipKIT в режиме `kpi-smart-gap` оставляет парсимониально информативные сайты и снимает слишком неинформативные колонки по своему порогу пропусков.\n\n\n::: {.cell}\n\n```{.bash .cell-code}\nclipkit ../data/C_H/all_core_alignment_no_outgroup_C_H/80_percent/core_gene_alignment.aln \\\n -m kpi-smart-gap -o ../data/C_H/all_core_alignment_no_outgroup_C_H/80_percent/clipkit_core_snps.fa\n```\n:::\n\n\n\nВ IQ-TREE дальше идёт `clipkit_core_snps.fa`: 39 954 информативных сайта, \n88% исходного выравнивания вырезано.\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,9 +1,14 @@
 ---
-title: Аннотация сборок *Cardiobacteruin hominis* с помощью Prokka
+title: Аннотация сборок
 engine: knitr
 ---
 
-Проведем аннотацию новых (относительно летней практики) сборок *Cardiobacteruin hominis* с помощью Prokka
+Prokka аннотирует сборки *Cardiobacterium hominis* как бактериальные (`--kingdom Bacteria`).
+ В пан-геном Roary пойдут только GFF из этого шага: файлы NCBI ему не подходят. Если GFF для сборки уже лежит в выходной папке, скрипт её не пересчитывает.
+
+## Новые современные сборки
+
+48 сборок уже аннотированы, их GFF лежат в `data/C_H/avaliable_gff_C_H`. Здесь считаются семь новых, fasta которых скачаны в `data/C_H/new_assemblies_C_H`. Полный вывод Prokka — в `data/C_H/new_annotations_C_H`, копии GFF — в `data/C_H/new_gff_C_H`.
 
 ```{bash}
 #| eval: false
@@ -15,3 +20,17 @@ chmod +x ../scripts/prokka_bacteria_docker.sh
     ../data/C_H/new_gff_C_H
 ```
 
+
+## Древние консенсусы
+
+FASTA из предыдущей главы лежат в `data/C_H/BTC_consensus_C_H`. Полный вывод Prokka — в `data/C_H/BTC_consensus_annotations_C_H`, GFF для Roary — в `data/C_H/BTC_consensus_gff_C_H`.
+
+```{bash}
+#| eval: false
+chmod +x ../scripts/prokka_bacteria_docker.sh
+
+../scripts/prokka_bacteria_docker.sh \
+    ../data/C_H/BTC_consensus_C_H \
+    ../data/C_H/BTC_consensus_annotations_C_H \
+    ../data/C_H/BTC_consensus_gff_C_H
+```

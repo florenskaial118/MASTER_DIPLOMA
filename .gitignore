@@ -14,3 +14,6 @@ chapters/.DS_Store
 .DS_Store
 /.quarto/
 **/*.quarto_ipynb
+chapters/extra*
+chapters/localDB
+presentation_speech.qmd

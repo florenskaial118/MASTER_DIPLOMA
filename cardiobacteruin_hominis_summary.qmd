@@ -1,0 +1,1037 @@
+---
+bibliography: references.bib
+embed-resources: true
+execute:
+  eval: false
+engine: knitr
+---
+
+# Реконструкция геномов древних *Cardiobacterium hominis*: датированное дерево и сравнение подходов
+
+## Цели исследования
+
+Настоящая работа ставит себе целью:
+
+1.  **Пан-геномный анализ** современных (48 шт.) и древних представителей (4 шт. от БТК - 479-6012 BP) *Cardiobacterium hominis* с аутгруппой *Cardiobacterium valvarum* и без неё:
+    -   Оценить долю коровых генов (pie-chart)
+    -   Определить тип пан-генома (открытый/закрытый) по кривой насыщения
+2.  **ML дерево** на основе пан-геномного анализа с аутгруппой:
+    -   Подтвердить кластеризацию древних образцов с современными
+3. **ML дерево** на основе пан-геномного анализа без аутгруппы:
+    -   Оценить пространственную кластеризацию образцов с известной географией
+4.  **Датированное дерево** без аутгруппы:
+    -   Получить временные оценки ветвлений
+    -   Сравнить топологию с ML-деревом (положение древних образцов)
+5.  **Сравнение подходов к реконструкции геномов** древних образцов *C. hominis*:
+    -   *De novo* сборка vs *reference-based* сборка (выравнивание на штамм NCTC10426, GCF_900637305)
+    -   Качество и полнота сборок
+    -   Поиск генов, уникальных для de novo сборки
+6.  **Анализ de novo сборок**:
+    -   Поиск плазмид
+    -   Поиск генов патогенности/вирулентности/лекарственной устойчивости
+
+## Данные
+
+-   **Референсный геном**: *C. hominis* NCTC10426 (`GCF_900637305.1`)
+-   **BAM-файлы**: выравнивание ридов 4 древних образцов (1780, 3140, 4510, 7130) на референс
+-   **De novo сборки**: результаты биннинга (`000008103140_bins.86.fa`, `000008104510_bins.42.fa`)
+
+### Проверка референса в выравниваниях
+
+```{bash}
+#| eval: true
+for bam in Our_bam/*.bam; do
+    echo -n "$bam: "
+    samtools view -H "$bam" | grep '^@SQ' | cut -f2 | head -1
+done
+```
+
+### Загрузка референсного генома
+
+```{bash}
+#| eval: true
+source scripts/ncbi_search_templates.sh
+search_assembly "GCF_900637305.1"
+```
+
+```{bash}
+source scripts/ncbi_search_templates.sh
+download_assembly "GCF_900637305.1" "reference_for_ancient.fa"
+
+samtools faidx reference_for_ancient.fa
+```
+
+## Образцы
+
+Всего: 12 локаций, 9 для современных (США, Испания, Германия, Австралия, Дания, Китай, Бразилия, Новая Гвинея, Гонконг), 4 для исторических.
+
+| **Образец** | **Дата (BP)**         | **Место**                                |
+|:-----------------|:-------------------|:---------------------------------|
+| **4510**    | 476 (1500–1600 CE)    | Переславль-Залесский, Россия             |
+| **7130**    | 3,149 (1240–1007 BCE) | Курган Комсомолец 1, Ставропольский край |
+| **3140**    | 6,012 (±28 BP)        | Кавказ, курган 1 (Прогресс 2)            |
+| **1780**    | 2,170 (±23 BP)        | Кен Су, Киргизия                         |
+
+Для 17 образцов страна не известна.
+
+## Карта образцов
+
+Нарисуем карту образцов (положение для 7139 и 3140 объединим - Ставропольский край это Кавказ)
+
+```{r}
+library(tidyverse)
+library(leaflet)
+library(htmlwidgets)
+
+coords_raw <- read.csv("iq-tree_angsd_strict/coords_all_52.csv")
+coords <- coords_raw %>%
+  filter(Geo != "" & Geo != "Not provided") %>%
+  select(Geo, lat, lon, Data) %>%
+  mutate(
+    lat = as.numeric(lat),
+    lon = as.numeric(lon))
+
+source("scripts/create_map_no_legend_years_no_borders_count.r")
+create_the_best_map(coords)
+```
+
+![Карта сбора образцов](map.png)
+
+
+## Подготовка данных для пангеномного анализ
+
+#### Современные штаммы
+
+49 сборок из NCBI, хост: *Homo sapiens* (аннотацию gff для 48 из них сделала Саша - для GCA_963526385.1 не вышло).
+
+```{r}
+#| echo: false
+#| eval: true
+library(knitr)
+library(kableExtra)
+scroll_height <- "400px"
+df <- read.delim("Cardiobacterium_hominis_NCBI_meta_host.tsv", sep = '\t')
+kable(df) %>%
+  kable_styling() %>%
+  scroll_box(width = "100%", height = scroll_height)
+```
+
+### Аутгруппа: *Cardiobacterium valvarum*
+
+Выбрана по 16S rRNA филогении \[\@chen2011\].
+
+![Phylogenetic tree determined on the basis of the sequences of the 16S rRNA gene obtained by the unrooted neighbour-joining method in the MEGA (version 4.0) program package.](chen_2011/fig1_a.png)
+
+Найдем все сборки и запишем в файл valvarum_outgroup.tsv
+
+```{bash}
+#| eval: true
+source scripts/ncbi_search_templates.sh
+tab_search_assembly_datasets_host "Cardiobacterium valvarum" # > valvarum_outgroup.tsv
+```
+
+Скачаем сборки в общую папку со всеми сборками и в отдельную
+
+```{bash}
+mkdir -p out_group_NCBI_assembly
+
+tail -n +2 valvarum_outgroup.tsv |
+while IFS=$'\t' read -r AssemblyAccession Assembly_name Assembly_status SpeciesName Strain BioSampleAccn BioProject Total_length Contig_count Completeness Contamination ScaffoldN50 Isolation_source; do
+    download_assembly "$AssemblyAccession" "NCBI_assembly/${AssemblyAccession}.fa" < /dev/null
+    download_assembly "$AssemblyAccession" "out_group_NCBI_assembly/${AssemblyAccession}.fa" < /dev/null
+    #download_gff "$AssemblyAccession" "NCBI_gff"
+done
+```
+
+**Аннотация аутгруппы (Prokka):**
+
+```{bash}
+source scripts/prokka_docker.sh
+for assembly_file in out_group_NCBI_assembly/*.fa; do
+    assembly_name=$(basename "$assembly_file" .fa)
+    if [ -f "gff/${assembly_name}.gff" ]; then
+        continue
+    fi
+    # называем папки new, чтобы не путать с остальными при копировании результатов
+    prokka "${assembly_name}" "/prokka_annotations/new_${assembly_name}" \
+        "out_group_NCBI_assembly/${assembly_name}.fa" 
+    cp "prokka_annotations/new_${assembly_name}/${assembly_name}.gff" \
+       "gff/${assembly_name}.gff"
+done
+```
+
+```{bash}
+screen -S prokka_night
+chmod +x scripts/prokka.sh           
+scripts/prokka.sh  
+# в новом окне  
+screen -ls         
+screen -d prokka_night 
+screen -r prokka_night
+```
+
+### Построение и аннотация древних консенсусов
+
+**ANGSD** (строгий фильтр: `minQ=20`, `minMapQ=20`):
+
+```{bash}
+#docker pull zjnolen/angsd:latest
+
+for bam in Our_bam/*.bam; do
+    s=$(basename "$bam" .bam | cut -d'_' -f1)
+    
+    # Создайте временный список BAM файлов (ANGSD требует файл со списком)
+    echo "data/$bam" > temp_bam_list.txt
+    
+    # Запустите ANGSD для вызова вариантов
+    docker run --rm -v "$(pwd):/data" zjnolen/angsd:latest \
+        angsd -doFasta 1 \
+        -doCounts 1 \
+        -bam /data/temp_bam_list.txt \
+        -ref /data/reference_for_ancient.fa \
+        -out /data/Our_consensus/${s}_angsd_strict \
+        -minMapQ 20 -minQ 20
+
+    
+    gzip -d "Our_consensus/${s}_angsd_strict.fa.gz"
+    mv "Our_consensus/${s}_angsd_strict.fa" "Our_consensus/${s}_angsd_strict.fasta"
+    
+done
+
+# Очистка
+rm temp_bam_list.txt
+```
+
+**Переименование заголовков** для удобства в UGENE:
+
+```{bash}
+for f in Our_consensus/*.fasta; do
+    sample=$(basename "$f" .fasta)
+    # Replace the first header line (everything after >) with sample name
+    sed -i '' "1s/>.*/>${sample}_consensus/" "$f"
+done
+```
+
+**Аннотация консенсусов (Prokka):**
+
+```{bash}
+mkdir -p Consensus_annotation_angsd_strict
+
+source scripts/prokka_docker.sh
+for consensus in Our_consensus/*_angsd_strict.fasta; do
+    sample=$(basename "$consensus" .fasta)
+    prokka "${sample}_consensus" "Consensus_annotation_angsd_strict/${sample}" \
+        "Our_consensus/${sample}.fasta" 
+    cp "Consensus_annotation_angsd_strict/${sample}/${sample}_consensus.gff" "Consensus_annotation_angsd_strict/"
+done
+```
+
+### Пан-геномный анализ (Roary) 
+
+### С аутгруппой (48 современных + 4 древних + 4 аутгруппа)
+
+```{bash}
+mkdir -p all_gffs_angsd_strict_with_out
+mkdir -p roary_results_angsd_strict_with_out
+
+# Copy GFF files
+cp -r gff/*.gff all_gffs_angsd_strict_with_out/
+cp -r Consensus_annotation_angsd_strict/*.gff all_gffs_angsd_strict_with_out/
+
+# Run Roary
+docker run --rm -it \
+  -v "$(pwd)/all_gffs_angsd_strict_with_out:/data" \
+  -v "$(pwd)/roary_results_angsd_strict_with_out:/results" \
+  sangerpathogens/roary \
+  sh -c "roary -f /results/80_percent \
+        -e -n -v -p 8 -i 80 -cd 80 /data/*.gff"
+```
+
+```{bash}
+mkdir -p snp_filtered_angsd_strict
+
+snp-sites -cb -o snp_filtered_angsd_strict/core_snps_with_out.aln \
+          roary_results_angsd_strict_with_out/80_percent/core_gene_alignment.aln
+```
+
+**Результат:** 444 сайта, 50 из 56 уникальных последовательностей.
+
+### Без аутгруппы (48 современных + 4 древних)
+
+```{bash}
+mkdir -p all_gffs_angsd_strict
+mkdir -p roary_results_angsd_strict
+
+# Copy GFF files
+cp -r gff_c_h/*.gff all_gffs_angsd_strict/
+cp -r Consensus_annotation_angsd_strict/*.gff all_gffs_angsd_strict/
+
+# Run Roary
+docker run --rm -it \
+  -v "$(pwd)/all_gffs_angsd_strict:/data" \
+  -v "$(pwd)/roary_results_angsd_strict:/results" \
+  sangerpathogens/roary \
+  sh -c "roary -f /results/80_percent \
+        -e -n -v -p 8 -i 80 -cd 80 /data/*.gff"
+```
+
+```{bash}
+snp-sites -cb -o snp_filtered_angsd_strict/core_snps.fa \
+          roary_results_angsd_strict/80_percent/core_gene_alignment.aln
+```
+
+
+**Результат:** 444 сайта, 46 из 52 уникальных последовательностей.
+
+### Визулизация состава пан-генома
+
+[roary_plot](https://github.com/sanger-pathogens/Roary/tree/master/contrib/roary_plots)
+
+уберем soft-core с картинок, он 0 с обоих случаях
+
+```{bash}
+cd roary_results_angsd_strict_with_out/80_percent
+
+python ../../scripts/roary_plots.py accessory_binary_genes.fa-2.newick gene_presence_absence-2.csv
+
+cd ../../roary_results_angsd_strict/80_percent
+
+python ../../scripts/roary_plots.py accessory_binary_genes.fa.newick gene_presence_absence.csv
+
+```
+
+::: {#fig-two-images layout-ncol="2"}
+![](roary_results_angsd_strict_with_out/80_percent/pangenome_pie.png){width="400"}
+
+![](roary_results_angsd_strict_with_out/80_percent/pangenome_pie.png){width="400"}
+
+Визулизация пан-генома с и без аутгруппы
+:::
+
+|  | **С аутгруппой (56 штаммов)** | **Без аутгруппы (52 штамма)** |
+|:-----------------------|:-----------------------|:-----------------------|
+| **Core genes (≥80%)** | **395** | **523** |
+| **Shell genes (15–79%)** | **2,831** | **2,823** |
+| **Cloud genes (\<15%)** | **10,683** | **8,621** |
+| **Total genes** | **13,909** | **11,967** |
+
+**Вывод:** Удаление аутгруппы увеличивает число коровых генов (523 vs 395), что ожидаемо.
+
+## Кривая насыщаемости
+
+![Кривая насыщения без аутгруппы](roary_results_angsd_strict/80_percent/pangenome_cumulative.png){width="424"}
+
+**Вывод:** Пан-геном не насыщается → **открытый пан-геном**.
+
+## ML филогенетическое дерево (IQ-TREE) с аутгруппой
+
+```{bash}
+mkdir -p iq_tree_angsd_strict_with_out
+
+iqtree -s snp_filtered_angsd_strict/core_snps_with_out.aln -m HKY+G4 -bb 1000 -alrt 1000 \
+-pre  iq_tree_angsd_strict_with_out/cardiobacterium_hominis_tree_angsd_with_out -redo
+```
+
+### Переименование древних образцов
+
+Наши древние образцы нужно пометить \* и переименовать BTC_Geo_Date\_\* (по-английски, иначе ITOL не распознает надпись):
+
+```         
+000008101780_angsd_strict_consensus > BTC_Ken_Su_Kyrgyzstan_2170_BP*
+
+000008103140_angsd_strict_consensus > BTC_Progress2_Caucasus_Kurgan1_6012_BP*
+
+000008104510_angsd_strict_consensus > BTC_Pereyaslavl-Zalessky_Russia_476_BP*
+
+000008107130_angsd_strict_consensus > BTC_Komsomolets_Kurgan1_Stavropol_3149_BP*
+```
+
+В iq-tree_angsd_strict/country_meta_itol.txt - метадата по странам для дерева, только для новой гвинеи нужно вручную в лейбле выбирать голубой
+
+![ML дерево с аутгруппой. ](iq_tree_angsd_strict_with_out/cardiobacterium_hominis_tree_angsd_with_out_with-rect.svg)
+
+**Вывод:** Исторические образцы *C. hominis* группируются с современными в отдельной кладе от *C. valvarum* ✔..
+
+## ML филогенетическое дерево (IQ-TREE) без аутгруппы
+
+```{bash}
+mkdir -p iq_tree_angsd_strict
+
+iqtree -s snp_filtered_angsd_strict/core_snps.fa -m HKY+G4 -bb 1000 -alrt 1000 \
+-pre  iq-tree_angsd_strict/cardiobacterium_hominis_tree_ansd_strict -redo
+```
+
+![ML дерево без аутгруппы и со странами. Дерево **не подтверждает** пространственную кластеризацию образцов ✖](iq-tree_angsd_strict/cardiobacterium_hominis_tree_ansd_strict.svg)
+
+## Датированное дерево (BEAST2)
+
+### Параметры
+
+-   **Выравнивание:** 523 коровых гена, 444 сайта, 52 штамма
+
+-   **Модель**: HKY + G, **Clock**: strict, **Clock rate prior**: lognormal, **Coalescent** Constant Population, **MCMC**: 50 млн итераций
+
+-   **Калибровка**: 4 радиоуглеродно датированных образца
+
+### Настройка BEAUTi
+
+-   Все коровые гены в одной партиции (формат .fasta)
+-   **Taxon sets:** все современные в таксон `modern`, древние — каждый в свой `angsd_№`
+-   **Tip dates** (year before present):
+    -   `angsd_4510`: 0.000476
+
+    -   `angsd_7130`: 0.003149
+
+    -   `angsd_3140`: 0.006012
+
+    -   `angsd_1780`: 0.00217
+
+**XML-файл:**`beast_for_444_alignment/HKY_Gamma_0_Strict_clock_Coalescent_constant_pop_clockRate_lognormal.xml`
+
+Я добавила подпись MLN к оси в графическом редакторе.
+
+![Датированное дерево c указанием диапазаона узлов 95% HPD](beast_for_444_alignment/HKY_Gamma_0_Strict_clock_Coalescent_constant_pop_clockRate_lognormal.svg)
+
+**Вывод:** Топология датированного дерева отличается от ML дерева.
+
+## Топологическое сравнение деревьев (Tangle tree)
+
+Я подготовила файл с tangle tree metadata - beast_for_444_alignment/tangle_tree.txt, для этого переведа датированное деревео в nxwk формат
+
+Для сравнения топологии не будем учитывать длину ветвей, уберем бутстрепы и интервалы, чтобы было лучше видно
+
+```{bash}
+library(ggtree)
+library(tangler)
+library(ggnewscale)
+library(dplyr)
+# Read the BEAST tree file
+beast_tree <- read.beast("beast_for_444_alignment/HKY_Gamma_0_Strict_clock_Coalescent_constant_pop_clockRate_lognormal.tree")
+phylo_tree <- get.tree(beast_tree)
+write.tree(phylo_tree, file = "beast_for_444_alignment/HKY_Gamma_0_Strict_clock_Coalescent_constant_pop_clockRate_lognormal.nwk")
+
+```
+
+![Сравнение положения исторических образцов на деревьях, прямоугольниками отмечены клады с древними образцами](beast_for_444_alignment/tangle_tree_with_rect.svg)
+
+**ML дерево:**
+
+-   Все древние образцы в одной кладе
+
+-   Ken Su (Kyrgyzstan) 2170 BP — прародитель всех остальных
+
+-   Caucasus Kurgan1 6012 BP и Kurgan1 Stavropol 3149 BP — почти в одной кладе
+
+-   Pereyaslavl-Zalessky 476 BP — в соседней кладе
+
+**Датированное дерево:**
+
+-   Ken Su (Kyrgyzstan) 2170 BP — в другой кладе
+
+-   Caucasus Kurgan1 6012 BP и Pereyaslavl-Zalessky 476 BP — в одной кладе
+
+-   Kurgan1 Stavropol 3149 BP — их прародитель
+
+### Проекция датированного дерева на карту
+
+С помощью [phytools](https://blog.phytools.org/2019/03/projecting-phylogenetic-tree-onto-map.html) (только для 35 образцов с известной страной - то есть 17 из 52 убираем)
+
+```{r}
+library(phytools)
+library(mapdata)
+library(ape)
+library(dplyr)
+
+
+# 1. Загрузить дерево и координаты
+beast_tree <- read.nexus("beast_for_444_alignment/HKY_Gamma_0_Strict_clock_Coalescent_constant_pop_clockRate_lognormal.tree")
+ML_tree <- read.newick("iq_tree_angsd_strict_with_out/cardiobacterium_hominis_tree_angsd_with_out.nwk")
+coords_raw <- read.csv("iq-tree_angsd_strict/coords_all_52.csv")
+
+# 2. Очистить и сопоставить координаты с деревом
+coords_df <- coords_raw %>%
+  mutate(
+    tip = trimws(tip),
+    lat = as.numeric(lat),
+    lon = as.numeric(lon)
+  ) %>%
+  filter(complete.cases(lat, lon)) %>%
+  filter(tip %in% beast_tree$tip.label)  # только те, что в дереве
+
+# Удалить из дерева листья без координат
+missing <- setdiff(beast_tree$tip.label, coords_df$tip)
+if (length(missing) > 0) {
+  cat("⚠️ В дереве, но нет координат:", paste(head(missing, 3), collapse = ", "), "...\n")
+  beast_tree <- drop.tip(beast_tree, missing)
+}
+
+# 3. Сопоставить порядок: coords_df —> beast_tree
+idx_beast <- match(beast_tree$tip.label, coords_df$tip)
+lat_beast <- coords_df$lat[idx_beast]
+lon_beast <- coords_df$lon[idx_beast]
+names(lat_beast) <- names(lon_beast) <- beast_tree$tip.label
+
+# 4. Создать матрицу и объект
+coords_beast <- matrix(c(lat_beast, lon_beast), ncol = 2)
+colnames(coords_beast) <- c("lat", "lon")
+rownames(coords_beast) <- beast_tree$tip.label
+
+obj_beast <- phylo.to.map(beast_tree, coords_beast,plot=FALSE, from = "top")
+
+plot(obj_beast,ftype="i",cex.points=c(0.5,1.2), xlim=c(-120,160),ylim=c(-80,90), fsize=0.7, split=c(0.5,0.5))
+
+
+#plot(obj,direction="rightwards",ftype="off",cex.points=c(0,1.5),pts=FALSE)
+
+png("beast_for_444_alignment/beast_tree_map_up.png", height = 2000, width = 1600, res = 200)
+plot(obj_beast,ftype="i",cex.points=c(0.5,1.2), xlim=c(-120,160),ylim=c(-80,90), fsize=0.7, split=c(0.5,0.5))
+dev.off()
+
+
+png("beast_for_444_alignment/beast_tree_map_right.png", height = 4000, width = 2000, res = 200)
+plot(obj_beast,direction="rightwards",ftype="i",cex.points=c(0.5,1.5), fsize=0.7,xlim=c(-110,180),ylim=c(-40,80),split=c(0.5,0.5))
+dev.off()
+```
+
+ML-дерево
+
+```{r}
+ML_tree <- read.newick("iq_tree_angsd_strict_with_out/cardiobacterium_hominis_tree_angsd_with_out.nwk")
+coords_raw <- read.csv("iq-tree_angsd_strict/coords_all_52.csv")
+
+coords_df <- coords_raw %>%
+  mutate(
+    tip = trimws(tip),
+    lat = as.numeric(lat),
+    lon = as.numeric(lon)
+  ) %>%
+  filter(complete.cases(lat, lon)) %>%
+  filter(tip %in% ML_tree$tip.label)  # только те, что в дереве
+
+missing <- setdiff(ML_tree$tip.label, coords_df$tip)
+if (length(missing) > 0) {
+  cat("⚠️ В дереве, но нет координат:", paste(head(missing, 3), collapse = ", "), "...\n")
+  ML_tree <- drop.tip(ML_tree, missing)
+}
+
+idx_ML <- match(ML_tree$tip.label, coords_df$tip)
+lat_ML <- coords_df$lat[idx_ML]
+lon_ML <- coords_df$lon[idx_ML]
+names(lat_ML) <- names(lon_ML) <- ML_tree$tip.label
+
+# 4. Создать матрицу и объект
+coords_ML <- matrix(c(lat_ML, lon_ML), ncol = 2)
+colnames(coords_ML) <- c("lat", "lon")
+rownames(coords_ML) <- ML_tree$tip.label
+
+obj_ML <- phylo.to.map(ML_tree, coords_ML, from = "top")
+
+plot(obj_ML,ftype="i",cex.points=c(0.5,1.2), fsize=0.7, split=c(0.5,0.5))
+
+
+#plot(obj,direction="rightwards",ftype="off",cex.points=c(0,1.5),pts=FALSE)
+
+png("iq_tree_angsd_strict_with_out/ML_tree_map_up.png", height = 2000, width = 1600, res = 200)
+plot(obj_ML,ftype="i",cex.points=c(0.5,1.2), xlim=c(-120,160),ylim=c(-80,90), fsize=0.7, split=c(0.5,0.5))
+dev.off()
+
+
+png("iq_tree_angsd_strict_with_out/ML_tree_map_right.png", height = 4000, width = 2000, res = 200)
+plot(obj_ML,direction="rightwards",ftype="i",cex.points=c(0.5,1.5), fsize=0.7,xlim=c(-110,180),ylim=c(-40,80),split=c(0.5,0.5))
+dev.off()
+```
+
+![Датированное дерево, совмещенное с картой](beast_for_444_alignment/beast_tree_map_up.png)
+
+**Вывод:** Дерево **не подтверждает** пространственную кластеризацию образцов.
+
+Здесь программа сама развернула дерево, чтобы максимально учесть топологию, в tangletree же листья расположены немного по-другому, так, чтобы проще сравнить топологию дервевье \## Оценка качества сборок
+
+## Выводы
+
+1. **Пан-геном** *C. hominis* **открытый**, доля коровых генов — 523 (без аутгруппы) / 395 (с аутгруппой)
+
+2. **ML-дерево** подтверждает кластеризацию древних образцов с современными, но **не подтверждает** пространственную структуру
+
+3. **Временные оценки** позволяют проследить эволюционную историю *C. hominis* на протяжении ~28,000 лет. Древний образец Ken Su (2170 BP) образует базальную ветвь, обособленную от всех остальных древних образцов, что свидетельствует о древнейшем расхождении этой линии.
+
+
+#   Конверитируем все картинки для презентации
+```{bash}
+# ML-деревья
+rsvg-convert --dpi-x=400 --dpi-y=400 -o iq_tree_angsd_strict_with_out/cardiobacterium_hominis_tree_angsd_with_out_with-rect.png iq_tree_angsd_strict_with_out/cardiobacterium_hominis_tree_angsd_with_out_with-rect.svg
+
+rsvg-convert --dpi-x=400 --dpi-y=400 -o iq-tree_angsd_strict/cardiobacterium_hominis_tree_ansd_strict.png iq-tree_angsd_strict/cardiobacterium_hominis_tree_ansd_strict.svg
+
+# Датированное дерево BEAST2
+rsvg-convert --dpi-x=400 --dpi-y=400 -o beast_for_444_alignment/HKY_Gamma_0_Strict_clock_Coalescent_constant_pop_clockRate_lognormal.png beast_for_444_alignment/HKY_Gamma_0_Strict_clock_Coalescent_constant_pop_clockRate_lognormal.svg
+
+# Топологическое сравнение
+rsvg-convert --dpi-x=400 --dpi-y=400 -o beast_for_444_alignment/tangle_tree_with_rect.png beast_for_444_alignment/tangle_tree_with_rect.svg
+```  
+
+
+
+### Метаданные контигов и распределение покрытия
+
+Метаданные из заголовков контигов были спарсены и визуализированы (среднее и медианное покрытие, длина).
+
+```{python}
+import importlib
+import scripts.analyse_contig_metadata
+importlib.reload(scripts.analyse_contig_metadata)
+
+from scripts.analyse_contig_metadata import extract_contig_metadata, plot_contigs_comparison
+
+for assembly_file in ["Our_assembly/000008103140_bins.86.fa", "Our_assembly/000008104510_bins.42.fa"]:
+    sample = assembly_file.split('/')[-1].split('_')[0]
+    df = extract_contig_metadata(assembly_file)
+    plot_contigs_comparison(df, sample, path=f"Our_assembly/{sample}_visualisation.png")
+```
+
+::: {.column}
+![Покрытие сборки образца 3140. Крайне фрагментирована, высокие выбросы покрытия (до 229x)](Our_assembly/000008103140_visualisation.png)
+
+:::
+
+::: {.column}
+![Покрытие сборки образца 4510. Более равномерное распределение](Our_assembly/000008104510_visualisation.png)
+
+:::
+
+## Сравнение с референсом через QUAST
+
+```{bash}
+quast.py Our_assembly/000008103140_bins.86.fa \
+           Our_assembly/000008104510_bins.42.fa \
+        -r reference_for_ancient.fa 
+        -o ~/Downloads/quast_comparison
+```
+
+```{bash}
+quast.py Our_assembly/000008103140_bins.86.fa \
+           Our_assembly/000008104510_bins.42.fa \
+           Our_consensus/000008103140_angsd_strict.fasta \
+           Our_consensus/000008104510_angsd_strict.fasta \
+        -r reference_for_ancient.fa \
+        -o ~/Downloads/quast_comparison_big
+```
+
+::: {.column}
+![Cumnulative Plot in QUAST. Наши де-ново сбороки состоят из одного контига длины референса - то есть совпадают с пунктирной линией](Our_assembly/cumulative_plot.png)
+
+:::
+
+::: {.column}
+ ![Nx график](Our_assembly/Nx_plot.png)
+
+:::
+
+Ключевые параметры:
+
+| **Показатель** | **3140 (de novo)** | **4510 (de novo)** | **3140 (reference-based)** | **4510 (reference-based)** | **Референс** |
+|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|
+| **Total length** | \~1.4 Mbp | \~3.0 Mbp | 2.67 Mbp | 2.67 Mbp | 2.67 Mbp |
+| **\# contigs** | 499 | 909 | 1 | 1 | 1 |
+| **Largest contig** | 13,134 bp | 16,230 bp | 2,670,755 bp | 2,670,755 bp | 2,670,755 bp |
+| **Genome fraction (%)** | 1.13 | 55.89 | 84.05 | 86.75 | 100 |
+| **Misassemblies** | 0 | 25 | 0 | 0 |  |
+
+→ Сборка 3140 крайне фрагментирована и неполна, в то время как 4510 демонстрирует хорошее покрытие и синтению с референсом.
+
+Референс-основанные сборки - более полные
+
+## BUSCO
+
+в окружении busco_env:
+
+```{bash}
+busco \
+  --in Our_assembly/*_bins.*.fa \
+  --out Our_assembly/000008103140_cardiobacterium_busco \
+  --mode genome \
+  --lineage_dataset bacteria_odb10 \
+  --cpu 4 -f
+```
+
+
+| **Сборка**               | **C \[%\]** | **S** | **D** | **F** | **M** | **Total BUSCOs** |
+|:----------|:----------|:----------|:----------|:----------|:----------|:----------|
+| **de-nono 3140**         | **37.1**    | 46    | 0     | 13    | 65    | 124              |
+| **de-novo 4510**         | **52.4**    | 37    | 28    | 10    | 49    | 124              |
+| **referece-based 3140**  | **65.3**    | 81    | 0     | 23    | 20    | 124              |
+| **reference-based 4510** | **76.6**    | 95    | 0     | 9.7   | 13.7  | 124              |
+| **Референс**             | **91.9**    | 114   | 0     | 0     | 10    | 124              |
+
+→ Де-ново сборка 3140 содержит значительную долю отсутствующих (M) и фрагментированных (F) BUSCO; де-ново 4510 — более полная, но с дупликациями (D=22.6%).
+
+Reference-based сборки значительно превосходят de novo по полноте
+
+Дополнительно все сборки были проаннотированы через Prokka (для локального анализа) и визуализированы в Proksee.
+
+```{bash}
+source scripts/prokka_docker.sh
+
+prokka "C_hominis_NCTC10426" "reference_prokka" "reference_for_ancient.fa"
+
+cd Our_assembly
+
+for file in *.fa; do
+    sample=$(basename "$file" .fa)
+    prokka "${sample}" "${sample}_prokka" "${file}"    
+done
+```
+
+| **Образец** | **Дата (BP)** |
+|:----------------------|:-----------------------------------------------|
+| **4510** | **476 (1500–1600 CE)** Переславль-Залесский, Россия |
+| **7130** | **3,149 (1240–1007 BCE)** Курган Комсомолец 1, Ставропольский край |
+| **3140** | **6,012 (±28 BP)** Кавказ, курган 1 (Прогресс 2) |
+| **1780** | **2,170 (±23 BP)** Кен Су. Киргизия (широта  42°45'15.30"С, долгота  78°43'34.23"В) |
+
+000008103140_angsd_strict_consensus \> BTC_Progress2_Caucasus_Kurgan1_6012_BP\*
+
+000008104510_angsd_strict_consensus \> BTC_Pereyaslavl-Zalessky_Russia_476_BP\*
+
+#### Визуальное сравнение аннотаций сборок образца 3140
+
+::: {.column}
+![Визуализация де-ново сборки 000008103140_bins.86.fa](Our_assembly/proksee-000008103140_bins.86.svg)
+:::
+
+::: {.column}
+![Визуализация reference-based сборки 000008103140](Our_assembly/ref-000008103140_bins.86.svg)
+:::
+
+#### Визуальное сравнение аннотаций сборок образца 4510
+
+::: {.column}
+![Визуализация reference-сборки 000008104510_bins.42.fa](Our_assembly/proksee-000008104510_bins.42.svg)
+:::
+
+
+::: {.column}
+![Визуализация reference-based сборки 000008104510](Our_assembly/ref-000008104510.svg)
+:::
+![Визуализация референса - Cardiobacterium hominis strain NCTC10426 chromosome 1, complete sequence](Our_assembly/proksee-Cardiobacterium_hominis_strain_NCTC10426_chromosome_1_complete_sequence.svg)
+
+## Выравнивание de novo сборок на референс
+
+```{bash}
+cd Our_assembly
+
+for sample in 000008103140 000008104510; do
+    assembly=$(ls ${sample}_bins.*.fa | head -1)
+    # Выравниваем и сохраняем в BAM (нужен для syri/plotsr)
+    minimap2 -ax asm5 --eqx ../reference_for_ancient.fa "$assembly"  | \
+            samtools sort -O BAM - > "${sample}_vs_ref.bam"
+    samtools index "${sample}_vs_ref.bam"
+    
+    # Сохраняем также в PAF (для быстрого просмотра и выявления уникальных контигов)
+    minimap2 -c ../reference_for_ancient.fa "$assembly" > "${sample}_contigs_vs_ref.paf"
+    
+    echo "✓ $sample: BAM и PAF созданы"
+
+done
+```
+
+![Сравнение выравнивания сборок на референс](Our_assembly/compare_bam.png)
+
+Визуально: сборка 4510 выравнивается гораздо лучше
+
+## Анализ уникальных и вставленных регионов
+
+### Поиск вставок (structural variants)
+
+Разработана функция на основе анализа CIGAR в BAM-файлах:
+
+```{python}
+import sys
+sys.path.append('scripts')
+from importlib import reload
+import find_insertions
+reload(find_insertions) 
+from find_insertions import find_insertions
+
+
+# Запуск
+#find_insertions("Our_assembly/000008103140_vs_ref.bam", "Our_assembly/insertions_sample1.tsv") - нет вставок
+find_insertions("Our_assembly/000008104510_vs_ref.bam", "Our_assembly/000008104510_bins.42.fa", "Our_assembly/insertions_000008104510.tsv")
+```
+
+Найдено 8 вставок в сборке 4510, максимальная длина — 227 bp (74 aa) и 0 в 3140.
+
+```{bash}
+#| eval: true
+cat Our_assembly/insertions_000008104510.tsv | column -t -s $'\t'
+```
+
+Выглядят они примерно так на IGV:
+
+![NZ_LR134365.1:951863-953863](Our_assembly/NZ_LR134365.1:951863-953863.png)
+
+Ни одна не содержит CDS по результатам bakta (вероятно, не кодирующие или фрагментированные)
+
+```{bash}
+bakta_db download --type light
+bakta --db db-light --output insertions_annot --force --skip-sorf Our_assembly/insertions_000008104510.fasta 
+```
+
+## Выделение уникальных контигов
+
+Уникальные контиги определены как такие, которые не выровнялись на референс:
+
+```{bash}
+mkdir -p Unique_contigs
+
+for sample in 000008103140 000008104510; do
+    assembly=$(ls Our_assembly/${sample}_bins.*.fa | head -1)
+    # Все контиги
+    grep "^>" "$assembly" | sed 's/>//' | cut -d' ' -f1 > Unique_contigs/${sample}_all.txt
+
+    # Выровнявшиеся на референс
+    cut -f1 Our_assembly/${sample}_contigs_vs_ref.paf 2>/dev/null | sort -u > Unique_contigs/${sample}_aligned.txt
+
+    # Уникальные = все минус выровнявшиеся
+    grep -v -f Unique_contigs/${sample}_aligned.txt Unique_contigs/${sample}_all.txt > Unique_contigs/${sample}_unique.txt
+
+    # Извлечение последовательностей уникальных и выровненных контигов
+    if [ -s Unique_contigs/${sample}_unique.txt ]; then
+        seqtk subseq "$assembly" Unique_contigs/${sample}_unique.txt > Unique_contigs/${sample}_unique.fasta
+        seqtk subseq "$assembly" Unique_contigs/${sample}_aligned.txt > Unique_contigs/${sample}_aligned.fasta
+    fi
+done
+
+```
+
+## Сравнение свойств уникальных и выровненных контигов
+
+```{python}
+import importlib
+import scripts.analyse_contig_metadata
+importlib.reload(scripts.analyse_contig_metadata)
+
+from scripts.analyse_contig_metadata import extract_contig_metadata, plot_contigs_comparison
+
+for assembly_file in ["Unique_contigs/000008103140_aligned.fasta", "Unique_contigs/000008103140_unique.fasta", "Unique_contigs/000008104510_aligned.fasta", "Unique_contigs/000008104510_unique.fasta"]:
+    sample = assembly_file.split('/')[-1].split('.')[0]
+    df = extract_contig_metadata(assembly_file)
+    plot_contigs_comparison(df, sample, path=f"Unique_contigs/visualisation_{sample}_visualisation.png")
+    
+```
+
+```{bash}
+quast.py Unique_contigs/000008103140_aligned.fasta \
+        Unique_contigs/000008103140_unique.fasta \
+        Unique_contigs/000008104510_aligned.fasta \
+        Unique_contigs/000008104510_unique.fasta \
+        -r reference_for_ancient.fa \
+        -o ~/Downloads/quast_comparison_unique_aligned
+```
+
+![cumulative_plot](Unique_contigs/cumulative_plot.png) ![Nx_plot](Unique_contigs/Nx_plot.png)
+
+![Выровненные контиги 000008103140](Unique_contigs/visualisation_000008103140_aligned_visualisation.png)
+
+![Уникальные контиги 000008103140](Unique_contigs/visualisation_000008103140_unique_visualisation.png)
+
+![Выровненные контиги 000008104510](Unique_contigs/visualisation_000008104510_aligned_visualisation.png)
+
+![Уникальные контиги 000008104510](Unique_contigs/visualisation_000008104510_unique_visualisation.png)
+
+| **Образец** | **Тип** | **\# contigs** | **Mean cov** | **Median cov** | **Median length (bp)** |
+|:-----------|:-----------|:-----------|:-----------|:-----------|:-----------|
+| **3140** | **aligned** | **404** | **10.4x** | **8.5x** | **2,488** |
+| **3140** | **unique** | **95** | **14.9x** | **7.5x** | **2,176** |
+| **4510** | **aligned** | **814** | **9.2x** | **8.8x** | **2,682** |
+| **4510** | **unique** | **95** | **11.2x** | **8.9x** | **2,259** |
+
+→ Уникальные контиги не являются артефактами: их покрытие выше или сопоставимо со средним, длина близка к общему распределению.
+
+### Аннотация и BLAST уникальных и выровненных контигов
+
+Аннотация (`prokka`), BLAST полученных .ffn файлов против референсной базы данных генов (создан `BLAST_db/reference_genes.fasta`).
+
+```{bash}
+source scripts/prokka_docker.sh
+
+cd Unique_contigs
+
+for sample in 000008103140 000008104510; do
+    for type in aligned unique; do
+        input_fasta="${sample}_${type}.fasta"
+        if [[ -s "$input_fasta" ]]; then
+            prokka "${sample}_${type}" \
+                   "${sample}_${type}_prokka" \
+                   "$input_fasta"
+        fi
+    done
+done
+```
+
+```{bash}
+# Подготовка референсной базы
+cp reference_prokka/C_hominis_NCTC10426.ffn BLAST_db/reference_genes.fasta
+source scripts/blast.sh
+make_blast_db "BLAST_db/reference_genes.fasta" "BLAST_db/reference_genes_db"
+
+# BLAST каждого набора
+for sample in 000008103140 000008104510; do
+    for type in aligned unique; do
+        input_ffn="Unique_contigs/${sample}_${type}_prokka/${sample}_${type}.ffn"
+        if [[ -s "$input_ffn" ]]; then
+            cp "$input_ffn" "BLAST_db/${sample}_${type}.fasta"
+            blast_short "BLAST_db/${sample}_${type}.fasta" \
+                        "BLAST_db/reference_genes_db" \
+                        "BLAST_results/${sample}_${type}_vs_ref" \
+                        "force"
+        fi
+    done
+done
+```
+
+### Фильтрация и извлечение matching / unique генов и функциональный профиль контигов
+
+В сырые результаты бласта попали не все гены из .ffn, часть из них совсем не выровнялась. Из уникальных тех, что попали в результы мы отфильтровали только хорошие совпадения - \['identity'\] \> 80 & \['evalue'\] \< 1e-10. Все остальные с плохими совпадениями или совсем не попавшие в бласт мы назвали уникальными.
+
+По длине не фильтрую, чтобы tRNA тоже прошли фильтр
+
+Интересно, сколько генов было бы при других порогах параметров и в целом - можно ли считаь ген не прошедший парамтры - уникальным.
+
+```{bash}
+python scripts/filter_tsv_with_context.py 
+python scripts/sample_contigtype_contig.py
+#python scripts/analyse_contigs.py
+#python scripts/analyze_functional_groups.py
+```
+
+| **Образец** | **Тип**     | **Matching genes** | **Unique genes** | Всего |
+|:------------|:------------|:-------------------|:-----------------|-------|
+| **3140**    | **aligned** | **458**            | **709**          | 1167  |
+| **3140**    | **unique**  | **3**              | **271**          | 274   |
+| **4510**    | **aligned** | **1,835**          | **758**          | 2593  |
+| **4510**    | **unique**  | **1**              | **261**          | 262   |
+
+я вывела все контиги в которых есть и выровненные и уникальные гены в BLAST_results/unique_genes/sample_contigtype_contig.html
+
+контиги, в которых уникальный ген лежит между выровненными -
+
+NODE_2825_length_7736_cov_12.446394
+
+NODE_4906_length_5237_cov_7.510200
+
+lovis4u
+
+```{bash}
+# Для NODE_2825
+samtools faidx reference_for_ancient.fa NZ_LR134365.1:2434120-2441844 > lovis4u_mine/ref_region_2825.fa
+
+# Для NODE_4906
+samtools faidx reference_for_ancient.fa NZ_LR134365.1:1623853-1625701 > lovis4u_mine/ref_region_4906.fa
+
+samtools faidx Our_assembly/000008104510_bins.42.fa NODE_2825_length_7736_cov_12.446394	 > lovis4u_mine/NODE_2825.fa
+
+# Для NODE_4906
+samtools faidx Our_assembly/000008104510_bins.42.fa NODE_4906_length_5237_cov_7.510200 > lovis4u_mine/ref_region_4906.fa
+
+```
+
+```{bash}
+seqkit stats lovis4u_mine/ref_region_2825.fa seqkit stats lovis4u_mine/NODE_2825.fa seqkit stats lovis4u_mine/ref_region_4906.fa seqkit stats lovis4u_mine/NODE_4906.fa
+```
+
+```{bash}
+source scripts/prokka_docker.sh
+
+cd lovis4u
+
+for file in *.fa; do
+    sample=$(basename "$file" .fa)
+    prokka "${sample}" "${sample}_prokka" "${file}"    
+done
+```
+
+не аннотируется, поэтому я сделала искуственные gff - скопировала аннотации из больших gff reference_prokka/C_hominis_NCTC10426.gff и Unique_contigs/000008104510_aligned_prokka/000008104510_aligned.gff и перенесла координаты вырезанного кусочка референса относительно начала его кусочка.
+
+```{python}
+lovis4u -gff lovis4u_mine/artifical_gffs_2825  -hl --set-category-colour -c A4L -o lovis4u_mine/artifical_gffs_2825/output_2825
+```
+
+![Bизуализация](lovis4u_mine/artifical_gffs_2825/output_2825/lovis4u.png)
+
+я думала, что у нас будет слева и справа общие гены, а по-середине - разные...
+
+c /NODE_4906 вышло странно - у меня записано, что у него длина 5,237, а длина выравнивания - всего 1,849... видимо какая-то проблема с выравниванием сразу была
+
+Гены были распределены по 17 функциональным категориям на основе аннотации в `.gff`-файлах. Классификация выполнялась по ключевым словам в поле `product`, согласно следующей логике:
+
+-   **Гипотетические белки** — *hypothetical*, *hyp*, или **`NaN`**
+
+-   **RNA** — **`tRNA`**, **`rRNA`**
+
+-   **Структурные белки** — *structural*, *capsid*, *tail*, *head*, *coat*, *shell*
+
+-   **Фаговые белки** — *phage*, *prophage*, *integrase*, *terminase*, *lysin*, *holin* и др.
+
+-   **Транспорт** — *transport*, *membrane*, *channel*, *pump*, *permease*, *efflux*
+
+-   **Метаболизм** — все ферменты: *synthase*, *dehydrogenase*, *kinase*, *oxidoreductase*, *hydrolase* и т.п.
+
+-   **Регуляция** — *regulator*, *two-component*, *sensor*, *repressor*, *transcriptional*, *sigma*
+
+-   **Рибосомальные** — *ribosomal*, *rpl*, *rps*
+
+-   **Белковый метаболизм** — *chaperone*, *protease*, *clp*, *hsl*, *hsp*, *groEL*, *peptidase*
+
+-   **Репликация и ремонт ДНК** — *dna*, *replication*, *repair*, *rec*, *helicase*, *ligase*, *polymerase*
+
+-   **Клеточная оболочка** — *division*, *fts*, *murein*, *peptidoglycan*, *transpeptidase*, *autolysin*
+
+-   **Производство энергии** — *electron*, *respiratory*, *atp synthase*, *cytochrome*, *oxidative phosphorylation*
+
+-   **Кофакторы** — *cofactor*, *coenzyme*, *biotin*, *folate*, *vitamin B*
+
+-   **Передача сигналов** — *signal*, *chemotaxis*, *two-component*, *transducer*, *secretion*
+
+-   **Мобильные элементы** — *transposase*, *integrase*, *toxin–antitoxin*, *abx*, *hic*, *vap*, *ccd*, *rel*
+
+-   **Клеточные процессы** — *stress*, *stringent*, *biofilm*, *sporulation*, *competence*, *CRISPR-Cas*, *cyclic di-GMP*
+
+-   **Прочее** — не попавшие в категории выше.
+
+Все категории проверялись построчно для каждого гена, приоритет имели более специфичные метки (напр., *ribosomal* \> *regulator*). Степень перекрытия низкая (по сути — каждый ген попадает в одну категорию).
+
+→ Частое присутствие генов, связанных с мембраной, транспортом, мобильностью — возможно, свидетельство адаптации.
+
+```{bash}
+for s in 000008103140 000008104510; do
+    for type in matching unique; do
+        input_file="BLAST_results/unique_genes/${s}_all_${type}.fna"
+        output_dir="BLAST_results/${s}_${type}_abricate"
+
+        if [[ -f "$input_file" ]]; then
+            echo "Running ABRicate: $input_file → $output_dir"
+            mkdir -p "$output_dir"
+            
+            # Run ABRicate on CARD (AMR) and VFDB (virulence) databases
+            abricate --db card "$input_file" > "$output_dir/${s}_all_${type}_card.tsv" 2>&1
+            abricate --db vfdb "$input_file" > "$output_dir/${s}_all_${type}_vfdb.tsv" 2>&1
+            
+            # Optional: generate summary reports (uncomment to enable)
+            abricate --summary "$output_dir/${s}_all_${type}_card.tsv" > "$output_dir/${s}_all_${type}_card_summary.tsv" 2>&1
+            abricate --summary "$output_dir/${s}_all_${type}_vfdb.tsv" > "$output_dir/${s}_all_${type}_vfdb_summary.tsv" 2>&1
+        else
+            echo "File not found: $input_file — skipping"
+        fi
+    done
+done
+```
+
+ABRicate не обнаружил в сборках гены лек. устойчивости и патогенности
+
+
+
+
+
+
+

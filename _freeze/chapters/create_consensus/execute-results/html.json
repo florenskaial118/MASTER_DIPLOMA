@@ -1,0 +1,15 @@
+{
+  "hash": "24a64e9ce23c236830b2b45312bc9742",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: Консенсусы древних образцов\nengine: knitr\n---\n\nКонсенсус строится по BAM, уже выровненным на референс *C. hominis* NCTC10426 (`GCF_900637305.1`, файл `data/reference_for_ancient_C_H.fa`). \nANGSD (`-doFasta 1`) записывает в каждую позицию случайную букву среди оснований с качеством картирования и качеством основания не ниже 20. \nПорог глубины не задан. Там, где подходящих ридов нет, остаётся N: буква референса в консенсус не подставляется.\n\nИз имени BAM берётся номер до первого подчёркивания. Для `000008104510_*.bam` результат — `data/C_H/BTC_consensus_C_H/000008104510_consensus.fa`.\n\n\n::: {.cell}\n\n```{.bash .cell-code}\nsource ../scripts/create_angsd_consensus.sh\n\nfor bam in ../data/BTC_bam_C_H/*.bam; do\n    [ -e \"$bam\" ] || continue\n    s=$(basename \"$bam\" .bam | cut -d'_' -f1)\n\n    # Абсолютный путь к BAM\n    abs_bam=\"$(cd \"$(dirname \"$bam\")\" && pwd)/$(basename \"$bam\")\"\n    list_file=\"$(dirname \"$abs_bam\")/bam_list_${s}.txt\"\n    echo \"/bams/$(basename \"$abs_bam\")\" > \"$list_file\"\n\n    create_consensus_angsd \\\n        \"$list_file\" \\\n        \"../data/reference_for_ancient_C_H.fa\" \\\n        \"../data/C_H/BTC_consensus_C_H/${s}_consensus\"\ndone\n```\n:::\n\n\nПолучились четыре консенсуса:\n\n| ID | Файл | Место | Возраст |\n|---|---|---|---|\n| 4510 | `000008104510_consensus.fa` | Переславль-Залесский | 476 л.н. |\n| 7130 | `000008107130_consensus.fa` | Курган Комсомолец 1, Ставрополье | 3149 л.н. |\n| 3140 | `000008103140_consensus.fa` | Прогресс 2, Кавказ | 6012 л.н. |\n| 1780 | `000008101780_consensus.fa` | Кен-Су, Киргизия | 2170 л.н. |\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

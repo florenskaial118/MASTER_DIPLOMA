@@ -1,17 +1,132 @@
 ---
-title: Построение ML дерева по коровому выравниванию
+title: ML-дерево по коровому выравниванию
 engine: knitr
 ---
 
+Дерево строится в IQ-TREE по `clipkit_core_snps.fa`: 59 последовательностей, 39 954 сайта. 
+Константных сайтов в этом выравнивании нет, поэтому модель `GTR+F+ASC+G4`: `+ASC` поправляет оценку, когда в анализ взяты только вариабельные сайты. 
+Поддержка ветвей — 1000 ультрабыстрых бутстрепов и 1000 SH-aLRT. Аутгруппы нет.
 
 ```{bash}
 #| eval: false
-mkdir -p ../data/C_H/iq_tree_no_outgroup
+mkdir -p ../data/C_H/old_iq_tree_no_outgroup
 
-iqtree -s ../data/C_H/all_core_alignment_no_outgroup_no_BTC_C_H/core_with_ancient/clipkit_core_snps.fa  -m GTR+F+ASC+G4 \
+iqtree -s ../data/C_H/all_core_alignment_no_outgroup_C_H/80_percent/clipkit_core_snps.fa \
+  -m GTR+F+ASC+G4 \
   -bb 1000 -alrt 1000 \
   -nt 3 \
--pre  ../data/C_H/iq_tree_no_outgroup/C_H_ML_tree -redo
+  -pre ../data/C_H/old_iq_tree_no_outgroup/C_H_ML_tree \
+  -redo
 ```
 
-![ML дерево](../results/figures/ML_tree_CH.png)
+![ML-дерево 59 штаммов *C. hominis* по 39 954 сайтам. Серым отмечены древние образцы, остальные цвета — страна. 
+Древние в отдельном кладе](../results/figures/ML_tree_CH_country.svg)
+
+## Имена на дереве
+
+Длинные имена сборок сокращаются до accession. Четыре консенсуса получают место и возраст, те же подписи, что в датасете для iTOL.
+
+| В выравнивании | На дереве |
+|---|---|
+| `000008104510_consensus` | `BTC_Pereyaslavl-Zalessky_Russia_476_BP` |
+| `000008107130_consensus` | `BTC_Komsomolets_Kurgan1_Stavropol_3149_BP` |
+| `000008103140_consensus` | `BTC_Progress2_Caucasus_Kurgan1_6012_BP` |
+| `000008101780_consensus` | `BTC_Ken_Su_Kyrgyzstan_2170_BP` |
+
+```{python}
+#| code-fold: true
+#| eval: false
+import re
+
+with open('../data/C_H/old_iq_tree_no_outgroup/C_H_ML_tree.treefile', 'r') as f:
+    tree = f.read().strip()
+
+# Сокращаем длинные названия сборок до accession (GCA_... / GCF_...)
+pattern = r'(GC[AF]_\d+\.\d+)[_A-Za-z0-9.]*'
+
+def shorten(match):
+    return match.group(1)
+
+tree_short = re.sub(pattern, shorten, tree)
+
+rename_map = {
+    '000008104510_consensus': 'BTC_Pereyaslavl-Zalessky_Russia_476_BP',
+    '000008107130_consensus': 'BTC_Komsomolets_Kurgan1_Stavropol_3149_BP',
+    '000008103140_consensus': 'BTC_Progress2_Caucasus_Kurgan1_6012_BP',
+    '000008101780_consensus': 'BTC_Ken_Su_Kyrgyzstan_2170_BP',
+}
+
+for old, new in rename_map.items():
+    tree_short = re.sub(r'\b' + re.escape(old) + r'\b', new, tree_short)
+
+with open('../data/C_H/old_iq_tree_no_outgroup/C_H_ML_tree_short.treefile', 'w') as f:
+    f.write(tree_short)
+
+print("Готово. Пример:")
+print(tree_short[:500])
+```
+
+## Проекция на карту
+
+На карту кладётся это же ML-дерево. 
+Из 59 листов остаются 42 с координатами: 17 современных сборок без страны отбрасываются. 
+В таблице координат у древних имён на конце стоит `*`, в дереве её нет. Перед склейкой звёздочка снимается, иначе эти четыре образца выпадут из рисунка.
+
+```{r}
+#| code-fold: true
+#| fig-cap: "ML-дерево на карте, 42 образца с координатами. Соседние ветви расходятся по разным странам."
+library(phytools)
+library(mapdata)
+library(ape)
+library(dplyr)
+
+ML_tree <- read.newick("../data/C_H/old_iq_tree_no_outgroup/C_H_ML_tree_short.treefile")
+coords_raw <- read.csv("../data/C_H/old_iq_tree_no_outgroup/coords_all_52.csv")
+
+coords_df <- coords_raw %>%
+  mutate(
+    tip = sub("\\*$", "", trimws(tip)),
+    lat = as.numeric(lat),
+    lon = as.numeric(lon)
+  ) %>%
+  filter(complete.cases(lat, lon)) %>%
+  filter(tip %in% ML_tree$tip.label)
+
+missing <- setdiff(ML_tree$tip.label, coords_df$tip)
+if (length(missing) > 0) {
+  cat("В дереве, но нет координат:", paste(head(missing, 3), collapse = ", "), "...\n")
+  ML_tree <- drop.tip(ML_tree, missing)
+}
+
+# Политoмии разрешатся нулевыми ветвями
+ML_tree <- multi2di(ML_tree)
+
+idx_ML <- match(ML_tree$tip.label, coords_df$tip)
+lat_ML <- coords_df$lat[idx_ML]
+lon_ML <- coords_df$lon[idx_ML]
+names(lat_ML) <- names(lon_ML) <- ML_tree$tip.label
+
+coords_ML <- matrix(c(lat_ML, lon_ML), ncol = 2)
+colnames(coords_ML) <- c("lat", "lon")
+rownames(coords_ML) <- ML_tree$tip.label
+
+obj_ML <- phylo.to.map(ML_tree, coords_ML, from = "top")
+
+plot(obj_ML, ftype = "i", cex.points = c(0.5, 1.2),
+     xlim = c(-120, 160), ylim = c(-80, 90), fsize = 1, split = c(0.5, 0.5))
+dev.off()
+png("../results/figures/ML_tree_map_up.png", height = 7000, width = 7400, res = 800)
+plot(obj_ML, ftype = "i", cex.points = c(0.5, 1.2),
+     xlim = c(-120, 160), ylim = c(-80, 90), fsize = 1, split = c(0.5, 0.5))
+dev.off()
+```
+
+По этой проекции географической структуры у современных штаммов нет.
+
+Рисунки из iTOL сохранены как SVG. Для вставки в текст их переводим в PNG.
+
+```{bash}
+#| eval: false
+rsvg-convert results/figures/ML_tree_CH_country.svg -o results/figures/ML_tree_CH_country.png
+rsvg-convert results/figures/ML_tree_CH_with_metadata.svg -o results/figures/ML_tree_CH_with_metadata.png
+```
