@@ -67,7 +67,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4f67ab1e4efc86feb5e21e0983fc9301.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-93ea9577cdbf6ced302812e0f26facab.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -96,6 +96,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -202,21 +231,37 @@ div.csl-indent {
   <ul>
   <li><a href="#магистерский-диплом-2027" id="toc-магистерский-диплом-2027" class="nav-link active" data-scroll-target="#магистерский-диплом-2027"><span class="header-section-number">1</span> Магистерский диплом 2027</a>
   <ul class="collapse">
-  <li><a href="#введение" id="toc-введение" class="nav-link" data-scroll-target="#введение"><span class="header-section-number">1.1</span> Введение</a>
+  <li><a href="#введение" id="toc-введение" class="nav-link" data-scroll-target="#введение"><span class="header-section-number">1.1</span> Введение</a></li>
+  <li><a href="#патогенез-иэ-и-клинические-особенности-течения" id="toc-патогенез-иэ-и-клинические-особенности-течения" class="nav-link" data-scroll-target="#патогенез-иэ-и-клинические-особенности-течения"><span class="header-section-number">1.2</span> Патогенез ИЭ и клинические особенности течения</a></li>
+  <li><a href="#эволюция-подходов-к-антибактериальной-терапии-и-профили-резистентности" id="toc-эволюция-подходов-к-антибактериальной-терапии-и-профили-резистентности" class="nav-link" data-scroll-target="#эволюция-подходов-к-антибактериальной-терапии-и-профили-резистентности"><span class="header-section-number">1.3</span> Эволюция подходов к антибактериальной терапии и профили резистентности</a></li>
+  <li><a href="#эволюционная-история-орального-микробиома" id="toc-эволюционная-история-орального-микробиома" class="nav-link" data-scroll-target="#эволюционная-история-орального-микробиома"><span class="header-section-number">1.4</span> Эволюционная история орального микробиома</a></li>
+  <li><a href="#обоснование-и-цель-исследования" id="toc-обоснование-и-цель-исследования" class="nav-link" data-scroll-target="#обоснование-и-цель-исследования"><span class="header-section-number">1.5</span> Обоснование и цель исследования</a></li>
+  <li><a href="#данные" id="toc-данные" class="nav-link" data-scroll-target="#данные"><span class="header-section-number">1.6</span> Данные</a></li>
+  <li><a href="#методы" id="toc-методы" class="nav-link" data-scroll-target="#методы"><span class="header-section-number">1.7</span> Методы</a>
   <ul class="collapse">
-  <li><a href="#клинические-особенности-и-диагностика" id="toc-клинические-особенности-и-диагностика" class="nav-link" data-scroll-target="#клинические-особенности-и-диагностика"><span class="header-section-number">1.1.1</span> Клинические особенности и диагностика</a></li>
-  <li><a href="#эволюция-подходов-к-антибактериальной-терапии-и-профили-резистентности" id="toc-эволюция-подходов-к-антибактериальной-терапии-и-профили-резистентности" class="nav-link" data-scroll-target="#эволюция-подходов-к-антибактериальной-терапии-и-профили-резистентности"><span class="header-section-number">1.1.2</span> Эволюция подходов к антибактериальной терапии и профили резистентности</a></li>
+  <li><a href="#сбор-публичных-геномов-и-метаданных" id="toc-сбор-публичных-геномов-и-метаданных" class="nav-link" data-scroll-target="#сбор-публичных-геномов-и-метаданных"><span class="header-section-number">1.7.1</span> Сбор публичных геномов и метаданных</a></li>
+  <li><a href="#построение-консенсусных-последовательностей-древних-образцов" id="toc-построение-консенсусных-последовательностей-древних-образцов" class="nav-link" data-scroll-target="#построение-консенсусных-последовательностей-древних-образцов"><span class="header-section-number">1.7.2</span> Построение консенсусных последовательностей древних образцов</a></li>
+  <li><a href="#аннотация-геномов" id="toc-аннотация-геномов" class="nav-link" data-scroll-target="#аннотация-геномов"><span class="header-section-number">1.7.3</span> Аннотация геномов</a></li>
+  <li><a href="#пан-геномный-анализ" id="toc-пан-геномный-анализ" class="nav-link" data-scroll-target="#пан-геномный-анализ"><span class="header-section-number">1.7.4</span> Пан-геномный анализ</a></li>
+  <li><a href="#отбор-сайтов-для-филогенетического-анализа" id="toc-отбор-сайтов-для-филогенетического-анализа" class="nav-link" data-scroll-target="#отбор-сайтов-для-филогенетического-анализа"><span class="header-section-number">1.7.5</span> Отбор сайтов для филогенетического анализа</a></li>
+  <li><a href="#филогенетическая-реконструкция-методом-максимального-правдоподобия" id="toc-филогенетическая-реконструкция-методом-максимального-правдоподобия" class="nav-link" data-scroll-target="#филогенетическая-реконструкция-методом-максимального-правдоподобия"><span class="header-section-number">1.7.6</span> Филогенетическая реконструкция методом максимального правдоподобия</a></li>
+  <li><a href="#анализ-пространственной-структуры" id="toc-анализ-пространственной-структуры" class="nav-link" data-scroll-target="#анализ-пространственной-структуры"><span class="header-section-number">1.7.7</span> Анализ пространственной структуры</a></li>
+  <li><a href="#проверка-временного-сигнала-регрессия-корень-лист" id="toc-проверка-временного-сигнала-регрессия-корень-лист" class="nav-link" data-scroll-target="#проверка-временного-сигнала-регрессия-корень-лист"><span class="header-section-number">1.7.8</span> Проверка временного сигнала: регрессия «корень — лист»</a></li>
+  <li><a href="#проверка-временного-сигнала-тест-рандомизации-дат" id="toc-проверка-временного-сигнала-тест-рандомизации-дат" class="nav-link" data-scroll-target="#проверка-временного-сигнала-тест-рандомизации-дат"><span class="header-section-number">1.7.9</span> Проверка временного сигнала: тест рандомизации дат</a></li>
+  <li><a href="#поиск-генов-вирулентности" id="toc-поиск-генов-вирулентности" class="nav-link" data-scroll-target="#поиск-генов-вирулентности"><span class="header-section-number">1.7.10</span> Поиск генов вирулентности</a></li>
+  <li><a href="#поиск-генов-антибиотикорезистентности" id="toc-поиск-генов-антибиотикорезистентности" class="nav-link" data-scroll-target="#поиск-генов-антибиотикорезистентности"><span class="header-section-number">1.7.11</span> Поиск генов антибиотикорезистентности</a></li>
   </ul></li>
-  <li><a href="#данные" id="toc-данные" class="nav-link" data-scroll-target="#данные"><span class="header-section-number">1.2</span> Данные</a></li>
-  <li><a href="#как-устроен-анализ" id="toc-как-устроен-анализ" class="nav-link" data-scroll-target="#как-устроен-анализ"><span class="header-section-number">1.3</span> Как устроен анализ</a></li>
-  <li><a href="#результаты" id="toc-результаты" class="nav-link" data-scroll-target="#результаты"><span class="header-section-number">1.4</span> Результаты</a>
+  <li><a href="#результаты" id="toc-результаты" class="nav-link" data-scroll-target="#результаты"><span class="header-section-number">1.8</span> Результаты</a>
   <ul class="collapse">
-  <li><a href="#пан-геном" id="toc-пан-геном" class="nav-link" data-scroll-target="#пан-геном"><span class="header-section-number">1.4.1</span> Пан-геном</a></li>
-  <li><a href="#ml-дерево" id="toc-ml-дерево" class="nav-link" data-scroll-target="#ml-дерево"><span class="header-section-number">1.4.2</span> ML-дерево</a></li>
-  <li><a href="#сигнал-времени" id="toc-сигнал-времени" class="nav-link" data-scroll-target="#сигнал-времени"><span class="header-section-number">1.4.3</span> Сигнал времени</a></li>
-  <li><a href="#гены-вирулентности" id="toc-гены-вирулентности" class="nav-link" data-scroll-target="#гены-вирулентности"><span class="header-section-number">1.4.4</span> Гены вирулентности</a></li>
-  <li><a href="#гены-устойчивости" id="toc-гены-устойчивости" class="nav-link" data-scroll-target="#гены-устойчивости"><span class="header-section-number">1.4.5</span> Гены устойчивости</a></li>
-  <li><a href="#сводка" id="toc-сводка" class="nav-link" data-scroll-target="#сводка"><span class="header-section-number">1.4.6</span> Сводка</a></li>
+  <li><a href="#состав-и-качество-выборки" id="toc-состав-и-качество-выборки" class="nav-link" data-scroll-target="#состав-и-качество-выборки"><span class="header-section-number">1.8.1</span> Состав и качество выборки</a></li>
+  <li><a href="#пангеномный-анализ" id="toc-пангеномный-анализ" class="nav-link" data-scroll-target="#пангеномный-анализ"><span class="header-section-number">1.8.2</span> Пангеномный анализ</a></li>
+  <li><a href="#отбор-сайтов-для-филогенетического-анализа-1" id="toc-отбор-сайтов-для-филогенетического-анализа-1" class="nav-link" data-scroll-target="#отбор-сайтов-для-филогенетического-анализа-1"><span class="header-section-number">1.8.3</span> Отбор сайтов для филогенетического анализа</a></li>
+  <li><a href="#филогенетическое-дерево" id="toc-филогенетическое-дерево" class="nav-link" data-scroll-target="#филогенетическое-дерево"><span class="header-section-number">1.8.4</span> Филогенетическое дерево</a></li>
+  <li><a href="#соответствие-дерева-географии" id="toc-соответствие-дерева-географии" class="nav-link" data-scroll-target="#соответствие-дерева-географии"><span class="header-section-number">1.8.5</span> Соответствие дерева географии</a></li>
+  <li><a href="#отсутствие-временного-сигнала" id="toc-отсутствие-временного-сигнала" class="nav-link" data-scroll-target="#отсутствие-временного-сигнала"><span class="header-section-number">1.8.6</span> Отсутствие временного сигнала</a></li>
+  <li><a href="#гены-факторов-вирулентности" id="toc-гены-факторов-вирулентности" class="nav-link" data-scroll-target="#гены-факторов-вирулентности"><span class="header-section-number">1.8.7</span> Гены факторов вирулентности</a></li>
+  <li><a href="#гены-антибиотикорезистентности" id="toc-гены-антибиотикорезистентности" class="nav-link" data-scroll-target="#гены-антибиотикорезистентности"><span class="header-section-number">1.8.8</span> Гены антибиотикорезистентности</a></li>
+  <li><a href="#сводка-результатов" id="toc-сводка-результатов" class="nav-link" data-scroll-target="#сводка-результатов"><span class="header-section-number">1.8.9</span> Сводка результатов</a></li>
   </ul></li>
   </ul></li>
   </ul>
@@ -253,56 +298,87 @@ div.csl-indent {
 <section id="магистерский-диплом-2027" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Магистерский диплом 2027</h1>
 <p>Сравнительный геномный анализ древних и современных штаммов группы HACEK.</p>
-<p><strong>Цель работы</strong> — сравнительный геномный анализ древних и современных штаммов трёх видов группы HACEK (<em>Cardiobacterium hominis</em>, <em>Eikenella corrodens</em>, <em>Aggregatibacter actinomycetemcomitans</em>.) для оценки их филогенетических связей, наличия временного сигнала и набора генов факторов вирулентности и антибиотикорезистентности.</p>
+<p><strong>Цель работы</strong> — сравнительный геномный анализ древних и современных штаммов трёх видов группы HACEK (<em>Cardiobacterium hominis</em>, <em>Eikenella corrodens</em>, <em>Aggregatibacter actinomycetemcomitans</em>) для оценки их филогенетических связей, наличия временного сигнала и набора генов факторов вирулентности и антибиотикорезистентности.</p>
 <p><strong>Задачи:</strong></p>
 <ul>
 <li>Построить ML-филогенетическое дерево по коровому выравниванию для <em>C. hominis</em>, <em>E. corrodens</em> и <em>A. actinomycetemcomitans</em>.</li>
 <li>Проверить наличие сигнала времени в выборке и, при его наличии, построить датированное дерево.</li>
-<li>Выявить гены факторов вирулентности (VFDB) и детерминанты антибиотикорезистентности (CARD/RGI) у исследованных штаммов.</li>
+<li>Выявить гены факторов вирулентности (VFDB) и гены антибиотикорезистентности (CARD/RGI) у исследованных штаммов.</li>
 <li>(Опционально) Провести анализ де-ново сборок, включая изучение рекомбинации и признаков положительного отбора.</li>
 </ul>
 <p>В настоящей главе представлены результаты по <em>C. hominis</em>. Анализ <em>E. corrodens</em> и <em>A. actinomycetemcomitans</em> запланирован как продолжение работы.</p>
 <section id="введение" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="введение"><span class="header-section-number">1.1</span> Введение</h2>
-<p>Инфекционный эндокардит (ИЭ) остается тяжелым заболеванием с высокой летальностью, несмотря на значительный прогресс в его диагностике и терапии <span class="citation" data-cites="tharsiga2026">(<a href="#ref-tharsiga2026" role="doc-biblioref">Tharsiga et al. 2026</a>)</span>. Среди редких возбудителей ИЭ особое место занимают грамотрицательные бактерии группы HACEK (<em>Haemophilus</em>, <em>Aggregatibacter actinomycetemcomitans</em>, <em>Cardiobacterium hominis</em>, <em>Eikenella corrodens</em> и <em>Kingella kingae</em>), входящие в состав нормальной микрофлоры полости рта и верхних дыхательных путей человека <span class="citation" data-cites="khaledi2022 chambers2013">(<a href="#ref-khaledi2022" role="doc-biblioref">Khaledi et al. 2022</a>; <a href="#ref-chambers2013" role="doc-biblioref">Chambers et al. 2013</a>)</span>.</p>
-<p><em>Cardiobacterium hominis</em> известен как возбудитель инфекционного эндокардита с 1962 года <span class="citation" data-cites="lequellec1994">(<a href="#ref-lequellec1994" role="doc-biblioref">Le Quellec et al. 1994a</a>)</span>. Согласно классическим данным Ellner et al., этот микроорганизм обладает «крайне низкой вирулентностью» <span class="citation" data-cites="ellner1979">(<a href="#ref-ellner1979" role="doc-biblioref">ELLNER et al. 1979</a>)</span>.</p>
-<p>Несмотря на это, он способен вызывать тяжелое поражение эндокарда при наличии фоновой патологии. Как показал недавний обзор 44 клинических случаев, основными предрасполагающими факторами развития инфекции выступают перенесенное протезирование клапанов (57%), стоматологические вмешательства или кариес (20%), а также врожденные аномалии клапанного аппарата (5%) <span class="citation" data-cites="ono2023">(<a href="#ref-ono2023" role="doc-biblioref">Ono et al. 2023</a>)</span>.</p>
-<p>Исторически заболевание ассоциировалось с неблагоприятным прогнозом: в когорте Ellner et al.&nbsp;(до широкого применения эффективной антибактериальной терапии и хирургии клапанов) летальность достигала 26% <span class="citation" data-cites="ellner1979">(<a href="#ref-ellner1979" role="doc-biblioref">ELLNER et al. 1979</a>)</span>. Однако внедрение эффективных протоколов лечения кардинально изменило ситуацию: по данным Malani et al.&nbsp;(61 случай), частота выздоровления при поражении ествественных клапанов составила 93%, а при протезном эндокардите — 94%. При этом потребность в замене клапана достигала 45% (27 из 61 случаев) <span class="citation" data-cites="malani2006">(<a href="#ref-malani2006" role="doc-biblioref">Malani et al. 2006</a>)</span>.</p>
-<p>При этом за последние десятилетия существенно изменился возрастной портрет пациента: пик заболеваемости сместился с 45 лет в 1950-х годах до 70 лет в настоящее время, а пожилые люди имеют пятикратно повышенный риск развития ИЭ по сравнению с общей взрослой популяцией <span class="citation" data-cites="ursi2018">(<a href="#ref-ursi2018" role="doc-biblioref">Ursi et al. 2018</a>)</span>.</p>
-<section id="клинические-особенности-и-диагностика" class="level3" data-number="1.1.1">
-<h3 data-number="1.1.1" class="anchored" data-anchor-id="клинические-особенности-и-диагностика"><span class="header-section-number">1.1.1</span> Клинические особенности и диагностика</h3>
-<p>Для эндокардита, вызванного <em>C. hominis</em>, характерно подострое, медленное и малосимптомное развитие. Длительность симптомов до диагноза: в среднем 138 ± 128 дней <span class="citation" data-cites="malani2006">(<a href="#ref-malani2006" role="doc-biblioref">Malani et al. 2006</a>)</span>.</p>
-<p>Диагностика базируется на сочетании трех ключевых критериев: эхокардиографического исследования, верификации клинических признаков (лихорадка, появление сердечных шумов) и микробиологического выделения возбудителя, часто на фоне заболеваний пародонта или бактериемии <span class="citation" data-cites="khaledi2022">(<a href="#ref-khaledi2022" role="doc-biblioref">Khaledi et al. 2022</a>)</span>.</p>
-<div id="fig-HACEK" class="quarto-float quarto-figure quarto-figure-center anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-HACEK-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="results/figures/HACEK.png" class="img-fluid figure-img">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-HACEK-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1.1: Диагностика ИЭ <span class="citation" data-cites="khaledi2022">(<a href="#ref-khaledi2022" role="doc-biblioref">Khaledi et al. 2022</a>)</span>
-</figcaption>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="results/figures/infekcionnyi-endokardit-bol.jpg" class="img-fluid figure-img"></p>
+<figcaption>Инфекционный эндокардит: поражение клапанов сердца. Источник: <a href="https://fnkc-fmba.ru/zabolevaniya/infektsionnyy-endokardit-klapanov-serdtsa/">ФНКЦ ФМБА России</a></figcaption>
 </figure>
 </div>
+<p>Инфекционный эндокардит (ИЭ) — это воспаление внутренней оболочки сердца (эндокарда), чаще всего поражающее сердечные клапаны. ИЭ остается тяжелым жизнеугрожающим заболеванием с высокой летальностью, несмотря на значительный прогресс в диагностике и антибактериальной терапии <span class="citation" data-cites="tharsiga2026">(<a href="#ref-tharsiga2026" role="doc-biblioref">Tharsiga et al. 2026</a>)</span>. Ситуация усугубляется изменением демографического профиля пациентов: за последние десятилетия пик заболеваемости сместился с 45 лет в 1950-х годах до 70 лет в настоящее время - риск развития ИЭ у пожилых людей в пять раз выше, чем в общей взрослой популяции <span class="citation" data-cites="ursi2018">(<a href="#ref-ursi2018" role="doc-biblioref">Ursi et al. 2018</a>)</span>.</p>
+<p>Среди редких возбудителей ИЭ особое место занимают грамотрицательные бактерии группы HACEK (<em>Haemophilus</em>, <em>Aggregatibacter actinomycetemcomitans</em>, <em>Cardiobacterium hominis</em>, <em>Eikenella corrodens</em> и <em>Kingella kingae</em>), входящие в состав нормальной микрофлоры полости рта и верхних дыхательных путей человека <span class="citation" data-cites="khaledi2022 chambers2013">(<a href="#ref-khaledi2022" role="doc-biblioref">Khaledi et al. 2022</a>; <a href="#ref-chambers2013" role="doc-biblioref">Chambers et al. 2013</a>)</span>. <em>Cardiobacterium hominis</em> известен как возбудитель эндокардита с 1962 года <span class="citation" data-cites="lequellec1994">(<a href="#ref-lequellec1994" role="doc-biblioref">Le Quellec et al. 1994a</a>)</span>. Согласно классическим представлениям Ellner et al., этот микроорганизм обладает «крайне низкой вирулентностью» <span class="citation" data-cites="ellner1979">(<a href="#ref-ellner1979" role="doc-biblioref">ELLNER et al. 1979</a>)</span>. Однако в клинической практике эта особенность существенно затрудняет диагностику: низкая вирулентность не делает инфекцию безопасной, а лишь маскирует ее развитие, позволяя патогену длительно и незаметно разрушать ткани сердца при наличии фоновой патологии. Как показал обзор 44 клинических случаев, ключевыми факторами риска выступают перенесенное протезирование клапанов (57%), стоматологические вмешательства или кариес (20%), а также врожденные аномалии клапанного аппарата (5%) <span class="citation" data-cites="ono2023">(<a href="#ref-ono2023" role="doc-biblioref">Ono et al. 2023</a>)</span>.</p>
+<p>Исторически эндокардит, вызванный <em>C. hominis</em>, ассоциировался с высокой летальностью, достигавшей в доантибиотическую и раннюю хирургическую эпоху 26% <span class="citation" data-cites="ellner1979">(<a href="#ref-ellner1979" role="doc-biblioref">ELLNER et al. 1979</a>)</span>. Внедрение современных протоколов лечения позволило повысить частоту выздоровления до 93% при поражении естественных клапанов и до 94% — при протезном эндокардите <span class="citation" data-cites="malani2006">(<a href="#ref-malani2006" role="doc-biblioref">Malani et al. 2006</a>)</span>.</p>
 </section>
-<section id="эволюция-подходов-к-антибактериальной-терапии-и-профили-резистентности" class="level3" data-number="1.1.2">
-<h3 data-number="1.1.2" class="anchored" data-anchor-id="эволюция-подходов-к-антибактериальной-терапии-и-профили-резистентности"><span class="header-section-number">1.1.2</span> Эволюция подходов к антибактериальной терапии и профили резистентности</h3>
-<p>При выборе тактики лечения клиницисты опираются на актуальные национальные и международные стандарты <span class="citation" data-cites="kotova2024">(<a href="#ref-kotova2024" role="doc-biblioref">Kotova and Kobalava 2024</a>)</span>.</p>
+<section id="патогенез-иэ-и-клинические-особенности-течения" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="патогенез-иэ-и-клинические-особенности-течения"><span class="header-section-number">1.2</span> Патогенез ИЭ и клинические особенности течения</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="results/figures/holland2016_Fig2.png" class="img-fluid figure-img"></p>
+<figcaption>Этапы патогенеза инфекционного эндокардита - от повреждения эндотелия и адгезии бактерий до формирования вегетаций и системной эмболизации. Адаптировано из <span class="citation" data-cites="holland2016">(<a href="#ref-holland2016" role="doc-biblioref">Holland et al. 2016</a>)</span></figcaption>
+</figure>
+</div>
+<p>Развитие инфекционного эндокардита начинается с кратковременного попадания бактерий в кровь при стоматологических вмешательствах, наличии хронических очагов инфекции в полости рта или использовании внутривенных катетеров. Переносясь с кровотоком, микроорганизмы прикрепляются к поврежденным участкам внутренней выстилки сердца — на естественных или искусственных клапанах, а также на внутрисердечных устройствах. На примере <em>Staphylococcus aureus</em> показано, что возбудители способны активно проникать в клетки внутренней оболочки и вызывать их быстрое разрушение. По мере размножения колонии микробов погружаются в защитную основу из фибрина и тромбоцитов, образуя крупные инфицированные разрастания — так называемые вегетации <span class="citation" data-cites="holland2016">(<a href="#ref-holland2016" role="doc-biblioref">Holland et al. 2016</a>)</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="results/figures/holland2016_Fig4.png" class="img-fluid figure-img"></p>
+<figcaption>Органные проявления и осложнения инфекционного эндокардита (поражение клапанов и электродов, системные эмболии, инфаркты органов, изменения кожи и глазного дна). Адаптировано из <span class="citation" data-cites="holland2016">(<a href="#ref-holland2016" role="doc-biblioref">Holland et al. 2016</a>)</span>.</figcaption>
+</figure>
+</div>
+<p>Длительный рост вегетаций приводит к местному разрушению тканей вплоть до перфорации створок клапана (f–h). На поздних этапах частицы вегетаций могут крошиться, отрываться и переноситься током крови, вызывая закупорку питающих артерий жизненно важных органов с развитием инфарктов, инсультов и гнойных очагов. При правостороннем поражении сердца в первую очередь страдают легкие (c). При левостороннем процессе развиваются ишемические и геморрагические поражения головного мозга с образованием гнойников (b), инфаркты почек и селезенки (d), а также омертвение тканей конечностей (e). Дополнительно циркулирующие в крови иммунные комплексы вызывают распространенное воспаление мелких сосудов, которое проявляется, в частности, кровоизлияниями на глазном дне — пятнами Рота (a) <span class="citation" data-cites="holland2016">(<a href="#ref-holland2016" role="doc-biblioref">Holland et al. 2016</a>)</span>.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="results/figures/HACEK.png" class="img-fluid figure-img"></p>
+<figcaption>Диагностика ИЭ <span class="citation" data-cites="khaledi2022">(<a href="#ref-khaledi2022" role="doc-biblioref">Khaledi et al. 2022</a>)</span></figcaption>
+</figure>
+</div>
+<p>Прямым следствием низкой вирулентности <em>C. hominis</em> является подострое, стертое и малосимптомное течение болезни. Из-за отсутствия яркой острой клиники период от появления первых признаков до постановки диагноза затягивается в среднем до 138 ± 128 дней <span class="citation" data-cites="malani2006">(<a href="#ref-malani2006" role="doc-biblioref">Malani et al. 2006</a>)</span>. В клинической картине преобладают неспецифические симптомы: лихорадка (74%), общая слабость и недомогание (53%), снижение массы тела и анорексия (40%), ночная потливость (24%), а также артралгии и миалгии (21%) <span class="citation" data-cites="malani2006">(<a href="#ref-malani2006" role="doc-biblioref">Malani et al. 2006</a>)</span>. В связи с этим диагностика требует комплексного подхода и опирается на сочетание эхокардиографии, оценки клинических признаков (лихорадка, появление новых сердечных шумов) и выделения возбудителя заболеваний пародонта или бактериемии <span class="citation" data-cites="khaledi2022">(<a href="#ref-khaledi2022" role="doc-biblioref">Khaledi et al. 2022</a>)</span>.</p>
+<p>Так, например, в недавнем клиническом наблюдении описан случай инфекционного эндокардита (ИЭ), вызванного <em>C. hominis</em>, у 37-летней женщины с двустворчатым аортальным клапаном и его протезом в анамнезе. Заболевание протекало подостро: в течение 3 месяцев пациентку беспокоила лишь нарастающая одышка. Длительное малосимптомное течение привело к развитию тяжелого осложнения — абсцесса корня аорты. В результате пациентке потребовалось повторное хирургическое вмешательство (замена протеза клапана и реконструкция корня аорты), после которого наступило выздоровление <span class="citation" data-cites="shah2024">(<a href="#ref-shah2024" role="doc-biblioref">Shah 2024</a>)</span>.</p>
+<p>Другой пример поздней диагностики и ее последствий представлен в <span class="citation" data-cites="sundin2025">(<a href="#ref-sundin2025" role="doc-biblioref">Sundin et al. 2025</a>)</span>, где описан случай протезного эндокардита митрального клапана у 67-летнего мужчины с биопротезом в анамнезе. Инфицирование <em>C. hominis</em> произошло после стоматологических процедур, проведенных без антибиотикопрофилактики. На протяжении 6 месяцев у пациента отмечались неспецифические и постепенно нарастающие симптомы: слабость, утомляемость, озноб, отеки нижних конечностей и периодическая лихорадка до 39,4 °C. Поводом для госпитализации послужили лишь положительные результаты амбулаторных посевов крови. Из-за трудностей культивирования <em>C. hominis</em> на стандартных питательных средах верификация диагноза затянулась, что привело к серьезным осложнениям: септическим эмболиям с развитием инфарктов селезенки и выраженной анемии (снижение гемоглобина с 13,6 до 9,1 г/дл). Пациенту была проведена повторная замена митрального клапана в сочетании с 6-недельным курсом внутривенной терапии цефтриаксоном; на контрольном осмотре через 6 недель зафиксировано полное разрешение симптомов.</p>
+</section>
+<section id="эволюция-подходов-к-антибактериальной-терапии-и-профили-резистентности" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="эволюция-подходов-к-антибактериальной-терапии-и-профили-резистентности"><span class="header-section-number">1.3</span> Эволюция подходов к антибактериальной терапии и профили резистентности</h2>
+<p>При выборе тактики лечения клиницисты руководствуются актуальными национальными и международными стандартами <span class="citation" data-cites="kotova2024">(<a href="#ref-kotova2024" role="doc-biblioref">Kotova and Kobalava 2024</a>)</span>:</p>
 <ul>
-<li><p><strong>Российские клинические рекомендации</strong>: «Инфекционный эндокардит и инфекция внутрисердечных устройств» (2021 г.).</p></li>
-<li><p><strong>Европейские рекомендации</strong>: «ESC Guidelines for the management of endocarditis» (2023 г.)</p></li>
+<li>Российские клинические рекомендации: «Инфекционный эндокардит и инфекция внутрисердечных устройств» (2021 г.);</li>
+<li>Европейские рекомендации: «ESC Guidelines for the management of endocarditis» (2023 г.).</li>
 </ul>
-<p>Исторически «золотым стандартом» терапии эндокардита, вызванного бактериями группы HACEK, считалась комбинация ампициллина и гентамицина <span class="citation" data-cites="calza2004">(<a href="#ref-calza2004" role="doc-biblioref">Calza et al. 2004</a>)</span>. Однако появление штаммов <em>C. hominis</em>, продуцирующих β-лактамазы (в частности, типа TEM), потребовало пересмотра этих схем <span class="citation" data-cites="lequellec1994a lu2000a">(<a href="#ref-lequellec1994a" role="doc-biblioref">Le Quellec et al. 1994b</a>; <a href="#ref-lu2000a" role="doc-biblioref">Lu et al. 2000</a>)</span>. С середины 2000-х годов препаратами выбора стали цефалоспорины III поколения (преимущественно цефтриаксон): рекомендуемая длительность курса составляет 4 недели при эндокардите естественного клапана и 6 недель — при поражении протеза <span class="citation" data-cites="walkty2005b">(<a href="#ref-walkty2005b" role="doc-biblioref">Walkty 2005</a>)</span>. Актуальность этого подхода подтверждается и современными клиническими наблюдениями: например, в описанном в 2026 году случае эндокардита у 40-летнего пациента без сопутствующей патологии шестинедельный курс цефалоспорина III поколения привел к полному выздоровлению <span class="citation" data-cites="tharsiga2026">(<a href="#ref-tharsiga2026" role="doc-biblioref">Tharsiga et al. 2026</a>)</span>.</p>
-<p>Помимо β-лактамов, в контексте эволюции и эпидемиологии резистентности <em>C. hominis</em> представляют интерес и другие классы антибиотиков, даже если они не входят в первую линию терапии:</p>
+<p>Исторически «золотым стандартом» терапии эндокардита группы HACEK считалась комбинация ампициллина и гентамицина <span class="citation" data-cites="calza2004">(<a href="#ref-calza2004" role="doc-biblioref">Calza et al. 2004</a>)</span>. Однако распространение штаммов <em>C. hominis</em>, продуцирующих β-лактамазы (в частности, типа TEM), потребовало пересмотра этих схем <span class="citation" data-cites="lequellec1994a lu2000a">(<a href="#ref-lequellec1994a" role="doc-biblioref">Le Quellec et al. 1994b</a>; <a href="#ref-lu2000a" role="doc-biblioref">Lu et al. 2000</a>)</span>. С середины 2000-х годов препаратами выбора стали цефалоспорины III поколения (преимущественно цефтриаксон) длительностью 4 недели при поражении естественного клапана и 6 недель — при протезном эндокардите <span class="citation" data-cites="walkty2005b">(<a href="#ref-walkty2005b" role="doc-biblioref">Walkty 2005</a>)</span>. Эффективность такого подхода подтверждается и современными наблюдениями: так, в описанном в 2026 году случае эндокардита у 40-летнего пациента без сопутствующей патологии шестинедельный курс цефалоспорина III поколения привел к полному выздоровлению <span class="citation" data-cites="tharsiga2026">(<a href="#ref-tharsiga2026" role="doc-biblioref">Tharsiga et al. 2026</a>)</span>.</p>
+<p><em>C. hominis</em> входит в состав орального микробиома, для которого характерен активнвый горизонтальный переносом генов. В связи с этим практический и научный интерес представляет мониторинг его резистентности к препаратам, не относящимся к первой линии терапии инфекционного эндокардита (ИЭ):</p>
 <ul>
-<li>Гликопептиды (ванкомицин): преимущественно применяются против грамположительных кокков и часто назначаются эмпирически до подтверждения возбудителя. Однако еще в 1979 году был описан клинический изолят <em>C. hominis</em>, устойчивый к ванкомицину (МПК 25 мкг/мл) и эритромицину <span class="citation" data-cites="ellner1979">(<a href="#ref-ellner1979" role="doc-biblioref">ELLNER et al. 1979</a>)</span>.</li>
-<li>Тетрациклины и сульфаниламиды: не используются в качестве стандартной терапии ИЭ, вызванного HACEK, однако их гены устойчивости широко распространены в микробных сообществах полости рта и служат важными маркерами горизонтального переноса генов.</li>
+<li>Гликопептиды (ванкомицин): часто используются для эмпирической стартовой терапии ИЭ до выделения возбудителя. Как и другие грамотрицательные микроорганизмы, <em>C. hominis</em> обладает природной устойчивостью к ванкомицину из-за непроницаемости внешней мембраны для его крупных молекул.</li>
+<li>Тетрациклины и сульфаниламиды: не используются при эндокардитах, вызванных бактериями группы HACEK. Тем не менее vониторинг таких генов позволяет оценить эволюционный потенциал патогена и интенсивность межвидового генетического обмена.</li>
 </ul>
-<p>Учитывая редкость выделения <em>C. hominis</em> в рутинной практике, его геномная структура, эволюционная динамика и скрытый потенциал генов устойчивости остаются недостаточно изученными. Целью данного исследования стал сравнительный геномный анализ современных и древних штаммов <em>C. hominis</em> для оценки структуры их пан-генома, филогеографических связей, а также набора факторов вирулентности и механизмов антибиотикорезистентности.</p>
 </section>
+<section id="эволюционная-история-орального-микробиома" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="эволюционная-история-орального-микробиома"><span class="header-section-number">1.4</span> Эволюционная история орального микробиома</h2>
+<p>Реконструкция эволюционной истории микроорганизмов, ассоциированных с человеком, стала возможной благодаря развитию палеомикробиологии — направления, изучающего древнюю бактериальную ДНК (aDNA). Пионерские работы середины 1980-х годов доказали принципиальную возможность секвенирования древнего генетического материала, что открыло новые пути для изучения прошлого человека и его симбионтов. Как отмечается в обзорной работе Arning и Wilson (2020), одним из наиболее информативных источников древней бактериальной ДНК является зубной камень (dental calculus), позволяющий реконструировать состав древнего орального микробиома и выявлять возбудителей заболеваний полости рта <span class="citation" data-cites="arning2020">(<a href="#ref-arning2020" role="doc-biblioref">Arning and Wilson 2020</a>)</span>.</p>
+<p>Зубной камень представляет собой минерализованную зубную бляшку — кальцинированную бактериальную биоплёнку, которая формируется послойно под воздействием слюны и десневой жидкости. Благодаря такой слоистой структуре он сохраняет последовательную «летопись» микробиома ротовой полости на протяжении жизни индивида, отражая особенности его диеты, перенесённые инфекции и воздействие внешней среды. С методической точки зрения зубной камень обладает высокой ценностью для палеогенетики: из него удаётся извлечь примерно в 1000 раз больше древней ДНК, чем из костной ткани того же индивида (согласно данным <span class="citation" data-cites="warinner2014">(<a href="#ref-warinner2014" role="doc-biblioref">Warinner et al. 2014</a>)</span>). Доминирование бактериальной фракции в образцах делает этот субстрат оптимальным ресурсом для сборки палеогеномов <span class="citation" data-cites="arning2020">(<a href="#ref-arning2020" role="doc-biblioref">Arning and Wilson 2020</a>)</span>.</p>
+<p>Работа с древней ДНК сопряжена с риском посмертной микробной колонизации и современной контаминации, поэтому критически важным этапом анализа является аутентификация последовательностей. Подлинность древнего материала подтверждают по характерным сигнатурам постмортального повреждения (PMD):</p>
+<ul>
+<li>Депуринизация и фрагментация: разрывы цепей ДНК приводят к преобладанию коротких фрагментов (менее 100 п.н.) с повышенной частотой пуриновых оснований перед точками разрыва.</li>
+<li>Дезаминирование цитозина: химическая модификация приводит к заменам цитозина на урацил (C→U), которые при секвенировании считываются как тимин (T) и накапливаются преимущественно на 5’-концах фрагментов.</li>
+</ul>
+<p>Несмотря на то что разновозрастная посмертная колонизация может отчасти размывать профиль повреждений, современные биоинформатические подходы позволяют надёжно выделять эндогенную ДНК. К настоящему времени из зубного камня неандертальцев выделены древнейшие бактериальные палеогеномы возрастом около 48–50 тысяч лет, что демонстрирует исключительный потенциал этого источника для изучения глубокой эволюции микробиоты <span class="citation" data-cites="arning2020">(<a href="#ref-arning2020" role="doc-biblioref">Arning and Wilson 2020</a>)</span>.</p>
+<p>Помимо реконструкции таксономического состава древних микробных сообществ, анализ зубного камня позволяет отслеживать эволюцию отдельных патогенов и условных патогенов. Сравнение древних и современных геномов даёт возможность установить время формирования современных клональных линий, проследить динамику приобретения или утраты факторов вирулентности, а также выяснить, существовали ли гены антимикробной резистентности в природных популяциях задолго до начала массового применения антибиотиков.</p>
 </section>
-<section id="данные" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="данные"><span class="header-section-number">1.2</span> Данные</h2>
-<p>В NCBI 55 современных сборок <em>C. hominis</em> из 11 стран. У 17 страна не указана. Списки accession лежат в <a href="./chapters/download_assemblies.html">главе про метаданные</a>.</p>
+<section id="обоснование-и-цель-исследования" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="обоснование-и-цель-исследования"><span class="header-section-number">1.5</span> Обоснование и цель исследования</h2>
+<p>Применение палеогеномного подхода особенно актуально для малоизученных бактерий группы HACEK. Из-за редкой выявляемости этих возбудителей в клинической практике их геномная организация, пути эволюции и факторы вирулентности остаются слабо охарактеризованными. Включение в анализ древних образцов позволяет восполнить эти пробелы и отследить историю формирования данных видов.</p>
+<p>В связи с этим целью исследования стал сравнительный геномный анализ современных и древних штаммов бактерий группы HACEK. Это позволило охарактеризовать пан-геномы исследуемых видов, реконструировать их филогеографию и эволюционную динамику, а также проследить изменения факторов патогенности и генов антимикробной резистентности от древних популяций до современных клинических изолятов.</p>
+</section>
+<section id="данные" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="данные"><span class="header-section-number">1.6</span> Данные</h2>
+<p>В NCBI на момент выгрузки было доступно 55 современных сборок <em>C. hominis</em>; страна сбора указана для 38 из них (11 стран), для 17 — отсутствует.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -361,7 +437,7 @@ Figure&nbsp;1.1: Диагностика ИЭ <span class="citation" data-cites="
 </tr>
 </tbody>
 </table>
-<p>Древних образцов четыре. На карте Комсомолец и Прогресс 2 стоят на одной точке, поэтому древних мест три, а образцов четыре.</p>
+<p>Древние образцы охватывают широкий хронологический диапазон: от 476 л.н. (Переславль-Залесский) до 6012 ± 28 л.н. (Прогресс 2, Кавказ), с промежуточными точками 2170 ± 23 л.н. (Кен-Су, Киргизия) и 3149 л.н. (курган Комсомолец 1, Ставропольский край). Разброс между древнейшим и современным образцом составляет около 6000 лет.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -398,97 +474,338 @@ Figure&nbsp;1.1: Диагностика ИЭ <span class="citation" data-cites="
 </tr>
 </tbody>
 </table>
+<p>Карта расположения образцов приведена в разделе «Результаты» (подраздел «Состав и качество выборки»).</p>
+</section>
+<section id="методы" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="методы"><span class="header-section-number">1.7</span> Методы</h2>
+<p>Анализ выполнен по схеме из семи последовательных этапов: (1) сбор публичных геномов и метаданных, (2) построение консенсусных последовательностей для древних образцов, (3) аннотация всех геномов в едином формате, (4) пан-геномный анализ и построение корового выравнивания, (5) отбор сайтов и филогенетическая реконструкция методом максимального правдоподобия, (6) проверка временного сигнала, (7) поиск генов вирулентности и антибиотикорезистентности. Каждый этап реализован отдельным скриптом и описан в соответствующей технической главе.</p>
+<section id="сбор-публичных-геномов-и-метаданных" class="level3" data-number="1.7.1">
+<h3 data-number="1.7.1" class="anchored" data-anchor-id="сбор-публичных-геномов-и-метаданных"><span class="header-section-number">1.7.1</span> Сбор публичных геномов и метаданных</h3>
+<p>Современные геномы <em>C. hominis</em> получены из NCBI. Метаданные (assembly accession, номер биообразца, страна, дата сбора, характеристики сборки) выгружались скриптом <code>scripts/download_taxon_assemblies_metadata.sh</code>, который обращается к NCBI Datasets API. На момент выгрузки для вида было доступно 55 сборок из 11 стран; для 17 сборок страна в метаданных не указана.</p>
+<p>Поле «страна» нормализовали: если в нём перечислено несколько значений через двоеточие, оставляли первое; пустые и неопределённые значения (<code>not provided</code>, <code>not determined</code>, <code>missing</code>) сводили в категорию <code>Not provided</code>.</p>
+<p>Полные таблицы метаданных и списки accession приведены в <a href="./chapters/download_assemblies.html">главе про метаданные</a>.</p>
+</section>
+<section id="построение-консенсусных-последовательностей-древних-образцов" class="level3" data-number="1.7.2">
+<h3 data-number="1.7.2" class="anchored" data-anchor-id="построение-консенсусных-последовательностей-древних-образцов"><span class="header-section-number">1.7.2</span> Построение консенсусных последовательностей древних образцов</h3>
+<p>Для четырёх древних образцов были предоставлены готовые BAM-файлы, картированные на референсный геном <em>C. hominis</em> NCTC10426 (<code>GCF_900637305.1</code>, длина 2 670 755 п.н.). Картирование выполнено на предшествующем этапе проекта и в рамки настоящей работы не входит.</p>
+<p>Консенсус строили программой ANGSD (сборка <code>zjnolen/angsd</code>, режим <code>-doFasta 1 -doCounts 1</code>) со следующими фильтрами: минимальное качество картирования <code>-minMapQ 20</code>, минимальное качество основания <code>-minQ 20</code>. Порог минимальной глубины (<code>-minDepth</code>) не задавался. В позиции, где после фильтрации оставался хотя бы один подходящий рид, ANGSD записывает основание из числа прошедших фильтр; там, где подходящих ридов нет, в консенсус ставится <code>N</code>. Буква референса в консенсус не подставляется, что принципиально: иначе участки без покрытия маскировались бы под референсное состояние и завышали бы сходство древних образцов с референсом.</p>
+<p>В результате все четыре консенсуса имеют длину референса (2 670 755 п.н.), а доля неопределённых оснований <code>N</code> в них составляет от 10,8% до 18,1%. Иными словами, 82–89% генома <em>C. hominis</em> удалось восстановить для каждого древнего образца. Оставшиеся <code>N</code> — это участки, где древняя ДНК не сохранилась или не прошла порог качества; в коровом выравнивании они превращаются в пропуски.</p>
+<p>Подробности и полный код приведены в <a href="./chapters/create_consensus.html">главе про консенсусы</a>.</p>
+</section>
+<section id="аннотация-геномов" class="level3" data-number="1.7.3">
+<h3 data-number="1.7.3" class="anchored" data-anchor-id="аннотация-геномов"><span class="header-section-number">1.7.3</span> Аннотация геномов</h3>
+<p>Все 59 геномов (55 современных сборок и 4 древних консенсуса) аннотированы в едином формате программой Prokka в контейнере <code>staphb/prokka</code> с параметрами <code>--kingdom Bacteria --cpus 10 --force</code>.</p>
+<p>Готовые аннотации NCBI (формат <code>_genomic.gff</code>) для пан-геномного анализа не использовались: Roary ожидает GFF с единообразной структурой записей и с локальными идентификаторами генов, а файлы NCBI содержат другую разметку атрибутов.</p>
+<p>Итоговый набор GFF, использованный в пан-геномном анализе, включает 59 файлов. См. <a href="./chapters/annotate_assemblies.html">главу про аннотацию</a>.</p>
+</section>
+<section id="пан-геномный-анализ" class="level3" data-number="1.7.4">
+<h3 data-number="1.7.4" class="anchored" data-anchor-id="пан-геномный-анализ"><span class="header-section-number">1.7.4</span> Пан-геномный анализ</h3>
+<p>Пан-геном строили программой Roary (контейнер <code>sangerpathogens/roary</code>) с параметрами <code>-i 80 -cd 80</code>:</p>
+<ul>
+<li><code>-i 80</code> — минимальная процентная идентичность при кластеризации белок-белок (BLASTP). Гомологи с идентичностью ниже 80% попадают в разные кластеры.</li>
+<li><code>-cd 80</code> — доля геномов, при которой ген считается коровым.</li>
+</ul>
+<p>Roary распределяет все кластеры по четырём категориям в зависимости от доли геномов, в которых ген присутствует, а также строит коровое выравнивание — конкатенацию последовательностей коровых генов, упорядоченных по кластерам.</p>
+<p>См. <a href="./chapters/make_core_alignment.html">главу про пан-геном</a>.</p>
+</section>
+<section id="отбор-сайтов-для-филогенетического-анализа" class="level3" data-number="1.7.5">
+<h3 data-number="1.7.5" class="anchored" data-anchor-id="отбор-сайтов-для-филогенетического-анализа"><span class="header-section-number">1.7.5</span> Отбор сайтов для филогенетического анализа</h3>
+<p>Фильтрацию выполняли ClipKIT в режиме <code>kpi-smart-gap</code>.</p>
+<p>Этот режим оставляет парсимониально информативные сайты (то есть сайты, где минорный вариант встречается минимум дважды — только такие сайты поддерживают какую-либо топологию) и одновременно вырезает блоки с аномально высокой долей пропусков по собственному адаптивному порогу.</p>
+<p>См. <a href="./chapters/find_snp.html">главу про отбор сайтов</a>.</p>
+</section>
+<section id="филогенетическая-реконструкция-методом-максимального-правдоподобия" class="level3" data-number="1.7.6">
+<h3 data-number="1.7.6" class="anchored" data-anchor-id="филогенетическая-реконструкция-методом-максимального-правдоподобия"><span class="header-section-number">1.7.6</span> Филогенетическая реконструкция методом максимального правдоподобия</h3>
+<p>ML-дерево построено в IQ-TREE 3.1.3, модель <code>GTR+F+ASC+G4</code>:</p>
+<ul>
+<li><code>GTR</code> — общая реверсивная модель с шестью свободными параметрами замен и неравными частотами оснований;</li>
+<li><code>+F</code> — эмпирические частоты оснований, оценённые по выравниванию;</li>
+<li><code>+G4</code> — гамма-распределение скоростей замен по сайтам с четырьмя категориями, что учитывает различия в эволюционной скорости между позициями кодона;</li>
+<li><code>+ASC</code> — поправка на асцертимент (ascertainment bias correction). Она необходима потому, что в выравнивании нет константных сайтов: они были удалены на этапе фильтрации.</li>
+</ul>
+<p>Достоверность ветвления оценивали двумя независимыми методами: 1000 ультрабыстрых бутстрепов (UFBoot) и 1000 псевдореплик SH-aLRT.</p>
+<p>См. <a href="./chapters/ML_tree.html">главу про ML-дерево</a>.</p>
+</section>
+<section id="анализ-пространственной-структуры" class="level3" data-number="1.7.7">
+<h3 data-number="1.7.7" class="anchored" data-anchor-id="анализ-пространственной-структуры"><span class="header-section-number">1.7.7</span> Анализ пространственной структуры</h3>
+<p>Для оценки связи филогении с географией ML-дерево проецировали на карту функцией <code>phylo.to.map</code> из пакета phytools (R). На карту наносили только листья с известными координатами: из 59 листьев осталось 42, поскольку для 17 сборок координаты отсутствуют.</p>
+<p>Такая проекция позволяет визуально оценить, распадаются ли соседние ветви дерева на разные регионы. См. <a href="./chapters/ML_tree.html">главу про ML-дерево</a>.</p>
+</section>
+<section id="проверка-временного-сигнала-регрессия-корень-лист" class="level3" data-number="1.7.8">
+<h3 data-number="1.7.8" class="anchored" data-anchor-id="проверка-временного-сигнала-регрессия-корень-лист"><span class="header-section-number">1.7.8</span> Проверка временного сигнала: регрессия «корень — лист»</h3>
+<p>Молекулярное датирование имеет смысл только при наличии временного сигнала, то есть при линейном росте генетического расстояния от корня до листьев в зависимости от возраста образца.</p>
+<p>Проверку выполняли в TreeTime (<code>treetime clock</code>) на ML-дереве с автоматическим подбором корня по методу наименьших квадратов (<code>--reroot least-squares</code>).</p>
+<p>Даты задавали отдельным файлом <code>name,date</code>.</p>
+<p>Для древних образцов календарный год определяли следующим образом: для образцов с калиброванным интервалом (4510: 1500–1600 гг. н.э.; 7130: 1240–1007 гг. до н.э.) брали середину интервала (1550 и −1123,5 соответственно), для образцов с радиоуглеродным возрастом (3140: 6012 ± 28 л.н.; 1780: 2170 ± 23 л.н.) год вычисляли как разность текущего года и возраста в годах назад (−3986 и −144).</p>
+<p>Качество подгонки характеризуется коэффициентом детерминации <span class="math inline">\(R^2\)</span>: значение, близкое к нулю, означает, что возраст образца не объясняет расстояние до корня, и датирование по такой выборке некорректно.</p>
+<p>Надёжность точечной оценки скорости TreeTime не сообщает доверительного интервала, поэтому одного <span class="math inline">\(R^2\)</span> недостаточно для вывода — требуется сравнение со случайной моделью. См. <a href="./chapters/check_time_signal.html">главу про сигнал времени</a>.</p>
+</section>
+<section id="проверка-временного-сигнала-тест-рандомизации-дат" class="level3" data-number="1.7.9">
+<h3 data-number="1.7.9" class="anchored" data-anchor-id="проверка-временного-сигнала-тест-рандомизации-дат"><span class="header-section-number">1.7.9</span> Проверка временного сигнала: тест рандомизации дат</h3>
+<p>Чтобы формально проверить значимость регрессии «время — расстояние», применяли тест рандомизации дат (Date Randomization Test, DRT).</p>
+<p>В ходе теста даты случайным образом перемешиваются между последовательностями. Это полностью разрушает реальную связь между временем и накопленными заменами. После каждого перемешивания оценка скорости в TreeTime запускается заново. В рамках анализа выполнили 20 случайных перестановок. Временной сигнал считается достоверным только в том случае, если реальная оценка скорости замен не попадает в распределение скоростей, полученных на перемешанных данных.</p>
+<p>Скрипт теста — <code>scripts/run_treetime_drt.py</code>. См. <a href="./chapters/check_time_signal.html">главу про сигнал времени</a>.</p>
+</section>
+<section id="поиск-генов-вирулентности" class="level3" data-number="1.7.10">
+<h3 data-number="1.7.10" class="anchored" data-anchor-id="поиск-генов-вирулентности"><span class="header-section-number">1.7.10</span> Поиск генов вирулентности</h3>
+<p>Гены факторов вирулентности искали программой ABRicate по базе VFDB на всех 59 нуклеотидных последовательностях (55 сборок и 4 консенсуса).</p>
+<p>Матрицу присутствия строили по максимальному покрытию: если ген найден у образца хотя бы одним фрагментом, образец помечался как несущий ген (1), иначе 0. Итоговая матрица имеет размер 59 × 6. См. <a href="./chapters/analyse_genes.html">главу про гены</a>.</p>
+</section>
+<section id="поиск-генов-антибиотикорезистентности" class="level3" data-number="1.7.11">
+<h3 data-number="1.7.11" class="anchored" data-anchor-id="поиск-генов-антибиотикорезистентности"><span class="header-section-number">1.7.11</span> Поиск генов антибиотикорезистентности</h3>
+<p>Гены устойчивости искали программой RGI (<code>rgi main --local --input_type contig</code>) по локальной базе CARD на тех же 59 последовательностях. RGI присваивает каждому попаданию категорию достоверности:</p>
+<ul>
+<li><strong>Perfect</strong> — совпадение с референсным геном базы на 100% идентичности и полной длины; это фактически точное совпадение с известным детерминантом;</li>
+<li><strong>Strict</strong> — попадание в референсный ген с идентичностью ниже 100%, но выше порога, специфичного для данной модели;</li>
+<li><strong>Loose</strong> — частичное или слабое совпадение.</li>
+</ul>
+<p>В анализ включены только попадания Perfect и Strict. См. <a href="./chapters/analyse_genes.html">главу про гены</a>.</p>
+</section>
+</section>
+<section id="результаты" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="результаты"><span class="header-section-number">1.8</span> Результаты</h2>
+<section id="состав-и-качество-выборки" class="level3" data-number="1.8.1">
+<h3 data-number="1.8.1" class="anchored" data-anchor-id="состав-и-качество-выборки"><span class="header-section-number">1.8.1</span> Состав и качество выборки</h3>
+<p>В анализ вошли 59 геномов: 55 современных сборок <em>C. hominis</em> из NCBI и 4 древних консенсуса.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="results/figures/C_H_map.png" class="img-fluid figure-img"></p>
-<figcaption>Четыре древних образца (зелёные) и современные сборы с известными координатами. Комсомолец и Прогресс 2 совмещены. 17 сборок без страны на карту не попали.</figcaption>
+<figcaption>Четыре древних образца (зелёные) и современные сборки с известными координатами. Комсомолец и Прогресс 2 совмещены. 17 сборок без страны на карту не попали.</figcaption>
 </figure>
 </div>
+<p>Качество сборок неоднородно - длина генома варьирует от 1,02 до 2,67 Мб, число контигов — от 1 до 637 (медиана 291). Геномы представлены на трёх уровнях: 2 полных генома, 10 скаффолдов и 43 контига.</p>
 </section>
-<section id="как-устроен-анализ" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="как-устроен-анализ"><span class="header-section-number">1.3</span> Как устроен анализ</h2>
-<p>Древние консенсусы построены по BAM, уже выровненным на референс <em>C. hominis</em> NCTC10426 (<code>GCF_900637305.1</code>). ANGSD (<code>-doFasta 1</code>) пишет в позицию случайную букву среди оснований с качеством картирования и качеством основания не ниже 20. Порог глубины не задан. Где ридов нет, стоит N. Подробности в <a href="./chapters/create_consensus.html">главе про консенсусы</a>.</p>
-<p>Современные сборки без готового GFF и четыре консенсуса аннотированы Prokka (<code>--kingdom Bacteria</code>). В Roary идут только эти GFF: файлы NCBI ему не подходят. См. <a href="./chapters/annotate_assemblies.html">аннотацию</a>.</p>
-<p>Roary кластеризует белки при идентичности 80% (<code>-i 80</code>) и считает коровым ген, который есть минимум у 80% штаммов (<code>-cd 80</code>). Получилось 451 коровых генов из 12 541. См. <a href="./chapters/make_core_alignment.html">пан-геном</a>.</p>
-<p>В коровом выравнивании 343 520 сайта и ни одной колонки без пропуска, поэтому <code>snp-sites -c</code> пуст. В дерево взят файл ClipKIT <code>kpi-smart-gap</code>: 39 954 информативных сайта. См. <a href="./chapters/find_snp.html">отбор сайтов</a>.</p>
-<p>IQ-TREE: <code>GTR+F+ASC+G4</code>, 1000 ультрабыстрых бутстрепов и 1000 SH-aLRT, без аутгруппы. Поправка <code>+ASC</code> стоит потому, что константных сайтов в выравнивании нет. См. <a href="./chapters/ML_tree.html">ML-дерево</a>.</p>
-<p>Сигнал времени проверяет TreeTime (<code>--reroot least-squares</code>). Дата известна у 35 из 59 листьев. См. <a href="./chapters/check_time_signal.html">сигнал времени</a>.</p>
-<p>Гены вирулентности ищет ABRicate по VFDB, гены устойчивости — RGI по CARD, только попадания Perfect и Strict. См. <a href="./chapters/analyse_genes.html">главу про гены</a>.</p>
-</section>
-<section id="результаты" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="результаты"><span class="header-section-number">1.4</span> Результаты</h2>
-<section id="пан-геном" class="level3" data-number="1.4.1">
-<h3 data-number="1.4.1" class="anchored" data-anchor-id="пан-геном"><span class="header-section-number">1.4.1</span> Пан-геном</h3>
+<section id="пангеномный-анализ" class="level3" data-number="1.8.2">
+<h3 data-number="1.8.2" class="anchored" data-anchor-id="пангеномный-анализ"><span class="header-section-number">1.8.2</span> Пангеномный анализ</h3>
+<p>Пан-геномный анализ выявил 12 541 кластер гомологов. Распределение по категориям представлено в таблице:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Категория</th>
+<th>Доля штаммов</th>
+<th>Число генов</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Коровые (Core)</td>
+<td>80% ≤ штаммов ≤ 100%</td>
+<td>451</td>
+</tr>
+<tr class="even">
+<td>Мягкое ядро (Soft core)</td>
+<td>79% ≤ штаммов &lt; 80%</td>
+<td>85</td>
+</tr>
+<tr class="odd">
+<td>Оболочка (Shell)</td>
+<td>15% ≤ штаммов &lt; 79%</td>
+<td>2782</td>
+</tr>
+<tr class="even">
+<td>Облако (Cloud)</td>
+<td>штаммов &lt; 15%</td>
+<td>9223</td>
+</tr>
+<tr class="odd">
+<td>Всего</td>
+<td></td>
+<td>12 541</td>
+</tr>
+</tbody>
+</table>
+<p>Коровое ядро составляет лишь 3,6% пан-генома (451 из 12 541). Показательно, что ни один ген не присутствует у всех 59 штаммов: максимальная встречаемость — 58 из 59.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="results/figures/pangenome_cumulative_CH.png" class="img-fluid figure-img"></p>
-<figcaption>Кривая насыщения пан-генома <em>C. hominis</em> не выходит на плато: на 59-м геноме она всё ещё растёт.</figcaption>
+<figcaption>Кривая накопления пан-генома <em>C. hominis</em>. Геномы добавлялись в порядке убывания числа генов.</figcaption>
 </figure>
 </div>
-<p>Коровых генов 451 из 12 541. Пан-геном открытый.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="results/figures/PCA.png" class="img-fluid figure-img"></p>
-<figcaption>PCA по доле различий в коровом выравнивании. Древние образцы смещены влево от основного облака современных, но самые удаленные точки — современные.</figcaption>
-</figure>
-</div>
+<p>Кривая накопления пан-генома не выходит на насыщение. Это означает, что пан-геном <em>C. hominis</em> открытый.</p>
 </section>
-<section id="ml-дерево" class="level3" data-number="1.4.2">
-<h3 data-number="1.4.2" class="anchored" data-anchor-id="ml-дерево"><span class="header-section-number">1.4.2</span> ML-дерево</h3>
+<section id="отбор-сайтов-для-филогенетического-анализа-1" class="level3" data-number="1.8.3">
+<h3 data-number="1.8.3" class="anchored" data-anchor-id="отбор-сайтов-для-филогенетического-анализа-1"><span class="header-section-number">1.8.3</span> Отбор сайтов для филогенетического анализа</h3>
+<p>По результатм ClipKIT коровое выравнивание содержит 59 последовательностей длиной 343 520 сайтов. Ни одна колонка не свободна от пропусков: в каждой хотя бы у одного штамма стоит прочерк. Это прямое следствие того, что коровое выравнивание собирается из генов, отсутствующих у части штаммов, а древние консенсусы дополнительно содержат участки без покрытия.</p>
+<p>Для построения дерева использовали файл <code>clipkit_core_snps.fa</code>: 39 954 сайта, то есть 88% исходного выравнивания вырезано.</p>
+</section>
+<section id="филогенетическое-дерево" class="level3" data-number="1.8.4">
+<h3 data-number="1.8.4" class="anchored" data-anchor-id="филогенетическое-дерево"><span class="header-section-number">1.8.4</span> Филогенетическое дерево</h3>
+<p>ML-дерево построено по 39 954 сайтам корового выравнивания. Дерево содержит 59 листьев и 56 внутренних узлов с оценками поддержки.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="results/figures/ML_tree_CH_country.svg" class="img-fluid figure-img"></p>
-<figcaption>ML-дерево 59 штаммов по 451 коровому гену, 39 954 сайта. Древние в отдельной кладе.</figcaption>
+<figcaption>ML-дерево 59 штаммов <em>C. hominis</em> по 451 коровому гену, 39 954 сайта. Модель GTR+F+ASC+G4. Цвета соответствуют стране сбора, серый — древние образцы.</figcaption>
 </figure>
 </div>
+<p>Пять пар геномов в дереве имеют близкие к нулю длины ветвей (порядка 10⁻⁶ замен на сайт). Это свидетельствует о практической идентичности их коровых последовательностей.</p>
+</section>
+<section id="соответствие-дерева-географии" class="level3" data-number="1.8.5">
+<h3 data-number="1.8.5" class="anchored" data-anchor-id="соответствие-дерева-географии"><span class="header-section-number">1.8.5</span> Соответствие дерева географии</h3>
+<p>Для визуализации филогеографической структуры политомии в исходном дереве были предварительно разрешены нулевыми ветвями (функция multi2di).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="results/figures/ML_tree_map_up.png" class="img-fluid figure-img"></p>
-<figcaption>Проекция того же дерева на карту, 42 образца с координатами. Географической структуры у современных штаммов нет.</figcaption>
+<figcaption>Проекция ML-дерева на карту. 42 образца с известными координатами, 17 сборок без координат не показаны.</figcaption>
 </figure>
 </div>
+<p>Проекция ML-дерева на карту не выявила выраженной географической кластеризации у современных штаммов.</p>
 </section>
-<section id="сигнал-времени" class="level3" data-number="1.4.3">
-<h3 data-number="1.4.3" class="anchored" data-anchor-id="сигнал-времени"><span class="header-section-number">1.4.3</span> Сигнал времени</h3>
+<section id="отсутствие-временного-сигнала" class="level3" data-number="1.8.6">
+<h3 data-number="1.8.6" class="anchored" data-anchor-id="отсутствие-временного-сигнала"><span class="header-section-number">1.8.6</span> Отсутствие временного сигнала</h3>
+<p>Регрессия «корень — лист» дала оценку скорости 1,11 × 10⁻⁵ замен на сайт в год и коэффициент детерминации <span class="math inline">\(R^2 = 0{,}08\)</span>. Линия регрессии почти горизонтальна: возраст образца объясняет лишь 8% разброса расстояний до корня.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="results/figures/root_to_tip_regression.png" class="img-fluid figure-img"></p>
-<figcaption>Регрессия расстояния от корня на год образца. r² = 0,08.</figcaption>
+<figcaption>Регрессия расстояния от корня дерева на год сбора образца. Наклон 1,11 × 10⁻⁵, <span class="math inline">\(R^2 = 0{,}08\)</span>.</figcaption>
 </figure>
 </div>
-<p>r² = 0,08. Датированное дерево по этой выборке не строится. Дальше штаммы сравниваются по присутствию и отсутствию генов патогенности и антибиотикорезистентности.</p>
+<p>Тест рандомизации дат подтвердил отсутствие надёжного временного сигнала. Хотя оценка скорости на реальных датах (1,13 × 10⁻⁵) формально превысила значения для всех 20 случайных перестановок (диапазон от 2,7 × 10⁻⁷ до 1,12 × 10⁻⁵, медиана 4,6 × 10⁻⁶), две перестановки (№2 и №18) дали практически идентичные результаты скорость 1,11 × 10⁻⁵ и 1,12 × 10⁻⁵ при <span class="math inline">\(R^2 = 0{,}09\)</span> .</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="results/figures/drt_plot.png" class="img-fluid figure-img"></p>
+<figcaption>Результаты теста рандомизации дат. Красная пунктирная линия — оценка скорости на реальных датах, синие точки — на 20 случайных перестановках.</figcaption>
+</figure>
+</div>
+<p>Таким образом, оба метода согласованно указывают на непригодность выборки для калибровки молекулярных часов. В связи с этим от молекулярного датирования пришлось отказаться, а дальнейший анализ был сфокусирован на сравнении профилей генов вирулентности и антибиотикорезистентности у древних и современных геномов.</p>
 </section>
-<section id="гены-вирулентности" class="level3" data-number="1.4.4">
-<h3 data-number="1.4.4" class="anchored" data-anchor-id="гены-вирулентности"><span class="header-section-number">1.4.4</span> Гены вирулентности</h3>
-<p>При обычном пороге ABRicate VFDB не находит ничего. При 70% идентичности и 70% покрытия находятся шесть гомологов: <em>tapT</em> (34 образца), <em>tufA</em> (16), <em>msrA/B</em> (3), <em>hmbR</em>, <em>kdtA/waaA</em> и <em>pilU</em> (по одному). Это гены адгезии, стресса и оболочки, не токсины. У древних консенсусов нет ни одного из них. Так результат стыкуется с описанием «крайне низкой вирулентности» вида <span class="citation" data-cites="ellner1979">(<a href="#ref-ellner1979" role="doc-biblioref">ELLNER et al. 1979</a>)</span>.</p>
+<section id="гены-факторов-вирулентности" class="level3" data-number="1.8.7">
+<h3 data-number="1.8.7" class="anchored" data-anchor-id="гены-факторов-вирулентности"><span class="header-section-number">1.8.7</span> Гены факторов вирулентности</h3>
+<p>При стандартных порогах ABRicate (80% идентичности, 80% покрытия) в базе VFDB не найдено ни одного гена ни у одного из 59 геномов.</p>
+<p>При снижении порога до 70% идентичности и 70% покрытия найдено шесть гомологов:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Ген</th>
+<th>Число образцов</th>
+<th>Предполагаемая функция</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>tapT</em></td>
+<td>34</td>
+<td>АТФаза пилей IV типа, адгезия</td>
+</tr>
+<tr class="even">
+<td><em>tufA</em></td>
+<td>16</td>
+<td>Фактор элонгации Tu</td>
+</tr>
+<tr class="odd">
+<td><em>msrA/B</em></td>
+<td>3</td>
+<td>Репарация метионина, ответ на стресс</td>
+</tr>
+<tr class="even">
+<td><em>hmbR</em></td>
+<td>1</td>
+<td>Рецептор гемоглобина</td>
+</tr>
+<tr class="odd">
+<td><em>kdtA/waaA</em></td>
+<td>1</td>
+<td>Сборка липоолигосахарида</td>
+</tr>
+<tr class="even">
+<td><em>pilU</em></td>
+<td>1</td>
+<td>Подвижность пилей IV типа</td>
+</tr>
+</tbody>
+</table>
+<p>Распределение находок имеет несколько особенностей. Во-первых, оно сильно смещено: <em>tapT</em> найден у 34 образцов (58% выборки), тогда как три гена (<em>hmbR</em>, <em>kdtA/waaA</em>, <em>pilU</em>) — каждый у одного.</p>
+<p>Во-вторых, <strong>ни один из шести гомологов не обнаружен в четырёх древних консенсусных геномах</strong>.</p>
+<p>Полученные результаты хорошо согласуются с клиническими данными, согласно которым <em>Cardiobacterium hominis</em> характеризуется крайне низкой вирулентностью.</p>
 </section>
-<section id="гены-устойчивости" class="level3" data-number="1.4.5">
-<h3 data-number="1.4.5" class="anchored" data-anchor-id="гены-устойчивости"><span class="header-section-number">1.4.5</span> Гены устойчивости</h3>
-<p>RGI (CARD, Perfect и Strict) находит восемь генов разных классов:</p>
-<ul>
-<li>сульфаниламиды: <em>folP</em> с заменами у 45 образцов, в том числе у всех четырёх древних; и <em>sul2</em> у двух современных образцов;</li>
-<li>гликопептиды: <em>vanT</em> кластера vanG у 10 образцов и <em>vanW</em> кластера vanI у одного;</li>
-<li>β-лактамы: <em>TEM-1</em> у двух;</li>
-<li>аминогликозиды: <em>APH(3’’)-Ib</em> и <em>APH(6)-Id</em> у одного;</li>
-<li>тетрациклины: <em>tet(A)</em> у одного.</li>
-</ul>
-<p>У <code>GCA_963509695.1</code> сразу четыре класса: аминогликозиды, <em>TEM-1</em>, сульфаниламиды и <em>vanT</em>. У <code>GCA_963554755.1</code> есть <em>tet(A)</em>.</p>
-<p><em>vanT</em> кодирует серин-рацемазу и сам по себе не означает устойчивость к ванкомицину: для кластера нужны и остальные компоненты, включая VanG и VanXY.</p>
-<p>Ванкомицин и тетрациклин не входят в первую линию терапии <em>C. hominis</em>, так что эти находки не меняют клинические рекомендации. Они описывают, какие гены устойчивости у вида уже есть.</p>
+<section id="гены-антибиотикорезистентности" class="level3" data-number="1.8.8">
+<h3 data-number="1.8.8" class="anchored" data-anchor-id="гены-антибиотикорезистентности"><span class="header-section-number">1.8.8</span> Гены антибиотикорезистентности</h3>
+<p>Поиск по CARD с учётом только попаданий Perfect и Strict выявил восемь детерминант, относящихся к пяти классам антибиотиков:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Ген</th>
+<th>Класс</th>
+<th>Число образцов</th>
+<th>Из них древних</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>folP</em> с заменами</td>
+<td>Сульфаниламиды</td>
+<td>45</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td><em>vanT</em> (кластер vanG)</td>
+<td>Гликопептиды</td>
+<td>10</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td><em>TEM-1</em></td>
+<td>β-Лактамы</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td><em>sul2</em></td>
+<td>Сульфаниламиды</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td><em>APH(3’’)-Ib</em></td>
+<td>Аминогликозиды</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td><em>APH(6)-Id</em></td>
+<td>Аминогликозиды</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td><em>tet(A)</em></td>
+<td>Тетрациклины</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td><em>vanW</em> (кластер vanI)</td>
+<td>Гликопептиды</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Общая картина резистома мозаична. Среди современных сборок 46 из 55 несут хотя бы одну детерминанту, а девять не несут ни одной. При этом у шести сборок не выявлено ни одного гена ни из базы CARD, ни из VFDB (<code>GCA_963507105.1</code>, <code>GCA_963527205.1</code>, <code>GCA_963530985.1</code>, <code>GCA_963543375.1</code>, <code>GCA_976992285.1</code> и <code>GCA_977003025.1</code>).</p>
+<p>Самой распространённой детерминантой в выборке оказался ген folP с мутациями, обусловливающими устойчивость к сульфаниламидам. Он обнаружен у 45 из 59 образцов (76 %), включая все четыре древних генома, где стал единственным выявленным маркером резистентности. Наличие этой мутации у древнейших образцов (6012 л. н.) — содержательно важный результат: замена в <em>folP</em>, снижающая сродство фермента к сульфаниламидам, присутствовала в популяциях <em>C. hominis</em> задолго до начала массового клинического применения этих препаратов в 1930-х годах.</p>
+<p>На общем фоне выделяются два современных генома. Сборка <code>GCA_963509695.1</code> несёт шесть детерминант, охватывающих четыре класса антибиотиков: аминогликозиды (<em>APH(3’’)-Ib</em>, <em>APH(6)-Id</em>), β-лактамы (<em>TEM-1</em>), сульфаниламиды (<em>sul2</em> и <em>folP</em>) и гликопептиды (vanT). Сборка <code>GCA_963554755.1</code> содержит четыре детерминанты: <em>TEM-1</em>, <em>tet(A)</em>, <em>vanT</em> и <em>folP</em>. Обнаружение β-лактамазы <em>TEM-1</em> согласуется с литературными данными о механизмах устойчивости к пенициллинам у представителей группы HACEK.</p>
+<p>Интерпретация находок, связанных с гликопептидами, требует важной оговорки. Ген <em>vanT</em> кодирует серин-рацемазу и сам по себе не обеспечивает устойчивость к ванкомицину: для формирования резистентного фенотипа необходим полный кластер (включающий лигазу VanG и дипептидазу VanXY) и согласованная экспрессия всего оперона. Ни у одного из 10 образцов с <em>vanT</em> полный кластер не подтверждён. Кроме того, грамотрицательные бактерии, к которым относится <em>C. hominis</em>, обладают природной устойчивостью к ванкомицину за счёт непроницаемости внешней мембраны, поэтому клиническое значение выявления <em>vanT</em> у этого вида остаётся неопределённым.</p>
+<p>В целом обнаруженные детерминанты не влияют на выбор клинической тактики: ванкомицин и тетрациклины не входят в стандартные схемы терапии эндокардита, вызванного бактериями группы HACEK, а сульфаниламиды при данной инфекции не применяются.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="results/figures/ML_tree_CH_with_metadata.svg" class="img-fluid figure-img"></p>
-<figcaption>ML-дерево и присутствие генов. Синие метки — гомологи VFDB при пороге 70%, зелёные — гены CARD. У древних образцов факторов вирулентности нет, из устойчивости есть только <em>folP</em>.</figcaption>
+<figcaption>ML-дерево с нанесёнными генами вирулентности и резистентности. Синие метки — гомологи VFDB (порог 70%), зелёные — детерминанты CARD (Perfect и Strict). У древних образцов факторов вирулентности нет, из детерминантов устойчивости присутствует только <em>folP</em>.</figcaption>
 </figure>
 </div>
 </section>
-<section id="сводка" class="level3" data-number="1.4.6">
-<h3 data-number="1.4.6" class="anchored" data-anchor-id="сводка"><span class="header-section-number">1.4.6</span> Сводка</h3>
-<p>Пан-геном <em>C. hominis</em> открытый: 451 коровый ген из 12 541. Древние образцы смещены относительно современных и на PCA, и на ML-дереве. Временного сигнала нет, r² = 0,08.</p>
-<p>При стандартном пороге факторов вирулентности нет. При пороге 70% шесть гомологов находятся только у современных сборок. Картина устойчивости мозаичная. Общий для древних образцов сигнал — <em>folP</em>. Отдельно выделяются <code>GCA_963509695.1</code> и <code>GCA_963554755.1</code>.</p>
+<section id="сводка-результатов" class="level3" data-number="1.8.9">
+<h3 data-number="1.8.9" class="anchored" data-anchor-id="сводка-результатов"><span class="header-section-number">1.8.9</span> Сводка результатов</h3>
+<p>Проведённый анализ даёт следующие основные результаты.</p>
+<p><strong>Пангеном.</strong> Пангеном <em>C. hominis</em> состоит из 12 541 кластера гомологов, из которых мягкое коровое ядро (присутствуют у &gt;95% штаммов) составляет только 451 ген (3,6%). Ни один ген не обнаружен у всех 59 штаммов одновременно. Кривая накопления не выходит на плато, то есть пангеном является открытым и его размер определяется объёмом выборки.</p>
+<p><strong>ML-дерево.</strong> Филогенетическая реконструкция не подтверждает пространственную структуру выборки. Для <em>C. hominis</em> отсутствие географической кластеризации не является неожиданным. Вид входит в нормальную микробиоту полости рта и кишечника человека, а его распространение связано с миграциями человеческих популяций, а не с географическими барьерами.</p>
+<p><strong>Временной сигнал.</strong> Оба теста — регрессия «корень — лист» (<span class="math inline">\((R^2 = 0,08)\)</span>) и тест рандомизации дат — указывают на отсутствие в выборке сигнала, пригодного для калибровки молекулярных часов. В связи с этим молекулярное датирование не проводилось.</p>
+<p><strong>Вирулентность.</strong> При стандартных порогах фильтрации факторы вирулентности не обнаружены ни у одного генома. При снижении порога до 70% найдено шесть гомологов, и все они принадлежат современным сборкам. Выявленные гены относятся к адгезии, формированию оболочки и стрессовому ответу, ни один из них не кодирует токсины. Этот результат согласуется с классическими клиническими наблюдениями.</p>
+<p><strong>Резистентность.</strong> Картина резистентности мозаична: 46 из 55 современных сборок несут хотя бы один детерминант, шесть не несут ни одного. Единственный детерминант, общий для всех древних образцов, — <em>folP</em> с заменами (устойчивость к сульфаниламидам), и он же самый распространённый в выборке (45 из 59), что указывает на его присутствие в популяциях вида задолго до начала применения сульфаниламидов. Клинически наиболее значимы два генома: <code>GCA_963509695.1</code> (шесть детерминант, четыре класса) и <code>GCA_963554755.1</code> (четыре детерминанта, включая <em>tet(A)</em>); оба несут β-лактамазу <em>TEM-1</em>, что важно с учётом роли цефалоспоринов III поколения в терапии.</p>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-arning2020" class="csl-entry" role="listitem">
+Arning, Nicolas, and Daniel J. Wilson. 2020. <span>“The Past, Present and Future of Ancient Bacterial DNA.”</span> <em>Microbial Genomics</em> 6 (7). <a href="https://doi.org/10.1099/mgen.0.000384">https://doi.org/10.1099/mgen.0.000384</a>.
+</div>
 <div id="ref-calza2004" class="csl-entry" role="listitem">
 Calza, Leonardo, Roberto Manfredi, and Francesco Chiodo. 2004. <span>“Infective Endocarditis: A Review of the Best Treatment Options.”</span> <em>Expert Opinion on Pharmacotherapy</em> 5 (9): 1899–916. <a href="https://doi.org/10.1517/14656566.5.9.1899">https://doi.org/10.1517/14656566.5.9.1899</a>.
 </div>
@@ -497,6 +814,9 @@ Chambers, Stephen T., David Murdoch, Arthur Morris, et al. 2013. <span>“HACEK 
 </div>
 <div id="ref-ellner1979" class="csl-entry" role="listitem">
 ELLNER, JERROLD J., MELVIN S. ROSENTHAL, PHILLIP I. LERNER, and MARTIN C. McHENRY. 1979. <span>“Infective Endocarditis Caused by Slow-Growing, Fastidious, Gram-Negative Bacteria.”</span> <em>Medicine</em> 58 (2): 145–58. <a href="https://doi.org/10.1097/00005792-197903000-00003">https://doi.org/10.1097/00005792-197903000-00003</a>.
+</div>
+<div id="ref-holland2016" class="csl-entry" role="listitem">
+Holland, Thomas L., Larry M. Baddour, Arnold S. Bayer, Bruno Hoen, Jose M. Miro, and Vance G. Fowler. 2016. <span>“Infective Endocarditis.”</span> <em>Nature Reviews Disease Primers</em> 2 (1). <a href="https://doi.org/10.1038/nrdp.2016.59">https://doi.org/10.1038/nrdp.2016.59</a>.
 </div>
 <div id="ref-khaledi2022" class="csl-entry" role="listitem">
 Khaledi, Mansoor, Fatemeh Sameni, Hamed Afkhami, et al. 2022. <span>“Infective Endocarditis by HACEK: A Review.”</span> <em>Journal of Cardiothoracic Surgery</em> 17 (1). <a href="https://doi.org/10.1186/s13019-022-01932-5">https://doi.org/10.1186/s13019-022-01932-5</a>.
@@ -519,6 +839,12 @@ Malani, A. N., D. M. Aronoff, S. F. Bradley, and C. A. Kauffman. 2006. <span>“
 <div id="ref-ono2023" class="csl-entry" role="listitem">
 Ono, Ryohei, Izumi Kitagawa, and Yoshio Kobayashi. 2023. <span>“Cardiobacterium Hominis Infective Endocarditis: A Literature Review.”</span> <em>American Heart Journal Plus: Cardiology Research and Practice</em> 26 (February): 100248. <a href="https://doi.org/10.1016/j.ahjo.2022.100248">https://doi.org/10.1016/j.ahjo.2022.100248</a>.
 </div>
+<div id="ref-shah2024" class="csl-entry" role="listitem">
+Shah, Momin. 2024. <span>“<span>"</span>The Root of the Problem: Cardiobacterium Hominis Endocarditis Complicated by an Aortic Root Abscess<span>"</span>.”</span> <em>Biomedical Journal of Scientific &amp; Technical Research</em> 57 (3). <a href="https://doi.org/10.26717/bjstr.2024.57.009014">https://doi.org/10.26717/bjstr.2024.57.009014</a>.
+</div>
+<div id="ref-sundin2025" class="csl-entry" role="listitem">
+Sundin, Ashley, Paul Duesing, Ashwin Jagadish, et al. 2025. <span>“From Dental Procedures to Endocarditis: Cardiobacterium Hominis Infection of a Bioprosthetic Mitral Valve.”</span> <em>Cureus</em>, ahead of print, June 5. <a href="https://doi.org/10.7759/cureus.85411">https://doi.org/10.7759/cureus.85411</a>.
+</div>
 <div id="ref-tharsiga2026" class="csl-entry" role="listitem">
 Tharsiga, T., A. J. S. Sabrina, and M. Umakanth. 2026. <span>“Subacute Infective Endocarditis in a Healthy Man with Native Heart Valves by Cardiobacterium Hominis: A Rare Presentation from the HACEK Group.”</span> <em>Asian Journal of Internal Medicine</em> 5 (1): 74–78. <a href="https://doi.org/10.4038/ajim.v5i1.341">https://doi.org/10.4038/ajim.v5i1.341</a>.
 </div>
@@ -527,6 +853,9 @@ Ursi, M. P., E. Durante Mangoni, R. Rajani, J. Hancock, J. B. Chambers, and B. P
 </div>
 <div id="ref-walkty2005b" class="csl-entry" role="listitem">
 Walkty, Andrew. 2005. <span>“<span><em>Cardiobacterium Hominis</em></span> Endocarditis: A Case Report and Review of the Literature.”</span> <em>Canadian Journal of Infectious Diseases and Medical Microbiology</em> 16 (5): 293–97. <a href="https://doi.org/10.1155/2005/716873">https://doi.org/10.1155/2005/716873</a>.
+</div>
+<div id="ref-warinner2014" class="csl-entry" role="listitem">
+Warinner, Christina, João F Matias Rodrigues, Rounak Vyas, et al. 2014. <span>“Pathogens and Host Immunity in the Ancient Human Oral Cavity.”</span> <em>Nature Genetics</em> 46 (4): 336–44. <a href="https://doi.org/10.1038/ng.2906">https://doi.org/10.1038/ng.2906</a>.
 </div>
 </div>
 </section>

@@ -83,7 +83,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-4f67ab1e4efc86feb5e21e0983fc9301.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-93ea9577cdbf6ced302812e0f26facab.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -112,6 +112,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -211,8 +240,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#проверка-временного-сигнала-root-to-tip-регрессия" id="toc-проверка-временного-сигнала-root-to-tip-регрессия" class="nav-link active" data-scroll-target="#проверка-временного-сигнала-root-to-tip-регрессия"><span class="header-section-number">8.1</span> Проверка временного сигнала (Root-to-tip регрессия)</a>
+  <ul class="collapse">
+  <li><a href="#подготовка-дат-сбора-образцов" id="toc-подготовка-дат-сбора-образцов" class="nav-link" data-scroll-target="#подготовка-дат-сбора-образцов"><span class="header-section-number">8.1.1</span> Подготовка дат сбора образцов</a></li>
+  <li><a href="#запуск-регрессионного-анализа" id="toc-запуск-регрессионного-анализа" class="nav-link" data-scroll-target="#запуск-регрессионного-анализа"><span class="header-section-number">8.1.2</span> Запуск регрессионного анализа</a></li>
+  </ul></li>
+  <li><a href="#тест-рандомизации-дат-date-randomization-test-drt" id="toc-тест-рандомизации-дат-date-randomization-test-drt" class="nav-link" data-scroll-target="#тест-рандомизации-дат-date-randomization-test-drt"><span class="header-section-number">8.2</span> Тест рандомизации дат (Date Randomization Test, DRT)</a></li>
+  <li><a href="#вывод" id="toc-вывод" class="nav-link" data-scroll-target="#вывод"><span class="header-section-number">8.3</span> Вывод</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/edit/main/chapters/check_time_signal.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/blob/main/chapters/check_time_signal.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content" tabindex="-1">
@@ -236,36 +277,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Датированное дерево имеет смысл только если расстояние от корня растёт с возрастом образца. TreeTime проверяет это регрессией по ML-дереву. Корень заново выбирается так, чтобы прямая легла лучше всего (<code>--reroot least-squares</code>).</p>
-<p>Год сбора современных сборок берётся из метаданных. Диапазон вроде 1900/1965 заменяется серединой, полная дата переводится в долю года. Если поле даты пустое, образец в файл не попадает: TreeTime оценит год сам.</p>
-<p>Четыре древних возраста заданы отдельно. <code>4510</code> — середина интервала 1500–1600 н.э. <code>7130</code> — середина 1240–1007 до н.э. Для <code>3140</code> и <code>1780</code> год посчитан как 2026 минус возраст в л.н., а не как 1950 минус радиоуглеродный возраст.</p>
+<section id="проверка-временного-сигнала-root-to-tip-регрессия" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="проверка-временного-сигнала-root-to-tip-регрессия"><span class="header-section-number">8.1</span> Проверка временного сигнала (Root-to-tip регрессия)</h2>
+<p>Построение датированного филогенетического дерева имеет смысл только при наличии в данных <strong>временного сигнала</strong> — когда генетическое расстояние от корня дерева до листьев линейно растёт с возрастом образцов. Для проверки этой гипотезы мы использовали <code>TreeTime</code>, который строит линейную регрессию расстояний по дереву максимального правдоподобия (ML) и автоматически подбирает положение корня так, чтобы минимизировать остатки (<code>--reroot least-squares</code>).</p>
+<section id="подготовка-дат-сбора-образцов" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="подготовка-дат-сбора-образцов"><span class="header-section-number">8.1.1</span> Подготовка дат сбора образцов</h3>
+<p>В итоговый файл с датами вошли <strong>35 из 59 образцов</strong>. Имена последовательностей приведены в соответствие с исходным выравниванием и деревом <code>C_H_ML_tree.treefile</code> (без сокращений, использованных ранее для визуализации в iTOL).</p>
+<p>Даты формировались по следующим правилам:</p>
+<ul>
+<li><strong>Современные сборки:</strong> год взят из метаданных. Интервалы (например, <code>1900/1965</code>) заменены на середину диапазона, а точные даты переведены в десятичную долю года. Образцы без указанной даты в файл не включались</li>
+<li><strong>Древние образцы:</strong> для четырёх палеогеномов возраст задан вручную. Для образцов <code>4510</code> (1500–1600 гг. н.э.) и <code>7130</code> (1240–1007 гг. до н.э.) использована середина калиброванного интервала. Для образцов <code>3140</code> и <code>1780</code> календарный год рассчитан от текущего года (<span class="math inline">\(2026 - \text{возраст в л.н.}\)</span>), а не от стандартного радиоуглеродного нуля (1950 г.).</li>
+</ul>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>ID</th>
-<th>Год в файле дат</th>
+<th style="text-align: left;">ID образца</th>
+<th style="text-align: left;">Возраст / интервал</th>
+<th style="text-align: left;">Год в файле дат</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>4510</td>
-<td>1550</td>
+<td style="text-align: left;"><code>4510</code></td>
+<td style="text-align: left;">1500–1600 гг. н.э.</td>
+<td style="text-align: left;"><code>1550</code></td>
 </tr>
 <tr class="even">
-<td>7130</td>
-<td>−1123,5</td>
+<td style="text-align: left;"><code>7130</code></td>
+<td style="text-align: left;">1240–1007 гг. до н.э.</td>
+<td style="text-align: left;"><code>−1123.5</code></td>
 </tr>
 <tr class="odd">
-<td>3140</td>
-<td>−3986</td>
+<td style="text-align: left;"><code>3140</code></td>
+<td style="text-align: left;">6012 л.н.</td>
+<td style="text-align: left;"><code>−3986</code></td>
 </tr>
 <tr class="even">
-<td>1780</td>
-<td>−144</td>
+<td style="text-align: left;"><code>1780</code></td>
+<td style="text-align: left;">2170 л.н.</td>
+<td style="text-align: left;"><code>−144</code></td>
 </tr>
 </tbody>
 </table>
-<p>Даты пишутся под именами из выравнивания и стыкуются с исходным деревом <code>C_H_ML_tree.treefile</code>, не с короткими именами для iTOL. Дата есть у 35 из 59 листов.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -333,6 +386,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'wrote'</span>, out_csv)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
+</section>
+<section id="запуск-регрессионного-анализа" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="запуск-регрессионного-анализа"><span class="header-section-number">8.1.2</span> Запуск регрессионного анализа</h3>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># pip install phylo-treetime</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">input_nwk</span><span class="op">=</span><span class="st">'../data/C_H/old_iq_tree_no_outgroup/C_H_ML_tree.treefile'</span></span>
@@ -340,16 +396,49 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="va">dates_csv</span><span class="op">=</span><span class="st">'../data/C_H/all_core_alignment_no_outgroup_C_H/dates.csv'</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">treetime</span> clock <span class="at">--tree</span> <span class="va">$input_nwk</span> <span class="at">--aln</span> <span class="va">$input_fasta</span> <span class="at">--dates</span> <span class="va">$dates_csv</span> <span class="at">--reroot</span> least-squares <span class="at">--outdir</span> ../data/C_H/all_core_alignment_no_outgroup_C_H/treetime_with_ancient</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+<p>Сохраняем в папку резульатов и переводим в png формат</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="../results/figures/root_to_tip_regression.png" class="img-fluid figure-img"></p>
-<figcaption>Регрессия расстояния от корня на год образца. Прямая почти горизонтальная, r² = 0,08.</figcaption>
+<figcaption>Регрессия расстояния от корня на год образца. Прямая почти горизонтальна, <span class="math inline">\(R^2 = 0{,}08\)</span>.</figcaption>
 </figure>
 </div>
-<p>r² = 0,08. Временного сигнала нет, и датированное дерево по текущей выборке не строится.</p>
-<p>Дальше штаммы сравниваются только по присутствию и отсутствию генов патогенности и антибиотикорезистентности.</p>
+<p>Коэффициент детерминации составил <strong><span class="math inline">\(R^2 = 0{,}08\)</span></strong>, а линия регрессии проходит почти горизонтально. Это говорит об отсутствии выраженного временного сигнала в текущей выборке.</p>
+<hr>
+</section>
+</section>
+<section id="тест-рандомизации-дат-date-randomization-test-drt" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="тест-рандомизации-дат-date-randomization-test-drt"><span class="header-section-number">8.2</span> Тест рандомизации дат (Date Randomization Test, DRT)</h2>
+<p>Чтобы убедиться, что слабый сигнал не является случайным артефактом, мы дополнительно провели <strong>тест рандомизации дат (DRT)</strong>. В ходе этого теста даты сбора случайно перемешиваются между последовательностями, что разрушает реальную связь между временем и накоплением мутаций. Если в данных есть истинный молекулярный ход часов, скорость эволюции на реальных датах должна заметно превышать оценки, полученные на перемешанных выборках.</p>
+<p>Мы запустили <code>TreeTime</code> на исходных данных и на <strong>20 случайных перестановках</strong> (поскольку <code>TreeTime</code> возвращает точечную оценку скорости без доверительного интервала, сравнение проводится по распределению точечных оценок).</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">input_nwk</span><span class="op">=</span><span class="st">'../data/C_H/old_iq_tree_no_outgroup/C_H_ML_tree.treefile'</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="va">input_fasta</span><span class="op">=</span><span class="st">'../data/C_H/all_core_alignment_no_outgroup_C_H/80_percent/clipkit_core_snps.fa'</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">dates_csv</span><span class="op">=</span><span class="st">'../data/C_H/all_core_alignment_no_outgroup_C_H/dates.csv'</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="va">outdir</span><span class="op">=</span><span class="st">'../data/C_H/all_core_alignment_no_outgroup_C_H/treetime_drt'</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> ../scripts/run_treetime_drt.py <span class="dt">\</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">--tree</span> <span class="va">$input_nwk</span> <span class="dt">\</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">--aln</span> <span class="va">$input_fasta</span> <span class="dt">\</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">--dates</span> <span class="va">$dates_csv</span> <span class="dt">\</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">--outdir</span> <span class="va">$outdir</span> <span class="dt">\</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">--reps</span> 20</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>cp data/C_H/all_core_alignment_no_outgroup_C_H/treetime_drt/drt_plot.png results/figures</code></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../data/C_H/all_core_alignment_no_outgroup_C_H/treetime_drt/drt_plot.png" class="img-fluid figure-img"></p>
+<figcaption>Результаты Date Randomization Test (DRT). Красная пунктирная линия показывает оценку скорости на реальных датах, синие точки — на 20 случайных перестановках.</figcaption>
+</figure>
+</div>
+<p>Хотя скорость замещения на исходных данных (красная пунктирная линия) в среднем выше, чем на перемешанных выборках (синие точки), две случайные реплики показали значения скорости и <span class="math inline">\(R^2\)</span>, сопоставимые с реальными данными. Качество линейной подгонки на исходных датах оказалось не выше случайного шума.</p>
+</section>
+<section id="вывод" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="вывод"><span class="header-section-number">8.3</span> Вывод</h2>
+<p>Оба метода подтвердили, что <strong>в текущей выборке отсутствует достоверный временной сигнал</strong>, поэтому построение калиброванного по времени дерева невозможно. В дальнейшей работе мы отказались от молекулярного датирования и перешли к сравнительному анализу штаммов по наличию и отсутствию генов патогенности и антибиотикорезистентности.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -845,4 +934,4 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions"><ul><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/edit/main/chapters/check_time_signal.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/blob/main/chapters/check_time_signal.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/edit/main/chapters/check_time_signal.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/blob/main/chapters/check_time_signal.qmd" class="toc-action"><i class="bi empty"></i>View source</a></li><li><a href="https://github.com/florenskaial118/MASTER_DIPLOMA.git/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div></div></footer></body></html>
