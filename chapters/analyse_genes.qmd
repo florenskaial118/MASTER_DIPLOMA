@@ -196,10 +196,10 @@ vf_color = '#0000ff'
 rgi_color = '#008000'
 
 rename = {
-    '000008104510_consensus': 'BTC_Pereyaslavl-Zalessky_Russia_476_BP',
-    '000008107130_consensus': 'BTC_Komsomolets_Kurgan1_Stavropol_3149_BP',
-    '000008103140_consensus': 'BTC_Progress2_Caucasus_Kurgan1_6012_BP',
-    '000008101780_consensus': 'BTC_Ken_Su_Kyrgyzstan_2170_BP',
+    '000008104510_consensus': 'BTC_Pereyaslavl-Zalessky_Russia_476_BP*',
+    '000008107130_consensus': 'BTC_Komsomolets_Kurgan1_Stavropol_3149_BP*',
+    '000008103140_consensus': 'BTC_Progress2_Caucasus_Kurgan1_6012_BP*',
+    '000008101780_consensus': 'BTC_Ken_Su_Kyrgyzstan_2170_BP*',
 }
 
 lines = [

@@ -124,6 +124,8 @@ dev.off()
 
 ![Проекция ML дерева на карту](../results/figures/ML_tree_map_up.png)
 
+[страны](../data/C_H/old_iq_tree_no_outgroup/country_meta_itol.txt) + [древние](../data/C_H/old_iq_tree_no_outgroup/stars_meta.txt) 
+
 По этой проекции географической структуры у современных штаммов нет.
 
 Рисунки из iTOL сохранены как SVG. Для вставки в текст их переводим в PNG.
